@@ -1,0 +1,5 @@
+rootProject.name = 'ISS_proto'
+include 'catalog-core'
+include 'catalog-web'
+include 'catalog-client'
+
