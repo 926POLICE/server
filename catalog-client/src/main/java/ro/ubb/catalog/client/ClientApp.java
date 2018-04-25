@@ -24,7 +24,7 @@ public class ClientApp {
 
         // ---
 
-        JsonNode recieved = restTemplate.getForObject("http://localhost:8080/api/bloodStocks", JsonNode.class);
+        JsonNode recieved = restTemplate.getForObject("http://localhost:8080/bloodStocks", JsonNode.class);
 
         ObjectMapper mapper = new ObjectMapper();
 
@@ -57,7 +57,7 @@ public class ClientApp {
         System.out.println("List should contain one already existing element:");
         printAllBloods(restTemplate);
 
-        Blood blood = restTemplate.postForObject("http://localhost:8080/api/bloods", new Blood("1",2.0f,3,"4"), Blood.class);
+        Blood blood = restTemplate.postForObject("http://localhost:8080/bloods", new Blood("1",2.0f,3,"4"), Blood.class);
 
         System.out.println("Created new blood" + blood);
 
@@ -65,18 +65,22 @@ public class ClientApp {
         printAllBloods(restTemplate);
 
         blood.setQuantity(blood.getQuantity()+3.0f);
-        restTemplate.put("http://localhost:8080/api/bloods/{bloodId}", blood, blood.getId());
+        restTemplate.put("http://localhost:8080/bloods/{bloodId}", blood, blood.getId());
 
         System.out.println("List should contain an updated blood:");
         printAllBloods(restTemplate);
 
-        restTemplate.delete("http://localhost:8080/api/bloods/{bloodId}", blood.getId());
+        restTemplate.delete("http://localhost:8080/bloods/{bloodId}", blood.getId());
 
         System.out.println("List should contain one already existing element:");;
         printAllBloods(restTemplate);
 
+        System.out.println("Homepage try:");
+        String page = restTemplate.getForObject("http://localhost:8080/",String.class);
+        System.out.println(page);
+
         System.out.println("Index.html:");
-        String page = restTemplate.getForObject("http://localhost:8080/api/invalid",String.class);
+        page = restTemplate.getForObject("http://localhost:8080/invalid",String.class);
         System.out.println(page);
 
         System.out.println("bye ");
