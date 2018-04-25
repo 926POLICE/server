@@ -75,6 +75,10 @@ public class ClientApp {
         System.out.println("List should contain one already existing element:");;
         printAllBloods(restTemplate);
 
+        System.out.println("Index.html:");
+        String page = restTemplate.getForObject("http://localhost:8080/api/invalid",String.class);
+        System.out.println(page);
+
         System.out.println("bye ");
     }
 }

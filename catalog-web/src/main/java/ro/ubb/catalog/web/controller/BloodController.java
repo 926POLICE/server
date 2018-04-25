@@ -1,16 +1,22 @@
 package ro.ubb.catalog.web.controller;
 
+import org.apache.logging.log4j.core.util.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.ResourceUtils;
 import org.springframework.web.bind.annotation.*;
 import ro.ubb.catalog.core.model.Blood;
 import ro.ubb.catalog.core.model.BloodList;
 import ro.ubb.catalog.core.service.BloodService;
+import ro.ubb.catalog.core.utils.FileUtilities;
 import ro.ubb.catalog.web.dto.EmptyJsonResponse;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -29,6 +35,29 @@ public class BloodController {
     @Autowired
     private BloodService bloodService;
 
+    // @RequestMapping(value = "**", method = RequestMethod.GET) also seems to work ...
+    @RequestMapping(value = "/**", method = RequestMethod.GET)
+    public String getIndexFile()
+    {
+        log.trace("getIndexFile entered!");
+
+        String res = new String();
+
+        File file = new File(getClass().getClassLoader().getResource("templates/index.html").getFile());
+
+        try
+        {
+            res = FileUtilities.readFile(file.getPath());
+        }
+        catch (IOException i)
+        {
+            return "FAIL";
+        }
+
+        log.trace("getIndexFile exited!");
+
+        return res;
+    }
 
     @RequestMapping(value = "/bloodStocks", method = RequestMethod.GET)
     public List<Blood> getBloodStocks()
