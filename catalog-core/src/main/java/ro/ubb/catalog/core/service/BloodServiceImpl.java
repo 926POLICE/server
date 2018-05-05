@@ -6,7 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ro.ubb.catalog.core.model.Blood;
+import ro.ubb.catalog.core.model.Donation;
+import ro.ubb.catalog.core.model.Clinic;
 import ro.ubb.catalog.core.repository.BloodRepository;
+import ro.ubb.catalog.core.repository.ClinicRepository;
+import ro.ubb.catalog.core.repository.DonationRepository;
 
 import java.util.List;
 import java.util.Optional;
@@ -18,6 +22,12 @@ public class BloodServiceImpl implements BloodService
 
     @Autowired
     private BloodRepository bloodRepository;
+
+    @Autowired
+    private DonationRepository donationRepository;
+
+    @Autowired
+    private ClinicRepository clinicRepository;
 
     @Override
     public List<Blood> getAllBloods() {
@@ -31,21 +41,60 @@ public class BloodServiceImpl implements BloodService
     }
 
     @Override
-    public Blood createBlood(String a, float b, int c, String d) {
-        Blood blood = bloodRepository.save(new Blood(a,b,c,d));
+    public Blood createBlood(String collectionDate, Float quantity, Integer state, String type, Long DonationID, Long ClinicID)
+    {
+        log.trace("createBlood - method Entered");
+
+        Optional<Donation> donationOptional = donationRepository.findById(DonationID);
+        Donation donation = null;
+
+        if(donationOptional.isPresent())
+            donation = donationOptional.get();
+        else
+            log.trace("createBlood - null donation!!");
+
+        Optional<Clinic> donationClinicOptional = clinicRepository.findById(ClinicID);
+        Clinic clinic = null;
+
+        if(donationClinicOptional.isPresent())
+            clinic = donationClinicOptional.get();
+        else
+            log.trace("createBlood - null clinic!!");
+
+        Blood blood = bloodRepository.save(new Blood(collectionDate,quantity,state,type,donation,clinic));
+
+        log.trace("createBlood - method exited");
+
         return blood;
     }
 
     @Override
     @Transactional
-    public Optional<Blood> updateBlood(Long bloodId, String a, float b, int c, String d) {
-        Optional<Blood> optionalBlood = bloodRepository.findById(bloodId);
+    public Optional<Blood> updateBlood(Long BloodID, String collectionDate, Float quantity, Integer state, String type, Long DonationID, Long ClinicID)
+    {
+        Optional<Donation> donationOptional = donationRepository.findById(DonationID);
+        Donation donation = null;
 
+        if(donationOptional.isPresent())
+            donation = donationOptional.get();
+
+        Optional<Clinic> donationClinicOptional = clinicRepository.findById(ClinicID);
+        Clinic clinic = null;
+
+        if(donationClinicOptional.isPresent())
+            clinic = donationClinicOptional.get();
+
+        Optional<Blood> optionalBlood = bloodRepository.findById(BloodID);
+
+        Donation finalDonation = donation;
+        Clinic finalClinic = clinic;
         optionalBlood.ifPresent(st -> {
-            st.setCollectionDate(a);
-            st.setQuantity(b);
-            st.setState(c);
-            st.setType(d);
+            st.setCollectionDate(collectionDate);
+            st.setQuantity(quantity);
+            st.setState(state);
+            st.setType(type);
+            st.setDonation(finalDonation);
+            st.setClinic(finalClinic);
         });
 
         return optionalBlood;
