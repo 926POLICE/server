@@ -50,7 +50,7 @@ public class DonationServiceImpl implements DonationService
         Optional<Donor> donor = donorRepository.findById(donorID);
         Optional<Patient> patient = patientRepository.findById(patientID);
         Optional<Clinic> clinic = clinicRepository.findById(donationClinicID);
-        if(RBlood.isPresent()==false||PBlood.isPresent()==false||TBlood.isPresent()==false||donor.isPresent()==false||patient.isPresent()==false||clinic.isPresent()==false)
+        if(!RBlood.isPresent() || !PBlood.isPresent() || !TBlood.isPresent() || !donor.isPresent() || !patient.isPresent() || !clinic.isPresent())
             throw new RuntimeException("Invalid donation constructor!");
 
         Donation donation = donationRepository.save(new Donation(RBlood.get(),PBlood.get(),TBlood.get(),donor.get(),patient.get(),false,clinic.get()));

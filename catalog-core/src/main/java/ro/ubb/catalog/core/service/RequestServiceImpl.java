@@ -72,12 +72,12 @@ public class RequestServiceImpl implements RequestService
         optionalRequest.ifPresent(st -> {
             st.setPatient(patient.get());
             st.setDoctor(doctor.get());
-            st.setClinic(clinic.get());
-            st.setCompleted(completed);
-            st.setPriority(priority);
             st.setRQuantity(RQuantity);
             st.setPQuantity(PQuantity);
             st.setTQuantity(TQuantity);
+            st.setCompleted(completed);
+            st.setPriority(priority);
+            st.setClinic(clinic.get());
         });
 
         return optionalRequest;

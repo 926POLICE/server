@@ -19,6 +19,8 @@ import java.util.stream.Collectors;
  * Created by radu.
  */
 
+
+// For testing purposes ONLY.
 @RestController
 public class BloodController {
 

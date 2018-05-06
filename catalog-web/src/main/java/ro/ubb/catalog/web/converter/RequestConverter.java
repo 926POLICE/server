@@ -10,8 +10,23 @@ public class RequestConverter extends BaseConverter<Request,RequestDTO> {
     }
 
     @Override
-    public RequestDTO convertModelToDto(Request request) {
-        RequestDTO res = new RequestDTO(request.getPatient().getId(),request.getDoctor().getId(),request.getRQuantity(),request.getPQuantity(),request.getTQuantity(),request.getPriority(),request.getCompleted(),request.getClinic().getId());
+    public RequestDTO convertModelToDto(Request request)
+    {
+        Long patient,doctor, clinic;
+        if(request.getDoctor()==null)
+            doctor=-1L;
+        else
+            doctor = request.getDoctor().getId();
+        if(request.getPatient()==null)
+            patient=-1L;
+        else
+            patient = request.getPatient().getId();
+        if(request.getClinic()==null)
+            clinic=-1L;
+        else
+            clinic = request.getClinic().getId();
+
+        RequestDTO res = new RequestDTO(patient,doctor,request.getRQuantity(),request.getPQuantity(),request.getTQuantity(),request.getPriority(),request.getCompleted(),clinic);
 
         res.setId(request.getId());
 

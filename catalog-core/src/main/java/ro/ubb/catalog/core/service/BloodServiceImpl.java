@@ -86,8 +86,8 @@ public class BloodServiceImpl implements BloodService
 
         Optional<Blood> optionalBlood = bloodRepository.findById(BloodID);
 
-        Donation finalDonation = donation;
-        Clinic finalClinic = clinic;
+        Donation finalDonation = donation; // werid java Quirks 101
+        Clinic finalClinic = clinic; // same
         optionalBlood.ifPresent(st -> {
             st.setCollectionDate(collectionDate);
             st.setQuantity(quantity);

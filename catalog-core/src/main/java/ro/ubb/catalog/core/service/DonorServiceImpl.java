@@ -67,5 +67,9 @@ public class DonorServiceImpl implements DonorService
         log.trace("deleteDonor --- method finished");
     }
 
-
+    @Override
+    public Optional<Donor> findbyID(Long DonorID)
+    {
+     return donorRepository.findById(DonorID);
+    }
 }

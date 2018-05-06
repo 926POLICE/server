@@ -3,11 +3,13 @@ package ro.ubb.catalog.core.service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import ro.ubb.catalog.core.model.Clinic;
 import ro.ubb.catalog.core.repository.ClinicRepository;
 
 import java.util.List;
 
+@Service
 public class ClinicServiceImpl implements ClinicService
 {
     private static final Logger log = LoggerFactory.getLogger(DoctorServiceImpl.class);

@@ -6,7 +6,51 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7e1d53c7-5b19-4df4-bcb7-3d8403a804e5" name="Default" comment="" />
+    <list default="true" id="7e1d53c7-5b19-4df4-bcb7-3d8403a804e5" name="Default" comment="">
+      <change beforePath="" afterPath="$PROJECT_DIR$/catalog-web/src/main/java/ro/ubb/catalog/web/controller/ClinicController.java" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/catalog-web/src/main/java/ro/ubb/catalog/web/controller/DoctorController.java" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/catalog-web/src/main/java/ro/ubb/catalog/web/controller/DonorController.java" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change beforePath="$PROJECT_DIR$/catalog-client/src/main/java/ro/ubb/catalog/client/ClientApp.java" afterPath="$PROJECT_DIR$/catalog-client/src/main/java/ro/ubb/catalog/client/ClientApp.java" />
+      <change beforePath="$PROJECT_DIR$/catalog-core/out/production/classes/ro/ubb/catalog/core/service/ClinicServiceImpl.class" afterPath="$PROJECT_DIR$/catalog-core/out/production/classes/ro/ubb/catalog/core/service/ClinicServiceImpl.class" />
+      <change beforePath="$PROJECT_DIR$/catalog-core/out/production/classes/ro/ubb/catalog/core/service/DonorService.class" afterPath="$PROJECT_DIR$/catalog-core/out/production/classes/ro/ubb/catalog/core/service/DonorService.class" />
+      <change beforePath="$PROJECT_DIR$/catalog-core/out/production/classes/ro/ubb/catalog/core/service/DonorServiceImpl.class" afterPath="$PROJECT_DIR$/catalog-core/out/production/classes/ro/ubb/catalog/core/service/DonorServiceImpl.class" />
+      <change beforePath="$PROJECT_DIR$/catalog-core/out/production/classes/ro/ubb/catalog/core/service/RequestServiceImpl.class" afterPath="$PROJECT_DIR$/catalog-core/out/production/classes/ro/ubb/catalog/core/service/RequestServiceImpl.class" />
+      <change beforePath="$PROJECT_DIR$/catalog-core/src/main/java/ro/ubb/catalog/core/service/BloodServiceImpl.java" afterPath="$PROJECT_DIR$/catalog-core/src/main/java/ro/ubb/catalog/core/service/BloodServiceImpl.java" />
+      <change beforePath="$PROJECT_DIR$/catalog-core/src/main/java/ro/ubb/catalog/core/service/ClinicServiceImpl.java" afterPath="$PROJECT_DIR$/catalog-core/src/main/java/ro/ubb/catalog/core/service/ClinicServiceImpl.java" />
+      <change beforePath="$PROJECT_DIR$/catalog-core/src/main/java/ro/ubb/catalog/core/service/DonationServiceImpl.java" afterPath="$PROJECT_DIR$/catalog-core/src/main/java/ro/ubb/catalog/core/service/DonationServiceImpl.java" />
+      <change beforePath="$PROJECT_DIR$/catalog-core/src/main/java/ro/ubb/catalog/core/service/DonorService.java" afterPath="$PROJECT_DIR$/catalog-core/src/main/java/ro/ubb/catalog/core/service/DonorService.java" />
+      <change beforePath="$PROJECT_DIR$/catalog-core/src/main/java/ro/ubb/catalog/core/service/DonorServiceImpl.java" afterPath="$PROJECT_DIR$/catalog-core/src/main/java/ro/ubb/catalog/core/service/DonorServiceImpl.java" />
+      <change beforePath="$PROJECT_DIR$/catalog-core/src/main/java/ro/ubb/catalog/core/service/RequestServiceImpl.java" afterPath="$PROJECT_DIR$/catalog-core/src/main/java/ro/ubb/catalog/core/service/RequestServiceImpl.java" />
+      <change beforePath="$PROJECT_DIR$/catalog-web/build/libs/exploded/catalog-web-1.0-SNAPSHOT.war/WEB-INF/classes/ro/ubb/catalog/web/controller/BloodController.class" afterPath="$PROJECT_DIR$/catalog-web/build/libs/exploded/catalog-web-1.0-SNAPSHOT.war/WEB-INF/classes/ro/ubb/catalog/web/controller/BloodController.class" />
+      <change beforePath="$PROJECT_DIR$/catalog-web/build/libs/exploded/catalog-web-1.0-SNAPSHOT.war/WEB-INF/classes/ro/ubb/catalog/web/converter/BloodConverter.class" afterPath="$PROJECT_DIR$/catalog-web/build/libs/exploded/catalog-web-1.0-SNAPSHOT.war/WEB-INF/classes/ro/ubb/catalog/web/converter/BloodConverter.class" />
+      <change beforePath="$PROJECT_DIR$/catalog-web/build/libs/exploded/catalog-web-1.0-SNAPSHOT.war/WEB-INF/lib/ro.ubb.catalog-rest-template-catalog-core-1.0-SNAPSHOT.jar" afterPath="$PROJECT_DIR$/catalog-web/build/libs/exploded/catalog-web-1.0-SNAPSHOT.war/WEB-INF/lib/ro.ubb.catalog-rest-template-catalog-core-1.0-SNAPSHOT.jar" />
+      <change beforePath="$PROJECT_DIR$/catalog-web/out/production/classes/ro/ubb/catalog/web/config/AppLocalConfig.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/catalog-web/out/production/classes/ro/ubb/catalog/web/config/Initializer.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/catalog-web/out/production/classes/ro/ubb/catalog/web/config/WebConfig$1.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/catalog-web/out/production/classes/ro/ubb/catalog/web/config/WebConfig.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/catalog-web/out/production/classes/ro/ubb/catalog/web/controller/BloodController.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/catalog-web/out/production/classes/ro/ubb/catalog/web/converter/BaseConverter.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/catalog-web/out/production/classes/ro/ubb/catalog/web/converter/BloodConverter.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/catalog-web/out/production/classes/ro/ubb/catalog/web/converter/Converter.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/catalog-web/out/production/classes/ro/ubb/catalog/web/converter/DoctorConverter.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/catalog-web/out/production/classes/ro/ubb/catalog/web/converter/DonationConverter.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/catalog-web/out/production/classes/ro/ubb/catalog/web/converter/DonorConverter.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/catalog-web/out/production/classes/ro/ubb/catalog/web/converter/PatientConverter.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/catalog-web/out/production/classes/ro/ubb/catalog/web/converter/RequestConverter.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/catalog-web/out/production/classes/ro/ubb/catalog/web/dto/BaseDto.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/catalog-web/out/production/classes/ro/ubb/catalog/web/dto/BloodDTO.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/catalog-web/out/production/classes/ro/ubb/catalog/web/dto/DoctorDTO.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/catalog-web/out/production/classes/ro/ubb/catalog/web/dto/DonationDTO.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/catalog-web/out/production/classes/ro/ubb/catalog/web/dto/DonorDTO.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/catalog-web/out/production/classes/ro/ubb/catalog/web/dto/EmptyJsonResponse.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/catalog-web/out/production/classes/ro/ubb/catalog/web/dto/PatientDTO.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/catalog-web/out/production/classes/ro/ubb/catalog/web/dto/RequestDTO.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/catalog-web/src/main/java/ro/ubb/catalog/web/controller/BloodController.java" afterPath="$PROJECT_DIR$/catalog-web/src/main/java/ro/ubb/catalog/web/controller/BloodController.java" />
+      <change beforePath="$PROJECT_DIR$/catalog-web/src/main/java/ro/ubb/catalog/web/converter/BloodConverter.java" afterPath="$PROJECT_DIR$/catalog-web/src/main/java/ro/ubb/catalog/web/converter/BloodConverter.java" />
+      <change beforePath="$PROJECT_DIR$/catalog-web/src/main/java/ro/ubb/catalog/web/converter/DonationConverter.java" afterPath="$PROJECT_DIR$/catalog-web/src/main/java/ro/ubb/catalog/web/converter/DonationConverter.java" />
+      <change beforePath="$PROJECT_DIR$/catalog-web/src/main/java/ro/ubb/catalog/web/converter/RequestConverter.java" afterPath="$PROJECT_DIR$/catalog-web/src/main/java/ro/ubb/catalog/web/converter/RequestConverter.java" />
+    </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/.gradle/" />
     <ignored path="$PROJECT_DIR$/build/" />
@@ -49,103 +93,62 @@
     </system>
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file leaf-file-name="BloodController.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/catalog-web/src/main/java/ro/ubb/catalog/web/controller/BloodController.java">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
+      <file leaf-file-name="ClinicController.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/catalog-web/src/main/java/ro/ubb/catalog/web/controller/ClinicController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="256">
-              <caret line="46" column="52" lean-forward="false" selection-start-line="46" selection-start-column="32" selection-end-line="46" selection-end-column="52" />
-              <folding />
+            <state relative-caret-position="514">
+              <caret line="168" column="34" lean-forward="false" selection-start-line="168" selection-start-column="28" selection-end-line="168" selection-end-column="34" />
+              <folding>
+                <element signature="e#1223#1224#0" expanded="true" />
+                <element signature="e#1250#1251#0" expanded="true" />
+                <element signature="e#1381#1382#0" expanded="true" />
+                <element signature="e#1408#1409#0" expanded="true" />
+                <element signature="e#1539#1540#0" expanded="true" />
+                <element signature="e#1566#1567#0" expanded="true" />
+                <element signature="e#5676#5677#0" expanded="true" />
+                <element signature="e#5704#5705#0" expanded="true" />
+                <element signature="e#5855#5856#0" expanded="true" />
+                <element signature="e#5883#5884#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DonationDTO.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/catalog-web/src/main/java/ro/ubb/catalog/web/dto/DonationDTO.java">
+      <file leaf-file-name="DoctorController.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/catalog-web/src/main/java/ro/ubb/catalog/web/controller/DoctorController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="444">
-              <caret line="24" column="25" lean-forward="false" selection-start-line="24" selection-start-column="25" selection-end-line="24" selection-end-column="25" />
-              <folding />
+            <state relative-caret-position="270">
+              <caret line="42" column="15" lean-forward="false" selection-start-line="42" selection-start-column="15" selection-end-line="42" selection-end-column="15" />
+              <folding>
+                <element signature="e#1303#1304#0" expanded="true" />
+                <element signature="e#1330#1331#0" expanded="true" />
+                <element signature="e#1881#1882#0" expanded="true" />
+                <element signature="e#1908#1909#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="RequestDTO.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/catalog-web/src/main/java/ro/ubb/catalog/web/dto/RequestDTO.java">
+      <file leaf-file-name="DonorController.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/catalog-web/src/main/java/ro/ubb/catalog/web/controller/DonorController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="363">
-              <caret line="23" column="26" lean-forward="true" selection-start-line="23" selection-start-column="26" selection-end-line="23" selection-end-column="26" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Person.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/catalog-core/src/main/java/ro/ubb/catalog/core/model/Person.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="65">
-              <caret line="18" column="0" lean-forward="false" selection-start-line="18" selection-start-column="0" selection-end-line="26" selection-end-column="31" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Donor.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/catalog-core/src/main/java/ro/ubb/catalog/core/model/Donor.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="378">
-              <caret line="19" column="0" lean-forward="false" selection-start-line="19" selection-start-column="0" selection-end-line="20" selection-end-column="32" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ClinicServiceImpl.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/catalog-core/src/main/java/ro/ubb/catalog/core/service/ClinicServiceImpl.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="351">
-              <caret line="31" column="61" lean-forward="false" selection-start-line="31" selection-start-column="61" selection-end-line="31" selection-end-column="61" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Donation.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/catalog-core/src/main/java/ro/ubb/catalog/core/model/Donation.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="634">
-              <caret line="35" column="26" lean-forward="true" selection-start-line="35" selection-start-column="26" selection-end-line="35" selection-end-column="26" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Blood.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/catalog-core/src/main/java/ro/ubb/catalog/core/model/Blood.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-27">
-              <caret line="29" column="5" lean-forward="true" selection-start-line="29" selection-start-column="5" selection-end-line="29" selection-end-column="5" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="DonationService.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/catalog-core/src/main/java/ro/ubb/catalog/core/service/DonationService.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="243">
-              <caret line="11" column="124" lean-forward="false" selection-start-line="11" selection-start-column="124" selection-end-line="11" selection-end-column="124" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="DonationServiceImpl.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/catalog-core/src/main/java/ro/ubb/catalog/core/service/DonationServiceImpl.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="27">
-              <caret line="45" column="109" lean-forward="false" selection-start-line="45" selection-start-column="109" selection-end-line="45" selection-end-column="109" />
-              <folding />
+            <state relative-caret-position="352">
+              <caret line="84" column="38" lean-forward="false" selection-start-line="84" selection-start-column="33" selection-end-line="84" selection-end-column="38" />
+              <folding>
+                <element signature="e#1295#1296#0" expanded="true" />
+                <element signature="e#1322#1323#0" expanded="true" />
+                <element signature="e#1860#1861#0" expanded="true" />
+                <element signature="e#1887#1888#0" expanded="true" />
+                <element signature="e#2044#2045#0" expanded="true" />
+                <element signature="e#2071#2072#0" expanded="true" />
+                <element signature="e#2239#2240#0" expanded="true" />
+                <element signature="e#2266#2267#0" expanded="true" />
+                <element signature="e#2817#2818#0" expanded="true" />
+                <element signature="e#2844#2845#0" expanded="true" />
+                <element signature="e#3025#3026#0" expanded="true" />
+                <element signature="e#3052#3053#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -175,6 +178,12 @@
       <find>Donor</find>
       <find>donation</find>
       <find>update</find>
+      <find>getid</find>
+      <find>@RequestMapping(value = &quot;/donors/{donorID}&quot;, method = RequestMethod.PUT)</find>
+      <find>seteli</find>
+      <find>path</find>
+      <find>pathva</find>
+      <find>pathv</find>
     </findStrings>
     <replaceStrings>
       <replace>Doctor</replace>
@@ -188,6 +197,9 @@
       <replace>Patient</replace>
       <replace>request</replace>
     </replaceStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GradleLocalSettings">
     <option name="myGradleHomes">
@@ -998,9 +1010,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/catalog-core/src/main/java/ro/ubb/catalog/core/repository/BloodRepository.java" />
-        <option value="$PROJECT_DIR$/catalog-core/src/main/java/ro/ubb/catalog/core/repository/DoctorRepository.java" />
-        <option value="$PROJECT_DIR$/catalog-core/src/main/java/ro/ubb/catalog/core/repository/DonationReppsitory.java" />
         <option value="$PROJECT_DIR$/catalog-core/src/main/java/ro/ubb/catalog/core/repository/DonorRepository.java" />
         <option value="$PROJECT_DIR$/catalog-core/src/main/java/ro/ubb/catalog/core/repository/PatientRepository.java" />
         <option value="$PROJECT_DIR$/catalog-core/src/main/java/ro/ubb/catalog/core/repository/RequestRepository.java" />
@@ -1011,7 +1020,6 @@
         <option value="$PROJECT_DIR$/catalog-core/src/main/java/ro/ubb/catalog/core/model/DonationClinic.java" />
         <option value="$PROJECT_DIR$/catalog-core/src/main/java/ro/ubb/catalog/core/model/Request.java" />
         <option value="$PROJECT_DIR$/catalog-core/src/main/java/ro/ubb/catalog/core/service/BloodService.java" />
-        <option value="$PROJECT_DIR$/catalog-core/src/main/java/ro/ubb/catalog/core/service/DonorService.java" />
         <option value="$PROJECT_DIR$/catalog-core/src/main/java/ro/ubb/catalog/core/service/RequestService.java" />
         <option value="$PROJECT_DIR$/catalog-core/src/main/java/ro/ubb/catalog/core/service/DoctorService.java" />
         <option value="$PROJECT_DIR$/catalog-core/src/main/java/ro/ubb/catalog/core/service/DoctorServiceImpl.java" />
@@ -1022,33 +1030,37 @@
         <option value="$PROJECT_DIR$/catalog-web/src/main/java/ro/ubb/catalog/web/converter/BaseConverter.java" />
         <option value="$PROJECT_DIR$/catalog-web/src/main/java/ro/ubb/catalog/web/dto/BaseDto.java" />
         <option value="$PROJECT_DIR$/catalog-web/src/main/java/ro/ubb/catalog/web/dto/BloodDTO.java" />
-        <option value="$PROJECT_DIR$/catalog-client/src/main/java/ro/ubb/catalog/client/ClientApp.java" />
-        <option value="$PROJECT_DIR$/catalog-web/src/main/java/ro/ubb/catalog/web/converter/BloodConverter.java" />
         <option value="$PROJECT_DIR$/catalog-core/src/main/java/ro/ubb/catalog/core/service/DonationClinicServiceImpl.java" />
         <option value="$PROJECT_DIR$/catalog-core/src/main/java/ro/ubb/catalog/core/model/Person.java" />
         <option value="$PROJECT_DIR$/catalog-core/src/main/java/ro/ubb/catalog/core/model/Donor.java" />
         <option value="$PROJECT_DIR$/catalog-core/src/main/java/ro/ubb/catalog/core/model/Patient.java" />
-        <option value="$PROJECT_DIR$/catalog-core/src/main/java/ro/ubb/catalog/core/service/DonorServiceImpl.java" />
         <option value="$PROJECT_DIR$/catalog-core/src/main/java/ro/ubb/catalog/core/service/PatientServiceImpl.java" />
-        <option value="$PROJECT_DIR$/catalog-core/src/main/java/ro/ubb/catalog/core/service/RequestServiceImpl.java" />
-        <option value="$PROJECT_DIR$/catalog-core/src/main/java/ro/ubb/catalog/core/service/BloodServiceImpl.java" />
         <option value="$PROJECT_DIR$/catalog-web/src/main/java/ro/ubb/catalog/web/dto/DoctorDTO.java" />
         <option value="$PROJECT_DIR$/catalog-web/src/main/java/ro/ubb/catalog/web/dto/DonationDTO.java" />
         <option value="$PROJECT_DIR$/catalog-web/src/main/java/ro/ubb/catalog/web/dto/DonorDTO.java" />
         <option value="$PROJECT_DIR$/catalog-web/src/main/java/ro/ubb/catalog/web/dto/PatientDTO.java" />
         <option value="$PROJECT_DIR$/catalog-web/src/main/java/ro/ubb/catalog/web/dto/RequestDTO.java" />
         <option value="$PROJECT_DIR$/catalog-web/src/main/java/ro/ubb/catalog/web/converter/DoctorConverter.java" />
-        <option value="$PROJECT_DIR$/catalog-web/src/main/java/ro/ubb/catalog/web/converter/DonationConverter.java" />
         <option value="$PROJECT_DIR$/catalog-web/src/main/java/ro/ubb/catalog/web/converter/DonorConverter.java" />
         <option value="$PROJECT_DIR$/catalog-web/src/main/java/ro/ubb/catalog/web/converter/PatientConverter.java" />
-        <option value="$PROJECT_DIR$/catalog-web/src/main/java/ro/ubb/catalog/web/converter/RequestConverter.java" />
-        <option value="$PROJECT_DIR$/catalog-web/src/main/java/ro/ubb/catalog/web/controller/BloodController.java" />
         <option value="$PROJECT_DIR$/catalog-core/src/main/java/ro/ubb/catalog/core/service/ClinicService.java" />
-        <option value="$PROJECT_DIR$/catalog-core/src/main/java/ro/ubb/catalog/core/service/ClinicServiceImpl.java" />
         <option value="$PROJECT_DIR$/catalog-core/src/main/java/ro/ubb/catalog/core/model/Clinic.java" />
-        <option value="$PROJECT_DIR$/catalog-core/src/main/java/ro/ubb/catalog/core/service/DonationServiceImpl.java" />
         <option value="$PROJECT_DIR$/catalog-core/src/main/java/ro/ubb/catalog/core/service/DonationService.java" />
         <option value="$PROJECT_DIR$/catalog-core/src/main/java/ro/ubb/catalog/core/model/Donation.java" />
+        <option value="$PROJECT_DIR$/catalog-web/src/main/java/ro/ubb/catalog/web/converter/BloodConverter.java" />
+        <option value="$PROJECT_DIR$/catalog-web/src/main/java/ro/ubb/catalog/web/converter/DonationConverter.java" />
+        <option value="$PROJECT_DIR$/catalog-web/src/main/java/ro/ubb/catalog/web/converter/RequestConverter.java" />
+        <option value="$PROJECT_DIR$/catalog-core/src/main/java/ro/ubb/catalog/core/service/BloodServiceImpl.java" />
+        <option value="$PROJECT_DIR$/catalog-core/src/main/java/ro/ubb/catalog/core/service/DonationServiceImpl.java" />
+        <option value="$PROJECT_DIR$/catalog-core/src/main/java/ro/ubb/catalog/core/service/RequestServiceImpl.java" />
+        <option value="$PROJECT_DIR$/catalog-core/src/main/java/ro/ubb/catalog/core/service/ClinicServiceImpl.java" />
+        <option value="$PROJECT_DIR$/catalog-web/src/main/java/ro/ubb/catalog/web/controller/BloodController.java" />
+        <option value="$PROJECT_DIR$/catalog-web/src/main/java/ro/ubb/catalog/web/controller/DoctorController.java" />
+        <option value="$PROJECT_DIR$/catalog-core/src/main/java/ro/ubb/catalog/core/service/DonorService.java" />
+        <option value="$PROJECT_DIR$/catalog-core/src/main/java/ro/ubb/catalog/core/service/DonorServiceImpl.java" />
+        <option value="$PROJECT_DIR$/catalog-client/src/main/java/ro/ubb/catalog/client/ClientApp.java" />
+        <option value="$PROJECT_DIR$/catalog-web/src/main/java/ro/ubb/catalog/web/controller/ClinicController.java" />
+        <option value="$PROJECT_DIR$/catalog-web/src/main/java/ro/ubb/catalog/web/controller/DonorController.java" />
       </list>
     </option>
   </component>
@@ -1070,6 +1082,7 @@
     <option name="width" value="976" />
     <option name="height" value="1038" />
   </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1">
       <flattenPackages />
@@ -1085,8 +1098,10 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
+      <pane id="Scratches" />
+      <pane id="Scope" />
       <pane id="AndroidView" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -1297,8 +1312,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scratches" />
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -1577,12 +1590,13 @@
       <workItem from="1525433347832" duration="90000" />
       <workItem from="1525433722575" duration="665000" />
       <workItem from="1525445894743" duration="5273000" />
-      <workItem from="1525515661774" duration="5856000" />
+      <workItem from="1525515661774" duration="14735000" />
+      <workItem from="1525596975210" duration="1180000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="67697000" />
+    <option name="totallyTimeSpent" value="77756000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-9" y="-9" width="1938" height="1048" extended-state="6" />
@@ -1606,8 +1620,8 @@
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="WINDOWED" visible="false" show_stripe_button="true" weight="0.4259056" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" x="0" y="29" width="1920" height="1001" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="WINDOWED" visible="true" show_stripe_button="true" weight="0.4259056" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" x="0" y="29" width="1920" height="1001" />
       <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2171875" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -1637,34 +1651,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/catalog-core/src/main/java/ro/ubb/catalog/core/repository/DonorRepository.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="108">
-          <caret line="4" column="61" lean-forward="false" selection-start-line="4" selection-start-column="61" selection-end-line="4" selection-end-column="61" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/catalog-core/src/main/java/ro/ubb/catalog/core/repository/DonationRepository.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="108">
-          <caret line="4" column="74" lean-forward="true" selection-start-line="4" selection-start-column="36" selection-end-line="4" selection-end-column="74" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/catalog-core/src/main/java/ro/ubb/catalog/core/repository/ClinicRepository.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="108">
-          <caret line="4" column="79" lean-forward="false" selection-start-line="4" selection-start-column="79" selection-end-line="4" selection-end-column="79" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/catalog-core/src/main/java/ro/ubb/catalog/core/repository/DoctorRepository.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="108">
-          <caret line="4" column="62" lean-forward="false" selection-start-line="4" selection-start-column="62" selection-end-line="4" selection-end-column="62" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/catalog-core/src/main/java/ro/ubb/catalog/core/repository/BaseRepository.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="162">
@@ -1681,16 +1667,6 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/catalog-web/src/main/java/ro/ubb/catalog/web/dto/ClientDto.java" />
     <entry file="file://$PROJECT_DIR$/catalog-web/src/main/java/ro/ubb/catalog/web/converter/ClientConverter.java" />
-    <entry file="file://$PROJECT_DIR$/catalog-core/src/main/java/ro/ubb/catalog/core/service/BloodService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="324">
-          <caret line="13" column="143" lean-forward="false" selection-start-line="13" selection-start-column="32" selection-end-line="13" selection-end-column="143" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/catalog-web/src/main/java/ro/ubb/catalog/web/config/WebConfig.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="324">
@@ -1713,13 +1689,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/catalog-core/src/main/java/ro/ubb/catalog/core/service/DonorService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="351">
-          <caret line="13" column="227" lean-forward="false" selection-start-line="13" selection-start-column="4" selection-end-line="13" selection-end-column="227" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/catalog-core/src/main/java/ro/ubb/catalog/core/service/PatientService.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="270">
@@ -1734,53 +1703,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/catalog-client/src/main/java/ro/ubb/catalog/client/ClientApp.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1674">
-          <caret line="71" column="0" lean-forward="false" selection-start-line="71" selection-start-column="0" selection-end-line="71" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/catalog-web/src/main/java/ro/ubb/catalog/web/dto/ClinicDTO.java" />
-    <entry file="file://$PROJECT_DIR$/catalog-core/src/main/java/ro/ubb/catalog/core/service/BloodServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="72" column="33" lean-forward="false" selection-start-line="72" selection-start-column="27" selection-end-line="72" selection-end-column="33" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/catalog-core/src/main/java/ro/ubb/catalog/core/service/DoctorServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="40" column="34" lean-forward="false" selection-start-line="40" selection-start-column="28" selection-end-line="40" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/catalog-core/src/main/java/ro/ubb/catalog/core/service/DonorServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="379">
-          <caret line="43" column="24" lean-forward="true" selection-start-line="43" selection-start-column="24" selection-end-line="43" selection-end-column="24" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/catalog-core/src/main/java/ro/ubb/catalog/core/service/PatientServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="352">
-          <caret line="50" column="33" lean-forward="false" selection-start-line="50" selection-start-column="33" selection-end-line="50" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/catalog-core/src/main/java/ro/ubb/catalog/core/service/RequestServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="634">
-          <caret line="79" column="39" lean-forward="true" selection-start-line="79" selection-start-column="39" selection-end-line="79" selection-end-column="39" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/catalog-web/src/main/java/ro/ubb/catalog/web/converter/Converter.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="216">
@@ -1796,61 +1719,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/catalog-core/src/main/java/ro/ubb/catalog/core/model/Doctor.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="405">
-          <caret line="19" column="0" lean-forward="true" selection-start-line="19" selection-start-column="0" selection-end-line="20" selection-end-column="28" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/catalog-web/src/main/java/ro/ubb/catalog/web/dto/DoctorDTO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="378">
-          <caret line="14" column="28" lean-forward="false" selection-start-line="14" selection-start-column="28" selection-end-line="14" selection-end-column="28" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/catalog-core/src/main/java/ro/ubb/catalog/core/model/Patient.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="378">
-          <caret line="19" column="4" lean-forward="false" selection-start-line="19" selection-start-column="4" selection-end-line="19" selection-end-column="28" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/catalog-web/src/main/java/ro/ubb/catalog/web/dto/PatientDTO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="594">
-          <caret line="22" column="28" lean-forward="false" selection-start-line="22" selection-start-column="28" selection-end-line="22" selection-end-column="28" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/catalog-core/src/main/java/ro/ubb/catalog/core/model/Request.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="284">
-          <caret line="17" column="0" lean-forward="false" selection-start-line="17" selection-start-column="0" selection-end-line="31" selection-end-column="26" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/catalog-web/src/main/java/ro/ubb/catalog/web/converter/BaseConverter.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="216">
           <caret line="13" column="30" lean-forward="false" selection-start-line="13" selection-start-column="30" selection-end-line="13" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/catalog-web/src/main/java/ro/ubb/catalog/web/converter/DoctorConverter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="405">
-          <caret line="15" column="19" lean-forward="false" selection-start-line="15" selection-start-column="19" selection-end-line="15" selection-end-column="19" />
         </state>
       </provider>
     </entry>
@@ -1861,103 +1733,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/catalog-web/src/main/java/ro/ubb/catalog/web/dto/BloodDTO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="108">
-          <caret line="4" column="0" lean-forward="false" selection-start-line="4" selection-start-column="0" selection-end-line="7" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/catalog-web/src/main/java/ro/ubb/catalog/web/converter/DonationConverter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="405">
-          <caret line="13" column="229" lean-forward="false" selection-start-line="13" selection-start-column="229" selection-end-line="13" selection-end-column="229" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#272#273#0" expanded="false" />
-            <element signature="e#338#339#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/catalog-web/src/main/java/ro/ubb/catalog/web/converter/BloodConverter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="212">
-          <caret line="14" column="0" lean-forward="true" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/catalog-web/src/main/java/ro/ubb/catalog/web/converter/DonorConverter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="405">
-          <caret line="13" column="254" lean-forward="false" selection-start-line="13" selection-start-column="254" selection-end-line="13" selection-end-column="254" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#251#252#0" expanded="false" />
-            <element signature="e#317#318#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/catalog-web/src/main/java/ro/ubb/catalog/web/dto/DonorDTO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="594">
-          <caret line="22" column="0" lean-forward="true" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/catalog-web/src/main/java/ro/ubb/catalog/web/converter/PatientConverter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="405">
-          <caret line="13" column="252" lean-forward="false" selection-start-line="13" selection-start-column="252" selection-end-line="13" selection-end-column="252" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/catalog-web/src/main/java/ro/ubb/catalog/web/converter/RequestConverter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="405">
-          <caret line="13" column="238" lean-forward="false" selection-start-line="13" selection-start-column="238" selection-end-line="13" selection-end-column="238" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#265#266#0" expanded="false" />
-            <element signature="e#331#332#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/catalog-core/src/main/java/ro/ubb/catalog/core/service/ClinicService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="216">
-          <caret line="10" column="59" lean-forward="true" selection-start-line="10" selection-start-column="4" selection-end-line="10" selection-end-column="59" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/catalog-core/src/main/java/ro/ubb/catalog/core/model/Clinic.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="175">
           <caret line="24" column="54" lean-forward="false" selection-start-line="24" selection-start-column="54" selection-end-line="24" selection-end-column="54" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/catalog-core/src/main/java/ro/ubb/catalog/core/service/ClinicServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="351">
-          <caret line="31" column="61" lean-forward="false" selection-start-line="31" selection-start-column="61" selection-end-line="31" selection-end-column="61" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/catalog-core/src/main/java/ro/ubb/catalog/core/service/DonationServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="27">
-          <caret line="45" column="109" lean-forward="false" selection-start-line="45" selection-start-column="109" selection-end-line="45" selection-end-column="109" />
           <folding />
         </state>
       </provider>
@@ -1970,50 +1749,50 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/catalog-core/src/main/java/ro/ubb/catalog/core/model/Donation.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="634">
-          <caret line="35" column="26" lean-forward="true" selection-start-line="35" selection-start-column="26" selection-end-line="35" selection-end-column="26" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/catalog-core/src/main/java/ro/ubb/catalog/core/model/Blood.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-27">
+        <state relative-caret-position="594">
           <caret line="29" column="5" lean-forward="true" selection-start-line="29" selection-start-column="5" selection-end-line="29" selection-end-column="5" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/catalog-core/src/main/java/ro/ubb/catalog/core/model/Donor.java">
+    <entry file="file://$PROJECT_DIR$/catalog-web/src/main/java/ro/ubb/catalog/web/dto/BloodDTO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="108">
+          <caret line="4" column="0" lean-forward="false" selection-start-line="4" selection-start-column="0" selection-end-line="7" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/catalog-core/src/main/java/ro/ubb/catalog/core/model/Patient.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="378">
-          <caret line="19" column="0" lean-forward="false" selection-start-line="19" selection-start-column="0" selection-end-line="20" selection-end-column="32" />
+          <caret line="19" column="4" lean-forward="false" selection-start-line="19" selection-start-column="4" selection-end-line="19" selection-end-column="28" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/catalog-core/src/main/java/ro/ubb/catalog/core/model/Person.java">
+    <entry file="file://$PROJECT_DIR$/catalog-web/src/main/java/ro/ubb/catalog/web/dto/DoctorDTO.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="65">
-          <caret line="18" column="0" lean-forward="false" selection-start-line="18" selection-start-column="0" selection-end-line="26" selection-end-column="31" />
+        <state relative-caret-position="297">
+          <caret line="14" column="28" lean-forward="false" selection-start-line="14" selection-start-column="28" selection-end-line="14" selection-end-column="28" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/catalog-web/src/main/java/ro/ubb/catalog/web/controller/BloodController.java">
+    <entry file="file://$PROJECT_DIR$/catalog-web/src/main/java/ro/ubb/catalog/web/dto/DonorDTO.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="256">
-          <caret line="46" column="52" lean-forward="false" selection-start-line="46" selection-start-column="32" selection-end-line="46" selection-end-column="52" />
+        <state relative-caret-position="513">
+          <caret line="22" column="0" lean-forward="true" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/catalog-web/src/main/java/ro/ubb/catalog/web/dto/DonationDTO.java">
+    <entry file="file://$PROJECT_DIR$/catalog-web/src/main/java/ro/ubb/catalog/web/dto/PatientDTO.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="444">
-          <caret line="24" column="25" lean-forward="false" selection-start-line="24" selection-start-column="25" selection-end-line="24" selection-end-column="25" />
+        <state relative-caret-position="513">
+          <caret line="22" column="28" lean-forward="false" selection-start-line="22" selection-start-column="28" selection-end-line="22" selection-end-column="28" />
           <folding />
         </state>
       </provider>
@@ -2023,6 +1802,262 @@
         <state relative-caret-position="363">
           <caret line="23" column="26" lean-forward="true" selection-start-line="23" selection-start-column="26" selection-end-line="23" selection-end-column="26" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/catalog-core/src/main/java/ro/ubb/catalog/core/model/Donation.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="662">
+          <caret line="35" column="26" lean-forward="true" selection-start-line="35" selection-start-column="26" selection-end-line="35" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/catalog-web/src/main/java/ro/ubb/catalog/web/converter/BloodConverter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="239">
+          <caret line="21" column="0" lean-forward="false" selection-start-line="21" selection-start-column="0" selection-end-line="28" selection-end-column="49" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/catalog-core/src/main/java/ro/ubb/catalog/core/model/Person.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="378">
+          <caret line="19" column="26" lean-forward="false" selection-start-line="19" selection-start-column="26" selection-end-line="19" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/catalog-web/src/main/java/ro/ubb/catalog/web/dto/DonationDTO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="567">
+          <caret line="24" column="25" lean-forward="false" selection-start-line="24" selection-start-column="25" selection-end-line="24" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/catalog-web/src/main/java/ro/ubb/catalog/web/converter/RequestConverter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="580">
+          <caret line="28" column="175" lean-forward="false" selection-start-line="28" selection-start-column="175" selection-end-line="28" selection-end-column="175" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/catalog-web/src/main/java/ro/ubb/catalog/web/converter/PatientConverter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="324">
+          <caret line="13" column="252" lean-forward="false" selection-start-line="13" selection-start-column="252" selection-end-line="13" selection-end-column="252" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/catalog-web/src/main/java/ro/ubb/catalog/web/converter/DonorConverter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="378">
+          <caret line="15" column="28" lean-forward="false" selection-start-line="15" selection-start-column="23" selection-end-line="15" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/catalog-web/src/main/java/ro/ubb/catalog/web/converter/DonationConverter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="769">
+          <caret line="35" column="0" lean-forward="false" selection-start-line="35" selection-start-column="0" selection-end-line="38" selection-end-column="50" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/catalog-web/src/main/java/ro/ubb/catalog/web/converter/DoctorConverter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="324">
+          <caret line="15" column="19" lean-forward="false" selection-start-line="15" selection-start-column="19" selection-end-line="15" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/catalog-core/src/main/java/ro/ubb/catalog/core/model/Doctor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="405">
+          <caret line="19" column="0" lean-forward="true" selection-start-line="19" selection-start-column="0" selection-end-line="20" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/catalog-core/src/main/java/ro/ubb/catalog/core/model/Donor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="513">
+          <caret line="23" column="97" lean-forward="true" selection-start-line="23" selection-start-column="97" selection-end-line="23" selection-end-column="97" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/catalog-core/src/main/java/ro/ubb/catalog/core/model/Request.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="284">
+          <caret line="17" column="0" lean-forward="false" selection-start-line="17" selection-start-column="0" selection-end-line="31" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/catalog-web/src/main/java/ro/ubb/catalog/web/dto/EmptyJsonResponse.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="216">
+          <caret line="8" column="13" lean-forward="false" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/catalog-core/src/main/java/ro/ubb/catalog/core/service/BloodServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="108">
+          <caret line="17" column="0" lean-forward="false" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/catalog-core/src/main/java/ro/ubb/catalog/core/service/ClinicService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="216">
+          <caret line="10" column="59" lean-forward="true" selection-start-line="10" selection-start-column="4" selection-end-line="10" selection-end-column="59" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/catalog-core/src/main/java/ro/ubb/catalog/core/service/BloodService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="324">
+          <caret line="13" column="143" lean-forward="false" selection-start-line="13" selection-start-column="32" selection-end-line="13" selection-end-column="143" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/catalog-core/src/main/java/ro/ubb/catalog/core/service/PatientServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1026">
+          <caret line="44" column="29" lean-forward="true" selection-start-line="44" selection-start-column="29" selection-end-line="44" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/catalog-core/src/main/java/ro/ubb/catalog/core/service/RequestServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1620">
+          <caret line="72" column="21" lean-forward="true" selection-start-line="72" selection-start-column="21" selection-end-line="72" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/catalog-core/src/main/java/ro/ubb/catalog/core/service/DonationServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2052">
+          <caret line="80" column="34" lean-forward="false" selection-start-line="80" selection-start-column="34" selection-end-line="80" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/catalog-core/src/main/java/ro/ubb/catalog/core/service/DoctorServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="729">
+          <caret line="36" column="5" lean-forward="true" selection-start-line="36" selection-start-column="5" selection-end-line="36" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/catalog-core/src/main/java/ro/ubb/catalog/core/service/ClinicServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="108">
+          <caret line="11" column="8" lean-forward="false" selection-start-line="11" selection-start-column="8" selection-end-line="11" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/catalog-core/src/main/java/ro/ubb/catalog/core/service/DonorService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="324">
+          <caret line="16" column="4" lean-forward="false" selection-start-line="16" selection-start-column="4" selection-end-line="16" selection-end-column="43" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/catalog-core/src/main/java/ro/ubb/catalog/core/service/DonorServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1647">
+          <caret line="72" column="46" lean-forward="false" selection-start-line="72" selection-start-column="46" selection-end-line="72" selection-end-column="46" />
+          <folding>
+            <element signature="e#2349#2350#0" expanded="false" />
+            <element signature="e#2402#2403#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/catalog-client/src/main/java/ro/ubb/catalog/client/ClientApp.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="499">
+          <caret line="75" column="74" lean-forward="false" selection-start-line="75" selection-start-column="74" selection-end-line="75" selection-end-column="74" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/catalog-web/src/main/java/ro/ubb/catalog/web/controller/BloodController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-41">
+          <caret line="43" column="45" lean-forward="false" selection-start-line="43" selection-start-column="45" selection-end-line="43" selection-end-column="45" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/catalog-web/src/main/java/ro/ubb/catalog/web/controller/ClinicController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="514">
+          <caret line="168" column="34" lean-forward="false" selection-start-line="168" selection-start-column="28" selection-end-line="168" selection-end-column="34" />
+          <folding>
+            <element signature="e#1223#1224#0" expanded="true" />
+            <element signature="e#1250#1251#0" expanded="true" />
+            <element signature="e#1381#1382#0" expanded="true" />
+            <element signature="e#1408#1409#0" expanded="true" />
+            <element signature="e#1539#1540#0" expanded="true" />
+            <element signature="e#1566#1567#0" expanded="true" />
+            <element signature="e#5676#5677#0" expanded="true" />
+            <element signature="e#5704#5705#0" expanded="true" />
+            <element signature="e#5855#5856#0" expanded="true" />
+            <element signature="e#5883#5884#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/catalog-web/src/main/java/ro/ubb/catalog/web/controller/DoctorController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="42" column="15" lean-forward="false" selection-start-line="42" selection-start-column="15" selection-end-line="42" selection-end-column="15" />
+          <folding>
+            <element signature="e#1303#1304#0" expanded="true" />
+            <element signature="e#1330#1331#0" expanded="true" />
+            <element signature="e#1881#1882#0" expanded="true" />
+            <element signature="e#1908#1909#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/catalog-web/src/main/java/ro/ubb/catalog/web/controller/DonorController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="352">
+          <caret line="84" column="38" lean-forward="false" selection-start-line="84" selection-start-column="33" selection-end-line="84" selection-end-column="38" />
+          <folding>
+            <element signature="e#1295#1296#0" expanded="true" />
+            <element signature="e#1322#1323#0" expanded="true" />
+            <element signature="e#1860#1861#0" expanded="true" />
+            <element signature="e#1887#1888#0" expanded="true" />
+            <element signature="e#2044#2045#0" expanded="true" />
+            <element signature="e#2071#2072#0" expanded="true" />
+            <element signature="e#2239#2240#0" expanded="true" />
+            <element signature="e#2266#2267#0" expanded="true" />
+            <element signature="e#2817#2818#0" expanded="true" />
+            <element signature="e#2844#2845#0" expanded="true" />
+            <element signature="e#3025#3026#0" expanded="true" />
+            <element signature="e#3052#3053#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

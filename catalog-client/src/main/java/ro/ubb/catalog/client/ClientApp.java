@@ -73,6 +73,9 @@ public class ClientApp {
         System.out.println("List should contain only the initial element:");
         printAllBloods(restTemplate);
 
+        Boolean res = restTemplate.getForObject("http://localhost:8080/api/donors/eligibility/{donorID}",Boolean.class,1l);
+        System.out.println(res);
+
         System.out.println("bye ");
     }
 }
