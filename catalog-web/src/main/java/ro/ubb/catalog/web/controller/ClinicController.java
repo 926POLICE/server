@@ -142,25 +142,29 @@ public class ClinicController {
     }
 
     @RequestMapping(value = "/bloodStocksUntested", method = RequestMethod.POST)
-    public List<BloodDTO> collectBlood(@RequestBody final Long DonationID, @RequestBody final Float RQuantity, @RequestBody final Float PQuantity, @RequestBody final Float TQuantity, @RequestBody final String collectionDate)
+    public List<BloodDTO> collectBlood(@RequestBody Map<String, String> json)
+    //@RequestBody final Long DonationID, @RequestBody final Float RQuantity, @RequestBody final Float PQuantity, @RequestBody final Float TQuantity, @RequestBody final String collectionDate)
     {
         return null;
     }
 
     @RequestMapping(value = "/bloodStocks/available", method = RequestMethod.GET)
-    boolean checkAvailability(@RequestBody final Float Thrombocytes,@RequestBody final Float RedBloodCells,@RequestBody final Float Plasma)
+    boolean checkAvailability(@RequestBody Map<String, String> json)
+    //@RequestBody final Float Thrombocytes,@RequestBody final Float RedBloodCells,@RequestBody final Float Plasma)
     {
         return false;
     }
 
     @RequestMapping(value = "/donors/notify", method = RequestMethod.PUT)
-    boolean notifyDonorNeeded(@RequestBody final String BloodType,@RequestBody final Boolean RH,@RequestBody final String Anticorps)
+    boolean notifyDonorNeeded(@RequestBody Map<String, String> json)
+    //@RequestBody final String BloodType,@RequestBody final Boolean RH,@RequestBody final String Anticorps)
     {
         return false;
     }
 
     @RequestMapping(value = "/donors/compatibility", method = RequestMethod.GET)
-    boolean checkCompatibility(@RequestBody final Long DonorID,@RequestBody final  Long PatientID)
+    boolean checkCompatibility(@RequestBody Map<String, String> json)
+    //@RequestBody final Long DonorID,@RequestBody final  Long PatientID)
     {
         return false;
     }

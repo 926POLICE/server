@@ -4,7 +4,7 @@ allprojects {
 
     apply plugin: 'java'
 
-    sourceCompatibility = 1.9
+    sourceCompatibility = 9
 
     repositories {
         mavenCentral()
@@ -48,7 +48,7 @@ allprojects {
         //lombok
         compile group: 'org.projectlombok', name: 'lombok', version: "$lombokVersion"
 
-
-
+        // supress weird error
+        compile group: 'com.google.code.findbugs', name: 'jsr305', version: '3.0.2'
     }
 }
