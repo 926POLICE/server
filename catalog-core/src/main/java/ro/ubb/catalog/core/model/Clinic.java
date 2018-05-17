@@ -4,18 +4,13 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @Table(name = "donationClinics")
 @NoArgsConstructor
 @Getter
 @Setter
-@ToString(callSuper = true)
-@EqualsAndHashCode(callSuper = true)
 @AllArgsConstructor
 public class Clinic extends BaseEntity<Long> implements Serializable
 {
@@ -36,9 +31,27 @@ public class Clinic extends BaseEntity<Long> implements Serializable
     @OneToMany(fetch=FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "clinic")
     private Set<Blood> bloodStock = new HashSet<>();
 
-    @OneToMany(fetch=FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "clinic")
-    private Set<Blood> unusableBloodStock = new HashSet<>();
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Clinic)) return false;
+        if (!super.equals(o)) return false;
+        Clinic clinic = (Clinic) o;
+        return Objects.equals(latitude, clinic.latitude) &&
+                Objects.equals(longitude, clinic.longitude);
+    }
 
-    @OneToMany(fetch=FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "clinic")
-    private Set<Blood> untestedBloodStock = new HashSet<>();
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(super.hashCode(), latitude, longitude);
+    }
+
+    @Override
+    public String toString() {
+        return "Clinic{" +
+                "latitude=" + latitude +
+                ", longitude=" + longitude +
+                '}';
+    }
 }

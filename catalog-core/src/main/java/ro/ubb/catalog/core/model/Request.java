@@ -4,23 +4,16 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Objects;
 
 @Entity
 @Table(name = "requests")
 @NoArgsConstructor
 @Getter
 @Setter
-@ToString(callSuper = true)
-@EqualsAndHashCode(callSuper = true)
 @AllArgsConstructor
 public class Request extends BaseEntity<Long> implements Serializable
 {
-    @OneToOne(cascade = CascadeType.ALL)
-    private Patient patient;
-
-    @OneToOne(cascade = CascadeType.ALL)
-    private Doctor doctor;
-
     private Float RQuantity;
     private Float PQuantity;
     private Float TQuantity;
@@ -28,6 +21,48 @@ public class Request extends BaseEntity<Long> implements Serializable
     private Boolean priority;
     private Boolean completed;
 
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private Patient patient;
+
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private Doctor doctor;
+
     @ManyToOne
     private Clinic clinic;
+
+    @Override
+    public String toString() {
+        return "Request{" +
+                "RQuantity=" + RQuantity +
+                ", PQuantity=" + PQuantity +
+                ", TQuantity=" + TQuantity +
+                ", priority=" + priority +
+                ", completed=" + completed +
+                ", patient=" + patient.getId() +
+                ", doctor=" + doctor.getId() +
+                ", clinic=" + clinic.getId() +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Request)) return false;
+        if (!super.equals(o)) return false;
+        Request request = (Request) o;
+        return Objects.equals(RQuantity, request.RQuantity) &&
+                Objects.equals(PQuantity, request.PQuantity) &&
+                Objects.equals(TQuantity, request.TQuantity) &&
+                Objects.equals(priority, request.priority) &&
+                Objects.equals(completed, request.completed) &&
+                Objects.equals(patient.getId(), request.patient.getId()) &&
+                Objects.equals(doctor.getId(), request.doctor.getId()) &&
+                Objects.equals(clinic.getId(), request.clinic.getId());
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(super.hashCode(), RQuantity, PQuantity, TQuantity, priority, completed, patient.getId(), doctor.getId(), clinic.getId());
+    }
 }

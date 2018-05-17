@@ -54,7 +54,7 @@ public class RequestServiceImpl implements RequestService
         if(doctor.isPresent()==false||patient.isPresent()==false||clinic.isPresent()==false)
             throw new RuntimeException("Invalid request constructor!");
 
-        Request request = requestRepository.save(new Request(patient.get(),doctor.get(),RQuantity,PQuantity,TQuantity,priority,false,clinic.get()));
+        Request request = requestRepository.save(new Request(RQuantity,PQuantity,TQuantity,priority,false,patient.get(),doctor.get(),clinic.get()));
         return request;
     }
 

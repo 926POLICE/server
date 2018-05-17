@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ro.ubb.catalog.core.model.Blood;
 import ro.ubb.catalog.core.service.BloodService;
+import ro.ubb.catalog.core.service.ClinicService;
 import ro.ubb.catalog.web.converter.BloodConverter;
 import ro.ubb.catalog.web.dto.BloodDTO;
 import ro.ubb.catalog.web.dto.EmptyJsonResponse;
@@ -32,9 +33,24 @@ public class BloodController {
     @Autowired
     private BloodConverter bloodConverter;
 
+    @Autowired
+    private ClinicService clinicService;
+
     @RequestMapping(value = "/bloods", method = RequestMethod.GET)
     public Set<BloodDTO> getBloodsList() {
         log.trace("getBloods");
+
+        try
+        {
+            // Used for debugging.
+            log.trace("BEGIN DEBUG");
+            log.trace(clinicService.getTheClinic().getBloodStock().toString());
+            log.trace("END DEBUG");
+        }
+        catch (Exception e)
+        {
+            log.trace("DEBUG FAIL: "+e.getMessage());
+        }
 
         List<Blood> bloods = bloodService.getAllBloods();
 
@@ -50,12 +66,10 @@ public class BloodController {
     {
         log.trace("updateBlood: bloodId={}, bloodDtoMap={}", bloodId, bloodDto);
 
-        Optional<Blood> bloodOptional = bloodService.updateBlood(bloodId,bloodDto.getCollectionDate(),bloodDto.getQuantity(),bloodDto.getState(),bloodDto.getType(),bloodDto.getDonationID(),bloodDto.getClinicID());
+        Optional<Blood> bloodOptional = bloodService.updateBlood(bloodId,bloodDto.getCollectionDate(),bloodDto.getQuantity(),bloodDto.getState(),bloodDto.getType(),bloodDto.getTested(),bloodDto.getDonationID(),bloodDto.getClinicID());
 
         Map<String, BloodDTO> result = new HashMap<>();
-        bloodOptional.ifPresentOrElse(
-                blood -> result.put("blood", bloodConverter.convertModelToDto(blood)),
-                () -> result.put("blood", bloodConverter.convertModelToDto(new Blood())));
+        bloodOptional.ifPresent(blood -> result.put("blood", bloodConverter.convertModelToDto(blood)));
 
         log.trace("updateBlood: result={}", result);
 

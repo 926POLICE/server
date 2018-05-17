@@ -31,14 +31,14 @@ public class DonorServiceImpl implements DonorService
     }
 
     @Override
-    public Donor createDonor(String name,String birthday,String residence,String bloodType,Boolean Rh,String anticorps,Boolean isDonor,Double latitude,Double longitude) {
-        Donor donor = donorRepository.save(new Donor(name,birthday,residence,bloodType,Rh,anticorps,isDonor,latitude,longitude));
+    public Donor createDonor(String username, String password,String name,String birthday,String residence,String bloodType,Boolean Rh,String anticorps,Boolean isDonor,Double latitude,Double longitude) {
+        Donor donor = donorRepository.save(new Donor(name,birthday,residence,bloodType,Rh,anticorps,isDonor,latitude,longitude,username,password));
         return donor;
     }
 
     @Override
     @Transactional
-    public Optional<Donor> updateDonor(Long DonorID, String name,String birthday,String residence,String bloodType,Boolean Rh,String anticorps,Boolean isDonor,Double latitude,Double longitude, Boolean eligibility, String nextDonation) {
+    public Optional<Donor> updateDonor(Long DonorID, String name,String birthday,String residence,String bloodType,Boolean Rh,String anticorps,Boolean isDonor,Double latitude,Double longitude, Boolean eligibility, String nextDonation, String username, String password) {
         Optional<Donor> optionalDonor = donorRepository.findById(DonorID);
 
         optionalDonor.ifPresent(st -> {
@@ -53,6 +53,8 @@ public class DonorServiceImpl implements DonorService
             st.setLongitude(longitude);
             st.setEligibility(eligibility);
             st.setNextDonation(nextDonation);
+            st.setUsername(username);
+            st.setPassword(password);
         });
 
         return optionalDonor;

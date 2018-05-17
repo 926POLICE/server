@@ -20,7 +20,8 @@ import java.util.stream.Collectors;
  */
 
 @RestController
-public class ClinicController {
+public class ClinicController
+{
 
     private static final Logger log = LoggerFactory.getLogger(BloodController.class);
 
@@ -116,9 +117,14 @@ public class ClinicController {
     @RequestMapping(value = "/bloodStocks/{bloodId}", method = RequestMethod.DELETE)
     public ResponseEntity useBlood(@PathVariable final Long bloodId)
     {
-        // delete din blood controller
+        Clinic c = clinicService.getTheClinic();
+        log.trace(c.getLatitude().toString());
 
-        return null;
+        // simulated exception
+        if(true)
+            throw new RuntimeException("Testing exception handling!");
+
+        return new ResponseEntity(new EmptyJsonResponse(), HttpStatus.OK);
     }
 
     @RequestMapping(value = "/donors/eligibility/{donorID}", method = RequestMethod.PUT)
@@ -126,7 +132,7 @@ public class ClinicController {
     {
         Donor old_donor = donorService.findbyID(donorID).get();
         DonorConverter d = new DonorConverter();
-        return d.convertModelToDto(donorService.updateDonor(donorID,old_donor.getName(),old_donor.getBirthday(),old_donor.getResidence(),old_donor.getBloodType(),old_donor.getRh(),old_donor.getAnticorps(),old_donor.getIsDonor(),old_donor.getLatitude(),old_donor.getLongitude(),flag,old_donor.getNextDonation()).get());
+        return d.convertModelToDto(donorService.updateDonor(donorID,old_donor.getName(),old_donor.getBirthday(),old_donor.getResidence(),old_donor.getBloodType(),old_donor.getRh(),old_donor.getAnticorps(),old_donor.getIsDonor(),old_donor.getLatitude(),old_donor.getLongitude(),flag,old_donor.getNextDonation(),old_donor.getUsername(),old_donor.getPassword()).get());
     }
 
     @RequestMapping(value = "/donors/eligibility/{donorID}", method = RequestMethod.GET)
@@ -134,7 +140,12 @@ public class ClinicController {
     {
         log.trace("getEligibility Entered!");
 
-        Donor donor = donorService.findbyID(donorID).get();
+        Optional<Donor> donorOptional = donorService.findbyID(donorID);
+
+        if(donorOptional.isPresent()==false)
+            throw new RuntimeException("Attempted to get eligibility for an inexistent donor...");
+
+        Donor donor = donorOptional.get();
 
         log.trace("getEligibility result: "+donor.getEligibility()+" \nexiting...");
 
@@ -172,6 +183,8 @@ public class ClinicController {
     @RequestMapping(value = "/requests/{requestID}", method = RequestMethod.PUT)
     boolean processRequest(@PathVariable final Long requestID)
     {
+        //TODO : look for donors; if there exists a donor with same chars as person, set isdonor to true and act accordingly ;)
+
         return false;
     }
 }

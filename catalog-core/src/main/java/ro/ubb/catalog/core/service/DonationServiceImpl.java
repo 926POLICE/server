@@ -53,7 +53,7 @@ public class DonationServiceImpl implements DonationService
         if(!RBlood.isPresent() || !PBlood.isPresent() || !TBlood.isPresent() || !donor.isPresent() || !patient.isPresent() || !clinic.isPresent())
             throw new RuntimeException("Invalid donation constructor!");
 
-        Donation donation = donationRepository.save(new Donation(RBlood.get(),PBlood.get(),TBlood.get(),donor.get(),patient.get(),false,clinic.get()));
+        Donation donation = donationRepository.save(new Donation(RBlood.get(),PBlood.get(),TBlood.get(),false,donor.get(),patient.get(),clinic.get()));
         return donation;
     }
 

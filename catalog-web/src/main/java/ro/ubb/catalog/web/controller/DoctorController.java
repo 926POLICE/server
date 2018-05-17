@@ -15,10 +15,6 @@ import ro.ubb.catalog.web.dto.*;
 import java.util.*;
 import java.util.stream.Collectors;
 
-/**
- * Created by radu.
- */
-
 @RestController
 public class DoctorController {
 
@@ -47,19 +43,16 @@ public class DoctorController {
 
     @RequestMapping(value = "/loginDoctor", method = RequestMethod.GET)
     Long getDoctorUser(@RequestBody Map<String, String> json)
-    //@RequestBody final String username,@RequestBody final String password)
     {
         return null;
     }
 
     @RequestMapping(value = "/requests", method = RequestMethod.POST)
     RequestDTO newBloodRequest(@RequestBody Map<String, String> json)
-    //@RequestBody final Long PatientID,@RequestBody final Long DoctorID, @RequestBody final boolean priority,@RequestBody final Float Rquantity, @RequestBody final Float Pquantity, @RequestBody final Float Tquantity)
     {
         return null;
     }
 
-    // Returns a string with the status of the request.
     @RequestMapping(value = "/requests/status", method = RequestMethod.GET)
     String checkRequestStatus(@RequestBody final Long PatientID)
     {

@@ -9,9 +9,9 @@ public interface DoctorService
 {
     List<Doctor> getAllDoctors();
 
-    Doctor createDoctor(String name, String hospital);
+    Doctor createDoctor(String username, String password, String name, String hospital);
 
-    Optional<Doctor> updateDoctor(Long doctorId, String name, String hospital);
+    Optional<Doctor> updateDoctor(Long doctorId, String name, String hospital, String username, String password);
 
     void deleteDoctor(Long id);
 }

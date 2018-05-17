@@ -31,19 +31,21 @@ public class DoctorServiceImpl implements DoctorService
     }
 
     @Override
-    public Doctor createDoctor(String name, String hospital) {
-        Doctor doctor = doctorRepository.save(new Doctor(name,hospital));
+    public Doctor createDoctor(String username, String password, String name, String hospital) {
+        Doctor doctor = doctorRepository.save(new Doctor(name,hospital,username,password));
         return doctor;
     }
 
     @Override
     @Transactional
-    public Optional<Doctor> updateDoctor(Long doctorId, String name, String hospital) {
+    public Optional<Doctor> updateDoctor(Long doctorId, String name, String hospital, String username, String password) {
         Optional<Doctor> optionalDoctor = doctorRepository.findById(doctorId);
 
         optionalDoctor.ifPresent(st -> {
             st.setName(name);
             st.setHospital(hospital);
+            st.setUsername(username);
+            st.setPassword(password);
         });
 
         return optionalDoctor;

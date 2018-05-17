@@ -28,7 +28,7 @@ public class BloodConverter  extends BaseConverter<Blood, BloodDTO>
         else
             clinicID = blood.getClinic().getId();
 
-        res = new BloodDTO(blood.getCollectionDate(),blood.getQuantity(),blood.getState(),blood.getType(),blood.getShelfLife(),donationID,clinicID);
+        res = new BloodDTO(blood.getCollectionDate(),blood.getQuantity(),blood.getState(),blood.getType(),blood.getShelfLife(),blood.getTested(),donationID,clinicID);
 
         res.setId(blood.getId());
 

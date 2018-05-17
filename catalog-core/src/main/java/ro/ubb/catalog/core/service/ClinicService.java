@@ -6,9 +6,5 @@ import java.util.List;
 
 public interface ClinicService
 {
-    List<Clinic> getAllClinics();
-
-    Clinic createClinic(Double latitude, Double longitude);
-
-    void deleteClinic(Long id);
+    Clinic getTheClinic();
 }

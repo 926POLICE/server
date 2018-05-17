@@ -7,9 +7,12 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import org.springframework.web.client.RestTemplate;
 import ro.ubb.catalog.core.model.Blood;
 import ro.ubb.catalog.web.dto.BloodDTO;
+import ro.ubb.catalog.web.dto.DonorDTO;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by radu.
@@ -55,7 +58,7 @@ public class ClientApp {
         System.out.println("List should contain one element:");
         printAllBloods(restTemplate);
 
-        BloodDTO blood = restTemplate.postForObject("http://localhost:8080/api/bloods", new BloodDTO("1",2.0f,3,"p",-1,1l,2l), BloodDTO.class);
+        BloodDTO blood = restTemplate.postForObject("http://localhost:8080/api/bloods", new BloodDTO("1",2.0f,3,"p",-1,false,1l,1l), BloodDTO.class);
 
         System.out.println("Created new blood" + blood);
 
@@ -73,8 +76,23 @@ public class ClientApp {
         System.out.println("List should contain only the initial element:");
         printAllBloods(restTemplate);
 
-        Boolean res = restTemplate.getForObject("http://localhost:8080/api/donors/eligibility/{donorID}",Boolean.class,1l);
-        System.out.println(res);
+//        Boolean res = restTemplate.getForObject("http://localhost:8080/api/donors/eligibility/{donorID}",Boolean.class,1l);
+//        System.out.println(res);
+
+        Map<String,String> theMap = new HashMap<>();
+        theMap.put("username","TESTING");
+        theMap.put("latitude","9000");
+
+        DonorDTO donator = restTemplate.postForObject("http://localhost:8080/api/donors",theMap,DonorDTO.class);
+        System.out.println(donator);
+
+        try {
+            restTemplate.delete("http://localhost:8080/api/bloodStocks/{bloodId}", 1l);
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+        }
 
         System.out.println("bye ");
     }

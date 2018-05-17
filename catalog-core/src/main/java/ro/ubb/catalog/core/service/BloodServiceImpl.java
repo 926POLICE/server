@@ -70,7 +70,7 @@ public class BloodServiceImpl implements BloodService
 
     @Override
     @Transactional
-    public Optional<Blood> updateBlood(Long BloodID, String collectionDate, Float quantity, Integer state, String type, Long DonationID, Long ClinicID)
+    public Optional<Blood> updateBlood(Long BloodID, String collectionDate, Float quantity, Integer state, String type, Boolean tested,Long DonationID, Long ClinicID)
     {
         Optional<Donation> donationOptional = donationRepository.findById(DonationID);
         Donation donation = null;
@@ -95,6 +95,7 @@ public class BloodServiceImpl implements BloodService
             st.setType(type);
             st.setDonation(finalDonation);
             st.setClinic(finalClinic);
+            st.setTested(tested);
         });
 
         return optionalBlood;

@@ -13,6 +13,7 @@ public class BloodDTO extends BaseDto
     private Integer state;
     private String type;
     private Integer shelfLife;
+    private Boolean tested;
     private Long donationID;
     private Long clinicID;
 }

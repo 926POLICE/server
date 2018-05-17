@@ -11,7 +11,7 @@ public interface BloodService
 
     Blood createBlood(String collectionDate, Float quantity, Integer state, String type, Long DonationID, Long ClinicID);
 
-    Optional<Blood> updateBlood(Long BloodID, String collectionDate, Float quantity, Integer state, String type, Long DonationID, Long ClinicID);
+    Optional<Blood> updateBlood(Long BloodID, String collectionDate, Float quantity, Integer state, String type,Boolean tested, Long DonationID, Long ClinicID);
 
     void deleteBlood(Long id);
 }

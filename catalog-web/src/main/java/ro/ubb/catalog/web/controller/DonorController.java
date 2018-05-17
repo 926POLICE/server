@@ -20,7 +20,8 @@ import java.util.stream.Collectors;
  */
 
 @RestController
-public class DonorController {
+public class DonorController
+{
 
     private static final Logger log = LoggerFactory.getLogger(BloodController.class);
 
@@ -46,22 +47,22 @@ public class DonorController {
     private RequestService requestService;
 
     @RequestMapping(value = "/loginDonor", method = RequestMethod.GET)
-    Long getUser(@RequestBody Map<String, String> json)//
-    // @RequestBody final String username,@RequestBody final String password)
+    Long getUser(@RequestBody Map<String, String> json)
     {
         return null;
     }
 
     @RequestMapping(value = "/donors", method = RequestMethod.POST)
     DonorDTO registerUser(@RequestBody Map<String, String> json)
-    // @RequestBody final String username,@RequestBody final String password,@RequestBody final String name,@RequestBody final String birthday,@RequestBody final String residence,@RequestBody final Double latitude,@RequestBody final Double longitude
     {
+        // Don't forget the case where the
+
         log.trace("YEE");
         log.trace(json.get("username"));
         Double val = Double.parseDouble(json.get("latitude"));
         log.trace(val.toString());
 
-        return null;
+        return new DonorDTO();
     }
 
     @RequestMapping(value = "/donors/history/{donorID}", method = RequestMethod.GET)
@@ -84,12 +85,10 @@ public class DonorController {
 
     @RequestMapping(value = "/donors/{donorID}", method = RequestMethod.PUT)
     DonorDTO updatePersonalDetails(@RequestBody Map<String, String> json)
-    //@PathVariable final  Long donorID, @RequestBody final String name,@RequestBody final String birthday,@RequestBody final String residence,@RequestBody final Double latitude,@RequestBody final Double longitude)
     {
         return null;
     }
 
-    // Returns a DonorDTO (contains the donor's personal details).
     @RequestMapping(value = "/donors/{donorID}", method = RequestMethod.GET)
     DonorDTO getPersonalDetails(@PathVariable final  Long DonorID)
     {
@@ -104,7 +103,6 @@ public class DonorController {
 
     @RequestMapping(value = "/donations", method = RequestMethod.POST)
     DonationDTO donate(@RequestBody Map<String, String> json)
-    //@RequestBody final DonorDTO donor, @RequestBody final @Nullable Long PatientID)
     {
         return null;
     }
