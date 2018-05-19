@@ -8,8 +8,10 @@ import org.springframework.transaction.annotation.Transactional;
 import ro.ubb.catalog.core.model.Donor;
 import ro.ubb.catalog.core.repository.DonorRepository;
 
+import java.time.Instant;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class DonorServiceImpl implements DonorService
@@ -38,7 +40,7 @@ public class DonorServiceImpl implements DonorService
 
     @Override
     @Transactional
-    public Optional<Donor> updateDonor(Long DonorID, String name,String birthday,String residence,String bloodType,Boolean Rh,String anticorps,Boolean isDonor,Double latitude,Double longitude, Boolean eligibility, String nextDonation, String username, String password) {
+    public Optional<Donor> updateDonor(Long DonorID, String name,String birthday,String residence,String bloodType,Boolean Rh,String anticorps,Boolean isDonor,Double latitude,Double longitude, Boolean eligibility, Long nextDonation, String username, String password) {
         Optional<Donor> optionalDonor = donorRepository.findById(DonorID);
 
         optionalDonor.ifPresent(st -> {
@@ -58,6 +60,29 @@ public class DonorServiceImpl implements DonorService
         });
 
         return optionalDonor;
+    }
+
+    @Override
+    @Transactional
+    public Optional<Donor> setEligibility(Long DonorID,Boolean eligibility) {
+        Optional<Donor> optionalDonor = donorRepository.findById(DonorID);
+
+        optionalDonor.ifPresent(st -> {
+            st.setEligibility(eligibility);
+        });
+
+        return optionalDonor;
+    }
+
+    @Override
+    public Boolean notifyDonorsNeeded(String BloodType, Boolean RH, String Anticorps) {
+        List<Donor> donors = this.getAllDonors();
+        donors = donors.stream().filter(donor -> donor.getNextDonation() <= Instant.now().getEpochSecond() && donor.getAnticorps()==Anticorps && donor.getRh() == RH && donor.getBloodType()==BloodType).collect(Collectors.toList());
+        Boolean res = false;
+        if(donors.size()>0)
+            res = true;
+        donors.forEach(d->d.setHasBeenNotified(true));
+        return res;
     }
 
     @Override

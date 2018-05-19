@@ -19,6 +19,8 @@ public class DonorDTO  extends BaseDto
     protected Double latitude;
     protected Double longitude;
 
-    private String nextDonation;
+    private Long nextDonation;
     private Boolean eligibility;
+    private Boolean hasBeenNotified;
+    private Boolean lastAnalysisResult;
 }

@@ -1,5 +1,6 @@
 package ro.ubb.catalog.core.service;
 
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,8 +13,10 @@ import ro.ubb.catalog.core.repository.BloodRepository;
 import ro.ubb.catalog.core.repository.ClinicRepository;
 import ro.ubb.catalog.core.repository.DonationRepository;
 
+import java.time.Instant;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class BloodServiceImpl implements BloodService
@@ -51,10 +54,7 @@ public class BloodServiceImpl implements BloodService
         if(donationOptional.isPresent())
             donation = donationOptional.get();
         else
-        {
             log.trace("createBlood - null donation!!");
-            donation = null;
-        }
 
         Optional<Clinic> donationClinicOptional = clinicRepository.findById(ClinicID);
         Clinic clinic = null;
@@ -112,6 +112,36 @@ public class BloodServiceImpl implements BloodService
         bloodRepository.deleteById(id);
 
         log.trace("deleteBlood --- method finished");
+    }
+
+    @Override
+    public Optional<Blood> findByID(Long id) {
+        return bloodRepository.findById(id);
+    }
+
+    @Override
+    @Transactional
+    public Optional<Blood> testBlood(Long BloodID, Boolean tested) {
+        Optional<Blood> optionalBlood = bloodRepository.findById(BloodID);
+
+        optionalBlood.ifPresent(st -> {
+            st.setTested(tested);
+        });
+
+        return optionalBlood;
+    }
+
+    @Override
+    public boolean checkAvailability(Float R, Float P, Float T) {
+        List<Blood> bloodList = this.getAllBloods();
+        bloodList = bloodList.stream().filter(b->b.getTested()==true && b.getCollectionDate()+86400*b.getShelfLife()>= Instant.now().getEpochSecond()).collect(Collectors.toList());
+        Float RAvailable = bloodList.stream().filter(p->p.getType()=="r").map(p->p.getQuantity()).reduce(0f,(a,b)->a+b).floatValue();
+        Float PAvailable = bloodList.stream().filter(p->p.getType()=="p").map(p->p.getQuantity()).reduce(0f,(a,b)->a+b).floatValue();
+        Float TAvailable = bloodList.stream().filter(p->p.getType()=="t").map(p->p.getQuantity()).reduce(0f,(a,b)->a+b).floatValue();
+        if(RAvailable>=R && PAvailable >= P && TAvailable>=T)
+            return true;
+        else
+            return false;
     }
 
 

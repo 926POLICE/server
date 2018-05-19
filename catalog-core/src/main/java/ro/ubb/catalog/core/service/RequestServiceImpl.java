@@ -92,5 +92,10 @@ public class RequestServiceImpl implements RequestService
         log.trace("deleteRequest --- method finished");
     }
 
+    @Override
+    public Optional<Request> findByID(Long id) {
+        return requestRepository.findById(id);
+    }
+
 
 }

@@ -61,6 +61,7 @@ public class BloodController {
     }
 
 
+    @SuppressWarnings("Duplicates")
     @RequestMapping(value = "/bloods/{bloodId}", method = RequestMethod.PUT)
     public BloodDTO updateBlood(@PathVariable final Long bloodId, @RequestBody final BloodDTO bloodDto)
     {

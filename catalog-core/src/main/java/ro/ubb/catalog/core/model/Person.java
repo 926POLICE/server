@@ -25,6 +25,11 @@ public abstract class Person extends BaseEntity<Long> implements Serializable
     protected Double latitude;
     protected Double longitude;
 
+    public boolean isCompatible(Person p)
+    {
+        return this.getBloodType()==p.getBloodType() && this.getRh() == p.getRh() && this.getAnticorps() == p.getAnticorps();
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

@@ -14,4 +14,6 @@ public interface DonationService
     Optional<Donation> updateDonation(Long DonationID, Long RBloodID, Long PBloodID, Long TBloodID, Long donorID, Boolean analysisResult, Long patientID, Long donationClinicID);
 
     void deleteDonation(Long id);
+
+    Optional<Donation> findByID(Long id);
 }

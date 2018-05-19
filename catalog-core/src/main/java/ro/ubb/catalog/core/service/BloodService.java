@@ -1,5 +1,6 @@
 package ro.ubb.catalog.core.service;
 
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import ro.ubb.catalog.core.model.Blood;
 
 import java.util.List;
@@ -14,4 +15,10 @@ public interface BloodService
     Optional<Blood> updateBlood(Long BloodID, Long collectionDate, Float quantity, Integer state, String type,Boolean tested,Boolean usable, Long DonationID, Long ClinicID);
 
     void deleteBlood(Long id);
+
+    Optional<Blood> findByID(Long id);
+
+    Optional<Blood> testBlood (Long BloodID, Boolean tested);
+
+    boolean checkAvailability(Float R, Float P, Float T);
 }

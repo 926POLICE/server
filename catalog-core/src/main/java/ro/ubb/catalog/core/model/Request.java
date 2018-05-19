@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Comparator;
 import java.util.Objects;
 
 @Entity
@@ -12,7 +13,7 @@ import java.util.Objects;
 @Getter
 @Setter
 @AllArgsConstructor
-public class Request extends BaseEntity<Long> implements Serializable
+public class Request extends BaseEntity<Long> implements Serializable, Comparable<Request>
 {
     private Float RQuantity;
     private Float PQuantity;
@@ -29,6 +30,18 @@ public class Request extends BaseEntity<Long> implements Serializable
 
     @ManyToOne
     private Clinic clinic;
+
+    @Override
+    public int compareTo(Request o)
+    {
+        if(this.priority==true && o.priority == false)
+            return 2;
+        if(this.priority == false && o.priority == true)
+            return -1;
+        else if (this.patient.isDonor==true)
+            return 1;
+        return 0;
+    }
 
     @Override
     public String toString() {

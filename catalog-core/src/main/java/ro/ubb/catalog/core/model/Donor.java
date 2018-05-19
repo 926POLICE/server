@@ -15,8 +15,10 @@ import java.util.Objects;
 @Table(name = "donors")
 public class Donor extends Person implements Serializable
 {
-    private String nextDonation;
+    private Long nextDonation;
     private Boolean eligibility;
+    private Boolean hasBeenNotified;
+    private Boolean lastAnalysisResult;
 
     private String username;
     private String password;

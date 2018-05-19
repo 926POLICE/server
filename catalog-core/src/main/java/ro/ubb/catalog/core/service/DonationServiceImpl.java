@@ -93,5 +93,10 @@ public class DonationServiceImpl implements DonationService
         log.trace("deleteDonation --- method finished");
     }
 
+    @Override
+    public Optional<Donation> findByID(Long id) {
+        return donationRepository.findById(id);
+    }
+
 
 }

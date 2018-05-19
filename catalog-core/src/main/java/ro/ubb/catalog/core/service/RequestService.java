@@ -14,4 +14,6 @@ public interface RequestService
     Optional<Request> updateRequest(Long requestID, Long patientID, Long doctorID, Float RQuantity, Float PQuantity, Float TQuantity, Boolean priority, Boolean completed, Long clinicID);
 
     void deleteRequest(Long id);
+
+    Optional<Request> findByID(Long id);
 }

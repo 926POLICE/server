@@ -66,5 +66,10 @@ public class PatientServiceImpl implements PatientService
         log.trace("deletePatient --- method finished");
     }
 
+    @Override
+    public Optional<Patient> findByID(Long id) {
+        return patientRepository.findById(id);
+    }
+
 
 }
