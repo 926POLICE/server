@@ -40,7 +40,6 @@ public class Request extends BaseEntity<Long> implements Serializable
                 ", completed=" + completed +
                 ", patient=" + patient.getId() +
                 ", doctor=" + doctor.getId() +
-                ", clinic=" + clinic.getId() +
                 '}';
     }
 
@@ -56,13 +55,12 @@ public class Request extends BaseEntity<Long> implements Serializable
                 Objects.equals(priority, request.priority) &&
                 Objects.equals(completed, request.completed) &&
                 Objects.equals(patient.getId(), request.patient.getId()) &&
-                Objects.equals(doctor.getId(), request.doctor.getId()) &&
-                Objects.equals(clinic.getId(), request.clinic.getId());
+                Objects.equals(doctor.getId(), request.doctor.getId());
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(super.hashCode(), RQuantity, PQuantity, TQuantity, priority, completed, patient.getId(), doctor.getId(), clinic.getId());
+        return Objects.hash(super.hashCode(), RQuantity, PQuantity, TQuantity, priority, completed, patient.getId(), doctor.getId());
     }
 }

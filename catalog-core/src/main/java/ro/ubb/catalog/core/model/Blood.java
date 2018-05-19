@@ -12,12 +12,13 @@ import java.util.Objects;
 @Setter
 @Table(name = "bloodContainers")
 public class Blood extends BaseEntity<Long> implements Serializable {
-    private String collectionDate;
+    private Long collectionDate;
     private Float quantity;
     private Integer state;
     private String type;
     private Integer shelfLife;
     private Boolean tested;
+    private Boolean usable;
 
     @OneToOne
     private Donation donation;
@@ -25,7 +26,7 @@ public class Blood extends BaseEntity<Long> implements Serializable {
     @ManyToOne
     private Clinic clinic;
 
-    public Blood(String collectionDate, Float quantity, Integer state, String type, Donation donation, Clinic clinic) {
+    public Blood(Long collectionDate, Float quantity, Integer state, String type, Donation donation, Clinic clinic) {
         this.collectionDate = collectionDate;
         this.quantity = quantity;
         this.state = state;
@@ -33,6 +34,7 @@ public class Blood extends BaseEntity<Long> implements Serializable {
         this.donation = donation;
         this.clinic = clinic;
         this.tested = false;
+        this.usable = true;
 
         if (type.equals("r"))
             shelfLife = 42;
@@ -56,14 +58,13 @@ public class Blood extends BaseEntity<Long> implements Serializable {
                 Objects.equals(type, blood.type) &&
                 Objects.equals(shelfLife, blood.shelfLife) &&
                 Objects.equals(tested, blood.tested) &&
-                Objects.equals(donation.getId(), blood.donation.getId()) &&
-                Objects.equals(clinic.getId(), blood.clinic.getId());
+                Objects.equals(usable, blood.tested);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(super.hashCode(), collectionDate, quantity, state, type, shelfLife, tested);
+        return Objects.hash(super.hashCode(), collectionDate, quantity, state, type, shelfLife, tested, usable);
     }
 
     @Override
@@ -75,6 +76,7 @@ public class Blood extends BaseEntity<Long> implements Serializable {
                 ", type='" + type + '\'' +
                 ", shelfLife=" + shelfLife +
                 ", tested=" + tested +
+                ", usable=" + usable +
                 '}';
     }
 }

@@ -43,7 +43,6 @@ public class Donation extends BaseEntity<Long> implements Serializable
                 ", analysisResult=" + analysisResult +
                 ", donor=" + donor.getId() +
                 ", patient=" + patient.getId() +
-                ", clinic=" + clinic.getId() +
                 '}';
     }
 
@@ -58,13 +57,12 @@ public class Donation extends BaseEntity<Long> implements Serializable
                 Objects.equals(T.getId(), donation.T.getId()) &&
                 Objects.equals(analysisResult, donation.analysisResult) &&
                 Objects.equals(donor.getId(), donation.donor.getId()) &&
-                Objects.equals(patient.getId(), donation.patient.getId()) &&
-                Objects.equals(clinic.getId(), donation.clinic.getId());
+                Objects.equals(patient.getId(), donation.patient.getId());
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(super.hashCode(), R.getId(), P.getId(), T.getId(), analysisResult, donor.getId(), patient.getId(), clinic.getId());
+        return Objects.hash(super.hashCode(), R.getId(), P.getId(), T.getId(), analysisResult, donor.getId(), patient.getId());
     }
 }

@@ -47,6 +47,13 @@ public class ClinicController
     @Autowired
     private RequestService requestService;
 
+    private BloodConverter bloodConverter = new BloodConverter();
+    private DoctorConverter doctorConverter = new DoctorConverter();
+    private DonationConverter donationConverter = new DonationConverter();
+    private DonorConverter donorConverter = new DonorConverter();
+    private PatientConverter patientConverter = new PatientConverter();
+    private RequestConverter requestConverter = new RequestConverter();
+
     @RequestMapping(value = "/bloodStocks", method = RequestMethod.GET)
     List<BloodDTO> getBloodStocks()
     {
@@ -54,9 +61,11 @@ public class ClinicController
     }
 
     @RequestMapping(value = "/bloodStocksUntested", method = RequestMethod.GET)
-    List<BloodDTO> getUntestedBloodStocks()
+    Set<BloodDTO> getUntestedBloodStocks()
     {
-        return null;
+        List<Blood> bloodList = bloodService.getAllBloods();
+        bloodList = bloodList.stream().filter(p->p.getTested()==false).collect(Collectors.toList());
+        return bloodConverter.convertModelsToDtos(bloodList);
     }
 
     @RequestMapping(value = "/bloodStocksUnusable", method = RequestMethod.GET)
@@ -70,16 +79,14 @@ public class ClinicController
     {
         // lat/lng and math function to calculate the distance from a point x to a point y ;) (kudos to Prisacariu)
         List<Patient> patients = patientService.getAllPatients();
-        PatientConverter p = new PatientConverter();
-        return p.convertModelsToDtos(patients);
+        return patientConverter.convertModelsToDtos(patients);
     }
 
     @RequestMapping(value = "/requests", method = RequestMethod.GET)
     Set<RequestDTO> getAllRequests()
     {
         List<Request> patients = requestService.getAllRequests();
-        RequestConverter r = new RequestConverter();
-        return r.convertModelsToDtos(patients);
+        return requestConverter.convertModelsToDtos(patients);
     }
 
     @RequestMapping(value = "/pendingDonations", method = RequestMethod.GET)
@@ -87,8 +94,7 @@ public class ClinicController
     {
         List<Donation> donations = donationService.getAllDonations();
         donations = donations.stream().filter(d->d.getR()==null).collect(Collectors.toList());
-        DonationConverter d = new DonationConverter();
-        return d.convertModelsToDtos(donations);
+        return donationConverter.convertModelsToDtos(donations);
     }
 
     @RequestMapping(value = "/bloodStocks/{bloodId}", method = RequestMethod.PUT)
@@ -157,6 +163,8 @@ public class ClinicController
     public List<BloodDTO> collectBlood(@RequestBody Map<String, String> json)
     //@RequestBody final Long DonationID, @RequestBody final Float RQuantity, @RequestBody final Float PQuantity, @RequestBody final Float TQuantity, @RequestBody final String collectionDate)
     {
+
+
         return null;
     }
 
@@ -185,6 +193,8 @@ public class ClinicController
     boolean processRequest(@PathVariable final Long requestID)
     {
         //TODO : look for donors; if there exists a donor with same chars as person, set isdonor to true and act accordingly ;)
+
+
 
         return false;
     }

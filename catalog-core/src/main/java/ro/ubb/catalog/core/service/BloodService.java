@@ -9,9 +9,9 @@ public interface BloodService
 {
     List<Blood> getAllBloods();
 
-    Blood createBlood(String collectionDate, Float quantity, Integer state, String type, Long DonationID, Long ClinicID);
+    Blood createBlood(Long collectionDate, Float quantity, Integer state, String type, Long DonationID, Long ClinicID);
 
-    Optional<Blood> updateBlood(Long BloodID, String collectionDate, Float quantity, Integer state, String type,Boolean tested, Long DonationID, Long ClinicID);
+    Optional<Blood> updateBlood(Long BloodID, Long collectionDate, Float quantity, Integer state, String type,Boolean tested,Boolean usable, Long DonationID, Long ClinicID);
 
     void deleteBlood(Long id);
 }

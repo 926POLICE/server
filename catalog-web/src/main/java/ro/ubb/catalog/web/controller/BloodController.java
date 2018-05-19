@@ -66,7 +66,7 @@ public class BloodController {
     {
         log.trace("updateBlood: bloodId={}, bloodDtoMap={}", bloodId, bloodDto);
 
-        Optional<Blood> bloodOptional = bloodService.updateBlood(bloodId,bloodDto.getCollectionDate(),bloodDto.getQuantity(),bloodDto.getState(),bloodDto.getType(),bloodDto.getTested(),bloodDto.getDonationID(),bloodDto.getClinicID());
+        Optional<Blood> bloodOptional = bloodService.updateBlood(bloodId,bloodDto.getCollectionDate(),bloodDto.getQuantity(),bloodDto.getState(),bloodDto.getType(),bloodDto.getTested(),bloodDto.getUsable(),bloodDto.getDonationID(),bloodDto.getClinicID());
 
         Map<String, BloodDTO> result = new HashMap<>();
         bloodOptional.ifPresent(blood -> result.put("blood", bloodConverter.convertModelToDto(blood)));
@@ -81,7 +81,15 @@ public class BloodController {
     public BloodDTO createBlood(@RequestBody final BloodDTO bloodDto) {
         log.trace("createBlood: bloodDtoMap={}", bloodDto);
 
-        Blood blood = bloodService.createBlood(bloodDto.getCollectionDate(),bloodDto.getQuantity(),bloodDto.getState(),bloodDto.getType(),bloodDto.getDonationID(),bloodDto.getClinicID());
+        Blood blood = null;
+
+        try {
+            blood = bloodService.createBlood(bloodDto.getCollectionDate(), bloodDto.getQuantity(), bloodDto.getState(), bloodDto.getType(), bloodDto.getDonationID(), bloodDto.getClinicID());
+        }
+        catch (Exception e)
+        {
+            log.trace(e.getMessage());
+        }
 
         BloodDTO result = bloodConverter.convertModelToDto(blood);
 

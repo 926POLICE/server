@@ -41,7 +41,7 @@ public class BloodServiceImpl implements BloodService
     }
 
     @Override
-    public Blood createBlood(String collectionDate, Float quantity, Integer state, String type, Long DonationID, Long ClinicID)
+    public Blood createBlood(Long collectionDate, Float quantity, Integer state, String type, Long DonationID, Long ClinicID)
     {
         log.trace("createBlood - method Entered");
 
@@ -51,7 +51,10 @@ public class BloodServiceImpl implements BloodService
         if(donationOptional.isPresent())
             donation = donationOptional.get();
         else
+        {
             log.trace("createBlood - null donation!!");
+            donation = null;
+        }
 
         Optional<Clinic> donationClinicOptional = clinicRepository.findById(ClinicID);
         Clinic clinic = null;
@@ -70,7 +73,7 @@ public class BloodServiceImpl implements BloodService
 
     @Override
     @Transactional
-    public Optional<Blood> updateBlood(Long BloodID, String collectionDate, Float quantity, Integer state, String type, Boolean tested,Long DonationID, Long ClinicID)
+    public Optional<Blood> updateBlood(Long BloodID, Long collectionDate, Float quantity, Integer state, String type, Boolean tested,Boolean usable, Long DonationID, Long ClinicID)
     {
         Optional<Donation> donationOptional = donationRepository.findById(DonationID);
         Donation donation = null;
@@ -96,6 +99,7 @@ public class BloodServiceImpl implements BloodService
             st.setDonation(finalDonation);
             st.setClinic(finalClinic);
             st.setTested(tested);
+            st.setUsable(usable);
         });
 
         return optionalBlood;

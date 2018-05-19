@@ -58,7 +58,7 @@ public class ClientApp {
         System.out.println("List should contain one element:");
         printAllBloods(restTemplate);
 
-        BloodDTO blood = restTemplate.postForObject("http://localhost:8080/api/bloods", new BloodDTO("1",2.0f,3,"p",-1,false,1l,1l), BloodDTO.class);
+        BloodDTO blood = restTemplate.postForObject("http://localhost:8080/api/bloods", new BloodDTO(9000l,2.0f,3,"p",-1,false,true,1l,1l), BloodDTO.class);
 
         System.out.println("Created new blood" + blood);
 
