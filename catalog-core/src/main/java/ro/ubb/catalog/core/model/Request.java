@@ -19,7 +19,7 @@ public class Request extends BaseEntity<Long> implements Serializable, Comparabl
     private Float PQuantity;
     private Float TQuantity;
 
-    private Boolean priority;
+    private Integer priority;
     private Boolean completed;
 
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
@@ -34,13 +34,10 @@ public class Request extends BaseEntity<Long> implements Serializable, Comparabl
     @Override
     public int compareTo(Request o)
     {
-        if(this.priority==true && o.priority == false)
-            return 2;
-        if(this.priority == false && o.priority == true)
-            return -1;
-        else if (this.patient.isDonor==true)
-            return 1;
-        return 0;
+        if(this.patient.getIsDonor() != o.patient.getIsDonor())
+            return this.patient.getIsDonor().compareTo(o.patient.getIsDonor());
+        else
+            return this.priority.compareTo(o.priority);
     }
 
     @Override

@@ -46,7 +46,7 @@ public class RequestServiceImpl implements RequestService
     }
 
     @Override
-    public Request createRequest(Long patientID, Long doctorID, Float RQuantity, Float PQuantity, Float TQuantity, Boolean priority, Long clinicID) {
+    public Request createRequest(Long patientID, Long doctorID, Float RQuantity, Float PQuantity, Float TQuantity, Integer priority, Long clinicID) {
 
         Optional<Patient> patient = patientRepository.findById(patientID);
         Optional<Clinic> clinic = clinicRepository.findById(clinicID);
@@ -60,7 +60,7 @@ public class RequestServiceImpl implements RequestService
 
     @Override
     @Transactional
-    public Optional<Request> updateRequest(Long requestID, Long patientID, Long doctorID, Float RQuantity, Float PQuantity, Float TQuantity, Boolean priority, Boolean completed, Long clinicID) {
+    public Optional<Request> updateRequest(Long requestID, Long patientID, Long doctorID, Float RQuantity, Float PQuantity, Float TQuantity, Integer priority, Boolean completed, Long clinicID) {
         Optional<Request> optionalRequest = requestRepository.findById(requestID);
 
         Optional<Patient> patient = patientRepository.findById(patientID);

@@ -18,7 +18,7 @@ public class RequestDTO  extends BaseDto {
     private Float PQuantity;
     private Float TQuantity;
 
-    private Boolean priority;
+    private Integer priority;
     private Boolean completed;
 
     private Long clinicID;

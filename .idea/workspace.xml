@@ -7,16 +7,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7e1d53c7-5b19-4df4-bcb7-3d8403a804e5" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/catalog-core/src/main/java/ro/ubb/catalog/core/model/Personnel.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/catalog-core/src/main/java/ro/ubb/catalog/core/repository/PersonnelRepository.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/catalog-core/src/main/java/ro/ubb/catalog/core/service/PersonnelService.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/catalog-core/src/main/java/ro/ubb/catalog/core/service/PersonnelServiceImpl.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/catalog-web/src/main/java/ro/ubb/catalog/web/dto/LoginReply.java" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/catalog-web/build/libs/exploded/catalog-web-1.0-SNAPSHOT.war/WEB-INF/lib/ro.ubb.catalog-rest-template-catalog-core-1.0-SNAPSHOT.jar" afterPath="$PROJECT_DIR$/catalog-web/build/libs/exploded/catalog-web-1.0-SNAPSHOT.war/WEB-INF/lib/ro.ubb.catalog-rest-template-catalog-core-1.0-SNAPSHOT.jar" />
-      <change beforePath="$PROJECT_DIR$/catalog-web/src/main/java/ro/ubb/catalog/web/controller/ClinicController.java" afterPath="$PROJECT_DIR$/catalog-web/src/main/java/ro/ubb/catalog/web/controller/ClinicController.java" />
-      <change beforePath="$PROJECT_DIR$/catalog-web/src/main/java/ro/ubb/catalog/web/controller/DoctorController.java" afterPath="$PROJECT_DIR$/catalog-web/src/main/java/ro/ubb/catalog/web/controller/DoctorController.java" />
-      <change beforePath="$PROJECT_DIR$/catalog-web/src/main/java/ro/ubb/catalog/web/controller/DonorController.java" afterPath="$PROJECT_DIR$/catalog-web/src/main/java/ro/ubb/catalog/web/controller/DonorController.java" />
+      <change beforePath="$PROJECT_DIR$/catalog-core/src/main/java/ro/ubb/catalog/core/model/Request.java" afterPath="$PROJECT_DIR$/catalog-core/src/main/java/ro/ubb/catalog/core/model/Request.java" />
+      <change beforePath="$PROJECT_DIR$/catalog-core/src/main/java/ro/ubb/catalog/core/service/RequestService.java" afterPath="$PROJECT_DIR$/catalog-core/src/main/java/ro/ubb/catalog/core/service/RequestService.java" />
+      <change beforePath="$PROJECT_DIR$/catalog-core/src/main/java/ro/ubb/catalog/core/service/RequestServiceImpl.java" afterPath="$PROJECT_DIR$/catalog-core/src/main/java/ro/ubb/catalog/core/service/RequestServiceImpl.java" />
+      <change beforePath="$PROJECT_DIR$/catalog-web/src/main/java/ro/ubb/catalog/web/dto/RequestDTO.java" afterPath="$PROJECT_DIR$/catalog-web/src/main/java/ro/ubb/catalog/web/dto/RequestDTO.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/.gradle/" />
@@ -61,7 +56,7 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-      <file leaf-file-name="ClinicController.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="ClinicController.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/catalog-web/src/main/java/ro/ubb/catalog/web/controller/ClinicController.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="255">
@@ -73,14 +68,92 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="LoginReply.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/catalog-web/src/main/java/ro/ubb/catalog/web/dto/LoginReply.java">
+      <file leaf-file-name="PatientDTO.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/catalog-web/src/main/java/ro/ubb/catalog/web/dto/PatientDTO.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="378">
-              <caret line="14" column="16" lean-forward="false" selection-start-line="14" selection-start-column="16" selection-end-line="14" selection-end-column="16" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state relative-caret-position="216">
+              <caret line="11" column="13" lean-forward="false" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="BloodDTO.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/catalog-web/src/main/java/ro/ubb/catalog/web/dto/BloodDTO.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="270">
+              <caret line="10" column="16" lean-forward="false" selection-start-line="10" selection-start-column="16" selection-end-line="10" selection-end-column="16" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="PatientConverter.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/catalog-web/src/main/java/ro/ubb/catalog/web/converter/PatientConverter.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="108">
+              <caret line="5" column="13" lean-forward="false" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="BaseDto.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/catalog-web/src/main/java/ro/ubb/catalog/web/dto/BaseDto.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="324">
+              <caret line="14" column="0" lean-forward="true" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Request.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/catalog-core/src/main/java/ro/ubb/catalog/core/model/Request.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-366">
+              <caret line="39" column="55" lean-forward="false" selection-start-line="39" selection-start-column="55" selection-end-line="39" selection-end-column="55" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="RequestServiceImpl.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/catalog-core/src/main/java/ro/ubb/catalog/core/service/RequestServiceImpl.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="157">
+              <caret line="62" column="148" lean-forward="false" selection-start-line="62" selection-start-column="148" selection-end-line="62" selection-end-column="148" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="RequestDTO.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/catalog-web/src/main/java/ro/ubb/catalog/web/dto/RequestDTO.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="459">
+              <caret line="20" column="19" lean-forward="false" selection-start-line="20" selection-start-column="19" selection-end-line="20" selection-end-column="19" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="RequestConverter.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/catalog-web/src/main/java/ro/ubb/catalog/web/converter/RequestConverter.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="108">
+              <caret line="5" column="13" lean-forward="false" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="RequestService.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/catalog-core/src/main/java/ro/ubb/catalog/core/service/RequestService.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="243">
+              <caret line="11" column="115" lean-forward="false" selection-start-line="11" selection-start-column="115" selection-end-line="11" selection-end-column="115" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -144,7 +217,7 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <push-targets>
-      <push-target-info target-remote="origin" target-branch="catalin" repo="$PROJECT_DIR$" source="master" />
+      <push-target-info target-remote="origin" target-branch="master" repo="$PROJECT_DIR$" source="master" />
     </push-targets>
   </component>
   <component name="GradleLocalSettings">
@@ -892,7 +965,6 @@
         <option value="$PROJECT_DIR$/catalog-web/src/main/java/ro/ubb/catalog/web/dto/DoctorDTO.java" />
         <option value="$PROJECT_DIR$/catalog-web/src/main/java/ro/ubb/catalog/web/dto/DonationDTO.java" />
         <option value="$PROJECT_DIR$/catalog-web/src/main/java/ro/ubb/catalog/web/dto/PatientDTO.java" />
-        <option value="$PROJECT_DIR$/catalog-web/src/main/java/ro/ubb/catalog/web/dto/RequestDTO.java" />
         <option value="$PROJECT_DIR$/catalog-web/src/main/java/ro/ubb/catalog/web/converter/DoctorConverter.java" />
         <option value="$PROJECT_DIR$/catalog-web/src/main/java/ro/ubb/catalog/web/converter/PatientConverter.java" />
         <option value="$PROJECT_DIR$/catalog-web/src/main/java/ro/ubb/catalog/web/converter/DonationConverter.java" />
@@ -918,12 +990,9 @@
         <option value="$PROJECT_DIR$/catalog-core/src/main/java/ro/ubb/catalog/core/service/PatientService.java" />
         <option value="$PROJECT_DIR$/catalog-core/src/main/java/ro/ubb/catalog/core/service/DonationService.java" />
         <option value="$PROJECT_DIR$/catalog-core/src/main/java/ro/ubb/catalog/core/service/DonationServiceImpl.java" />
-        <option value="$PROJECT_DIR$/catalog-core/src/main/java/ro/ubb/catalog/core/model/Request.java" />
         <option value="$PROJECT_DIR$/catalog-core/src/main/java/ro/ubb/catalog/core/model/Person.java" />
         <option value="$PROJECT_DIR$/catalog-core/src/main/java/ro/ubb/catalog/core/service/BloodService.java" />
         <option value="$PROJECT_DIR$/catalog-core/src/main/java/ro/ubb/catalog/core/service/BloodServiceImpl.java" />
-        <option value="$PROJECT_DIR$/catalog-core/src/main/java/ro/ubb/catalog/core/service/RequestServiceImpl.java" />
-        <option value="$PROJECT_DIR$/catalog-core/src/main/java/ro/ubb/catalog/core/service/RequestService.java" />
         <option value="$PROJECT_DIR$/catalog-core/src/main/java/ro/ubb/catalog/core/service/DonorService.java" />
         <option value="$PROJECT_DIR$/catalog-core/src/main/java/ro/ubb/catalog/core/model/Blood.java" />
         <option value="$PROJECT_DIR$/catalog-core/src/main/java/ro/ubb/catalog/core/model/Donor.java" />
@@ -938,6 +1007,10 @@
         <option value="$PROJECT_DIR$/catalog-web/src/main/java/ro/ubb/catalog/web/controller/DonorController.java" />
         <option value="$PROJECT_DIR$/catalog-web/src/main/java/ro/ubb/catalog/web/dto/LoginReply.java" />
         <option value="$PROJECT_DIR$/catalog-web/src/main/java/ro/ubb/catalog/web/controller/ClinicController.java" />
+        <option value="$PROJECT_DIR$/catalog-core/src/main/java/ro/ubb/catalog/core/model/Request.java" />
+        <option value="$PROJECT_DIR$/catalog-core/src/main/java/ro/ubb/catalog/core/service/RequestService.java" />
+        <option value="$PROJECT_DIR$/catalog-core/src/main/java/ro/ubb/catalog/core/service/RequestServiceImpl.java" />
+        <option value="$PROJECT_DIR$/catalog-web/src/main/java/ro/ubb/catalog/web/dto/RequestDTO.java" />
       </list>
     </option>
   </component>
@@ -991,6 +1064,61 @@
             <path>
               <item name="ISS_proto" type="b2602c69:ProjectViewProjectNode" />
               <item name="ISS_proto" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="catalog-core" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+            </path>
+            <path>
+              <item name="ISS_proto" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ISS_proto" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="catalog-core" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ISS_proto" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ISS_proto" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="catalog-core" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+            </path>
+            <path>
+              <item name="ISS_proto" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ISS_proto" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="catalog-core" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ISS_proto" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ISS_proto" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="catalog-core" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="core" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ISS_proto" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ISS_proto" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="catalog-core" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="core" type="462c0819:PsiDirectoryNode" />
+              <item name="model" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ISS_proto" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ISS_proto" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="catalog-core" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="core" type="462c0819:PsiDirectoryNode" />
+              <item name="service" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ISS_proto" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ISS_proto" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
               <item name="catalog-web" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
             </path>
             <path>
@@ -1032,6 +1160,16 @@
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="web" type="462c0819:PsiDirectoryNode" />
               <item name="controller" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ISS_proto" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ISS_proto" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="catalog-web" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="web" type="462c0819:PsiDirectoryNode" />
+              <item name="converter" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="ISS_proto" type="b2602c69:ProjectViewProjectNode" />
@@ -1397,7 +1535,7 @@
       <workItem from="1525955539648" duration="213000" />
       <workItem from="1526561141926" duration="14898000" />
       <workItem from="1526734170473" duration="16653000" />
-      <workItem from="1526907685197" duration="2430000" />
+      <workItem from="1526907685197" duration="3094000" />
     </task>
     <task id="LOCAL-00001" summary="Tons of changes">
       <created>1526576596825</created>
@@ -1441,11 +1579,18 @@
       <option name="project" value="LOCAL" />
       <updated>1526756141303</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Changes as per Prisacariu's requests.">
+      <created>1526911630302</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1526911630302</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="120927000" />
+    <option name="totallyTimeSpent" value="121591000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-9" y="-9" width="1938" height="1048" extended-state="6" />
@@ -1500,7 +1645,8 @@
     <MESSAGE value="Some important changes" />
     <MESSAGE value="Clinic backend almost done." />
     <MESSAGE value="cata" />
-    <option name="LAST_COMMIT_MESSAGE" value="cata" />
+    <MESSAGE value="Changes as per Prisacariu's requests." />
+    <option name="LAST_COMMIT_MESSAGE" value="Changes as per Prisacariu's requests." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1509,29 +1655,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/catalog-web/build.gradle">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/catalog-web/src/main/java/ro/ubb/catalog/web/dto/DonationDTO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="567">
-          <caret line="24" column="25" lean-forward="false" selection-start-line="24" selection-start-column="25" selection-end-line="24" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/build.gradle">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="162">
-          <caret line="6" column="29" lean-forward="false" selection-start-line="6" selection-start-column="29" selection-end-line="6" selection-end-column="29" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/catalog-web/src/main/java/ro/ubb/catalog/web/config/WebConfig.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="160">
@@ -1671,21 +1794,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/catalog-web/src/main/java/ro/ubb/catalog/web/dto/RequestDTO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="363">
-          <caret line="23" column="26" lean-forward="true" selection-start-line="23" selection-start-column="26" selection-end-line="23" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/catalog-core/src/main/java/ro/ubb/catalog/core/service/RequestService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="432">
-          <caret line="17" column="38" lean-forward="false" selection-start-line="17" selection-start-column="38" selection-end-line="17" selection-end-column="38" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/catalog-core/src/main/java/ro/ubb/catalog/core/service/DonorService.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="567">
@@ -1713,6 +1821,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="297">
           <caret line="14" column="28" lean-forward="false" selection-start-line="14" selection-start-column="28" selection-end-line="14" selection-end-column="28" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1727,6 +1836,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="648">
           <caret line="24" column="12" lean-forward="false" selection-start-line="24" selection-start-column="12" selection-end-line="24" selection-end-column="12" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1770,14 +1880,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/catalog-core/src/main/java/ro/ubb/catalog/core/model/Request.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-501">
-          <caret line="37" column="20" lean-forward="false" selection-start-line="37" selection-start-column="20" selection-end-line="37" selection-end-column="20" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/catalog-core/src/main/java/ro/ubb/catalog/core/model/Blood.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="99">
@@ -1802,14 +1904,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/catalog-core/src/main/java/ro/ubb/catalog/core/model/Personnel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="162">
-          <caret line="6" column="0" lean-forward="true" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/catalog-core/src/main/java/ro/ubb/catalog/core/service/BloodService.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="540">
@@ -1822,14 +1916,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="162">
           <caret line="10" column="38" lean-forward="false" selection-start-line="10" selection-start-column="38" selection-end-line="10" selection-end-column="38" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/catalog-core/src/main/java/ro/ubb/catalog/core/service/RequestServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="562">
-          <caret line="95" column="45" lean-forward="false" selection-start-line="95" selection-start-column="45" selection-end-line="95" selection-end-column="45" />
           <folding />
         </state>
       </provider>
@@ -1885,19 +1971,13 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/catalog-web/src/main/java/ro/ubb/catalog/web/dto/BloodDTO.java">
+    <entry file="file://$PROJECT_DIR$/catalog-web/src/main/java/ro/ubb/catalog/web/controller/ClinicController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="10" column="16" lean-forward="false" selection-start-line="10" selection-start-column="16" selection-end-line="10" selection-end-column="16" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/catalog-web/src/main/java/ro/ubb/catalog/web/dto/BaseDto.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="7" column="0" lean-forward="false" selection-start-line="7" selection-start-column="0" selection-end-line="10" selection-end-column="9" />
-          <folding />
+        <state relative-caret-position="255">
+          <caret line="326" column="140" lean-forward="true" selection-start-line="326" selection-start-column="140" selection-end-line="326" selection-end-column="140" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1911,13 +1991,85 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/catalog-web/src/main/java/ro/ubb/catalog/web/controller/ClinicController.java">
+    <entry file="file://$PROJECT_DIR$/catalog-web/src/main/java/ro/ubb/catalog/web/dto/PatientDTO.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="326" column="140" lean-forward="true" selection-start-line="326" selection-start-column="140" selection-end-line="326" selection-end-column="140" />
+        <state relative-caret-position="216">
+          <caret line="11" column="13" lean-forward="false" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/catalog-web/src/main/java/ro/ubb/catalog/web/dto/BloodDTO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="10" column="16" lean-forward="false" selection-start-line="10" selection-start-column="16" selection-end-line="10" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/catalog-web/src/main/java/ro/ubb/catalog/web/converter/PatientConverter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="108">
+          <caret line="5" column="13" lean-forward="false" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/catalog-web/src/main/java/ro/ubb/catalog/web/dto/BaseDto.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="324">
+          <caret line="14" column="0" lean-forward="true" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/catalog-core/src/main/java/ro/ubb/catalog/core/model/Personnel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="432">
+          <caret line="16" column="13" lean-forward="false" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/catalog-core/src/main/java/ro/ubb/catalog/core/model/Request.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-366">
+          <caret line="39" column="55" lean-forward="false" selection-start-line="39" selection-start-column="55" selection-end-line="39" selection-end-column="55" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/catalog-core/src/main/java/ro/ubb/catalog/core/service/RequestService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="243">
+          <caret line="11" column="115" lean-forward="false" selection-start-line="11" selection-start-column="115" selection-end-line="11" selection-end-column="115" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/catalog-core/src/main/java/ro/ubb/catalog/core/service/RequestServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="157">
+          <caret line="62" column="148" lean-forward="false" selection-start-line="62" selection-start-column="148" selection-end-line="62" selection-end-column="148" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/catalog-web/src/main/java/ro/ubb/catalog/web/dto/RequestDTO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="459">
+          <caret line="20" column="19" lean-forward="false" selection-start-line="20" selection-start-column="19" selection-end-line="20" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/catalog-web/src/main/java/ro/ubb/catalog/web/converter/RequestConverter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="108">
+          <caret line="5" column="13" lean-forward="false" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
+          <folding />
         </state>
       </provider>
     </entry>
