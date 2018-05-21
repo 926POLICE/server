@@ -49,6 +49,9 @@ public class ClinicController
     @Autowired
     private RequestService requestService;
 
+    @Autowired
+    private PersonnelService personnelService;
+
     private BloodConverter bloodConverter = new BloodConverter();
     private DoctorConverter doctorConverter = new DoctorConverter();
     private DonationConverter donationConverter = new DonationConverter();
@@ -308,5 +311,29 @@ boolean checkCompatibility(@RequestBody final Long DonorID,@RequestBody final  L
             donorService.notifyDonorsNeeded(request.getPatient().getBloodType(),request.getPatient().getRh(),request.getPatient().getAnticorps());
 
         return res;
+    }
+
+    // Looks up for doctors/donors/personnel having the username and password. Returns a JSON with two fields: String Type (which can be 'doctor', 'donor', 'personnel' or 'invalid', if the username and password are invalid) and Long ID (the ID of the doctor/donor - will be -1 if invalid). The client program will remember the given ID and will use it during the session to send further requests.
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    LoginReply getUser(@RequestBody Map<String, String> json)
+    {
+        String username = json.get("username");
+        String password = json.get("password");
+
+        List<Personnel> personnelList = personnelService.getAllPersonnel();
+        List<Doctor> doctorList = doctorService.getAllDoctors();
+        List<Donor> donorList = donorService.getAllDonors();
+
+        personnelList = personnelList.stream().filter(p->p.getUsername()==username&&p.getPassword()==password).collect(Collectors.toList());
+        doctorList = doctorList.stream().filter(p->p.getUsername()==username&&p.getPassword()==password).collect(Collectors.toList());
+        donorList = donorList.stream().filter(p->p.getUsername()==username&&p.getPassword()==password).collect(Collectors.toList());
+
+        if(personnelList.size()==0 && doctorList.size()==0 && donorList.size()==0)
+            return new LoginReply("invalid",-1l);
+        else if (doctorList.size()>0)
+            return new LoginReply("doctor",doctorList.get(0).getId());
+        else if (donorList.size()>0)
+            return new LoginReply("donor",donorList.get(0).getId());
+        else return new LoginReply("personnel",personnelList.get(0).getId());
     }
 }

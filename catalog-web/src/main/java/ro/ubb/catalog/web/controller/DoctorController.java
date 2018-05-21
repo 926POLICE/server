@@ -41,12 +41,6 @@ public class DoctorController {
     @Autowired
     private RequestService requestService;
 
-    @RequestMapping(value = "/loginDoctor", method = RequestMethod.GET)
-    Long getDoctorUser(@RequestBody Map<String, String> json)
-    {
-        return null;
-    }
-
     @RequestMapping(value = "/requests", method = RequestMethod.POST)
     RequestDTO newBloodRequest(@RequestBody Map<String, String> json)
     {

@@ -46,12 +46,6 @@ public class DonorController
     @Autowired
     private RequestService requestService;
 
-    @RequestMapping(value = "/loginDonor", method = RequestMethod.GET)
-    Long getUser(@RequestBody Map<String, String> json)
-    {
-        return null;
-    }
-
     @RequestMapping(value = "/donors", method = RequestMethod.POST)
     DonorDTO registerUser(@RequestBody Map<String, String> json)
     {
