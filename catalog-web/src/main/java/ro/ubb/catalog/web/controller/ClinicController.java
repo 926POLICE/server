@@ -26,6 +26,8 @@ import java.util.stream.Stream;
 @RestController
 public class ClinicController
 {
+    // workload handler
+
     private static final Logger log = LoggerFactory.getLogger(BloodController.class);
 
     @Autowired
