@@ -10,8 +10,9 @@ import lombok.*;
 public class DonorDTO  extends BaseDto
 {
     protected String name;
-    protected String birthday;
+    protected Long birthday;
     protected String residence;
+    protected String address;
     protected String bloodType;
     protected Boolean Rh;
     protected String anticorps;

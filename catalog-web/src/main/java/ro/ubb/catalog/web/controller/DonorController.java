@@ -49,7 +49,7 @@ public class DonorController
     @RequestMapping(value = "/donors", method = RequestMethod.POST)
     DonorDTO registerUser(@RequestBody Map<String, String> json)
     {
-        // Don't forget the case where the
+        // Don't forget the case where the username and password already exist !!
 
         log.trace("YEE");
         log.trace(json.get("username"));

@@ -11,7 +11,7 @@ public class PatientConverter extends BaseConverter<Patient,PatientDTO> {
 
     @Override
     public PatientDTO convertModelToDto(Patient patient) {
-        PatientDTO res = new PatientDTO(patient.getName(),patient.getBirthday(),patient.getResidence(),patient.getBloodType(),patient.getRh(),patient.getAnticorps(),patient.getIsDonor(),patient.getLatitude(),patient.getLongitude(),patient.getHospital());
+        PatientDTO res = new PatientDTO(patient.getName(),patient.getBirthday(),patient.getResidence(),patient.getAddress(),patient.getBloodType(),patient.getRh(),patient.getAnticorps(),patient.getIsDonor(),patient.getLatitude(),patient.getLongitude(),patient.getHospital());
 
         res.setId(patient.getId());
 

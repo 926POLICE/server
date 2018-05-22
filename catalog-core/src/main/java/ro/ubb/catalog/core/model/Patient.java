@@ -18,8 +18,8 @@ public class Patient extends Person implements Serializable
 {
     private String hospital;
 
-    public Patient(String name, String birthday, String residence, String bloodType, Boolean Rh, String anticorps, Boolean isDonor, Double latitude, Double longitude, String hospital) {
-        super(name, birthday, residence, bloodType, Rh, anticorps, isDonor, latitude, longitude);
+    public Patient(String name, Long birthday, String residence, String address, String bloodType, Boolean Rh, String anticorps, Boolean isDonor, Double latitude, Double longitude, String hospital) {
+        super(name, birthday, residence,address, bloodType, Rh, anticorps, isDonor, latitude, longitude);
         this.hospital = hospital;
     }
 

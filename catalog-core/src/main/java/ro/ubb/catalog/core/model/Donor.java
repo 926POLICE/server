@@ -23,8 +23,8 @@ public class Donor extends Person implements Serializable
     private String username;
     private String password;
 
-    public Donor(String name, String birthday, String residence, String bloodType, Boolean Rh, String anticorps, Boolean isDonor, Double latitude, Double longitude, String username, String password) {
-        super(name, birthday, residence, bloodType, Rh, anticorps, isDonor, latitude, longitude);
+    public Donor(String name, Long birthday, String residence, String address, String bloodType, Boolean Rh, String anticorps, Boolean isDonor, Double latitude, Double longitude, String username, String password) {
+        super(name, birthday, residence, address, bloodType, Rh, anticorps, isDonor, latitude, longitude);
         this.username = username;
         this.password = password;
     }

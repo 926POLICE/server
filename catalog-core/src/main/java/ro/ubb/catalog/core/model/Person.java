@@ -16,8 +16,9 @@ import java.util.Objects;
 public abstract class Person extends BaseEntity<Long> implements Serializable
 {
     protected String name;
-    protected String birthday;
+    protected Long birthday;
     protected String residence;
+    protected String address;
     protected String bloodType;
     protected Boolean Rh;
     protected String anticorps;

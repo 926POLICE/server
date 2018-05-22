@@ -11,7 +11,7 @@ public class DonorConverter extends BaseConverter<Donor,DonorDTO> {
 
     @Override
     public DonorDTO convertModelToDto(Donor donor) {
-       DonorDTO res = new DonorDTO(donor.getName(),donor.getBirthday(),donor.getResidence(),donor.getBloodType(),donor.getRh(),donor.getAnticorps(),donor.getIsDonor(),donor.getLatitude(),donor.getLongitude(),donor.getNextDonation(),donor.getEligibility(),donor.getHasBeenNotified(),donor.getLastAnalysisResult());
+       DonorDTO res = new DonorDTO(donor.getName(),donor.getBirthday(),donor.getResidence(),donor.getAddress(),donor.getBloodType(),donor.getRh(),donor.getAnticorps(),donor.getIsDonor(),donor.getLatitude(),donor.getLongitude(),donor.getNextDonation(),donor.getEligibility(),donor.getHasBeenNotified(),donor.getLastAnalysisResult());
 
        res.setId(donor.getId());
 
