@@ -21,4 +21,6 @@ public interface BloodService
     Optional<Blood> testBlood (Long BloodID, Boolean tested);
 
     boolean checkAvailability(Float R, Float P, Float T);
+
+    void useBlood(Long bloodId);
 }

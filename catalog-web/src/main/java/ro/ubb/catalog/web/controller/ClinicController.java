@@ -65,7 +65,7 @@ public class ClinicController
     Set<BloodDTO> getBloodStocks()
     {
         List<Blood> bloodList = bloodService.getAllBloods();
-        bloodList = bloodList.stream().filter(b->b.getTested()==true && b.getCollectionDate()+86400*b.getShelfLife()>= currentTime).collect(Collectors.toList());
+        bloodList = bloodList.stream().filter(b->b.getTested()==true && b.getCollectionDate()+86400*b.getShelfLife()>= currentTime && b.getState()!=3).collect(Collectors.toList());
         return bloodConverter.convertModelsToDtos(bloodList);
     }
 
@@ -157,7 +157,7 @@ public class ClinicController
     {
         log.trace("disposeBlood: bloodId={}", bloodId);
 
-        bloodService.deleteBlood(bloodId);
+        bloodService.useBlood(bloodId);
 
         log.trace("disposeBlood - method end");
 
@@ -227,9 +227,9 @@ public List<BloodDTO> collectBlood(@RequestBody final Long DonationID, @RequestB
             throw new RuntimeException("Invalid donation!");
 
         // public Blood(Long collectionDate, Float quantity, Integer state, String type, Donation donation, Clinic clinic)
-        Blood R = bloodService.createBlood(collectionDate,RQuantity,0,"r",DonationID,clinicService.getTheClinic().getId());
-        Blood P = bloodService.createBlood(collectionDate,PQuantity,0,"p",DonationID,clinicService.getTheClinic().getId());
-        Blood T = bloodService.createBlood(collectionDate,TQuantity,0,"t",DonationID,clinicService.getTheClinic().getId());
+        Blood R = bloodService.createBlood(collectionDate,RQuantity,1,"r",DonationID,clinicService.getTheClinic().getId());
+        Blood P = bloodService.createBlood(collectionDate,PQuantity,1,"p",DonationID,clinicService.getTheClinic().getId());
+        Blood T = bloodService.createBlood(collectionDate,TQuantity,1,"t",DonationID,clinicService.getTheClinic().getId());
 
         Donation donation = donationOptional.get();
         Donor donor = donation.getDonor();
@@ -314,7 +314,7 @@ boolean checkCompatibility(@RequestBody final Long DonorID,@RequestBody final  L
     }
 
     // Looks up for doctors/donors/personnel having the username and password. Returns a JSON with two fields: String Type (which can be 'doctor', 'donor', 'personnel' or 'invalid', if the username and password are invalid) and Long ID (the ID of the doctor/donor - will be -1 if invalid). The client program will remember the given ID and will use it during the session to send further requests.
-    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
     LoginReply getUser(@RequestBody Map<String, String> json)
     {
         String username = json.get("username");

@@ -125,6 +125,7 @@ public class BloodServiceImpl implements BloodService
         Optional<Blood> optionalBlood = bloodRepository.findById(BloodID);
 
         optionalBlood.ifPresent(st -> {
+            st.setState(2);
             st.setTested(tested);
         });
 
@@ -142,6 +143,15 @@ public class BloodServiceImpl implements BloodService
             return true;
         else
             return false;
+    }
+
+    @Override
+    public void useBlood(Long bloodId) {
+        Optional<Blood> optionalBlood = bloodRepository.findById(bloodId);
+
+        optionalBlood.ifPresent(st -> {
+            st.setState(3);
+        });
     }
 
 
