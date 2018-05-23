@@ -47,6 +47,11 @@ public class DoctorController {
         return null;
     }
 
+    // Returns a list of all requests made by the doctor with the given ID.
+    @RequestMapping(value = "/requests/doctors", method = RequestMethod.GET)
+    Set<RequestDTO> getAllDoctorRequests(@RequestBody final Long DoctorID)
+
+
     @RequestMapping(value = "/requests/status", method = RequestMethod.GET)
     String checkRequestStatus(@RequestBody final Long PatientID)
     {
