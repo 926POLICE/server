@@ -10,6 +10,12 @@ public interface BloodService
 {
     List<Blood> getAllBloods();
 
+    List<Blood> getUsableBloods();
+
+    List<Blood> getUnusableBloods();
+
+    List<Blood> getUntestedBloods();
+
     Blood createBlood(Long collectionDate, Float quantity, Integer state, String type, Long DonationID, Long ClinicID);
 
     Optional<Blood> updateBlood(Long BloodID, Long collectionDate, Float quantity, Integer state, String type,Boolean tested,Boolean usable, Long DonationID, Long ClinicID);

@@ -11,7 +11,7 @@ import java.util.Objects;
 @Getter
 @Setter
 @Table(name = "bloodContainers")
-public class Blood extends BaseEntity<Long> implements Serializable {
+public class Blood extends BaseEntity<Long> implements Serializable, Comparable<Blood> {
     private Long collectionDate;
     private Float quantity;
     private Integer state;
@@ -61,6 +61,7 @@ public class Blood extends BaseEntity<Long> implements Serializable {
                 Objects.equals(usable, blood.tested);
     }
 
+
     @Override
     public int hashCode() {
 
@@ -78,5 +79,10 @@ public class Blood extends BaseEntity<Long> implements Serializable {
                 ", tested=" + tested +
                 ", usable=" + usable +
                 '}';
+    }
+
+    @Override
+    public int compareTo(Blood o) {
+        return collectionDate.compareTo(o.collectionDate);
     }
 }

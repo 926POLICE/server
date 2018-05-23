@@ -14,8 +14,10 @@ import ro.ubb.catalog.core.repository.ClinicRepository;
 import ro.ubb.catalog.core.repository.DonationRepository;
 
 import java.time.Instant;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
@@ -32,6 +34,8 @@ public class BloodServiceImpl implements BloodService
     @Autowired
     private ClinicRepository clinicRepository;
 
+    private Long currentTime = Instant.now().getEpochSecond();
+
     @Override
     public List<Blood> getAllBloods() {
         log.trace("getAllBloods --- method entered");
@@ -41,6 +45,29 @@ public class BloodServiceImpl implements BloodService
         log.trace("getAllBloods: bloods={}", bloods);
 
         return bloods;
+    }
+
+    @Override
+    public List<Blood> getUsableBloods() {
+        List<Blood> bloodList = getAllBloods();
+        bloodList = bloodList.stream().filter(b->b.getTested()==true && b.getUsable()==true && b.getCollectionDate()+86400*b.getShelfLife()>= currentTime && b.getState()!=3).collect(Collectors.toList());
+        return bloodList;
+    }
+
+    @Override
+    public List<Blood> getUnusableBloods() {
+        Set<Blood> to_return = new HashSet<>();
+        List<Blood> bloodList = getAllBloods();
+        List<Blood> unusableBlood = bloodList.stream().filter(b->b.getUsable()==false).collect(Collectors.toList());
+        List<Blood> expiredBlood = bloodList.stream().filter(b->b.getCollectionDate()+86400*b.getShelfLife()< currentTime).collect(Collectors.toList());
+        to_return.addAll(unusableBlood);
+        to_return.addAll(expiredBlood);
+        return to_return.stream().collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Blood> getUntestedBloods() {
+        return getAllBloods().stream().filter(p->p.getTested()==false).collect(Collectors.toList());
     }
 
     @Override
@@ -121,12 +148,13 @@ public class BloodServiceImpl implements BloodService
 
     @Override
     @Transactional
-    public Optional<Blood> testBlood(Long BloodID, Boolean tested) {
+    public Optional<Blood> testBlood(Long BloodID, Boolean flag) {
         Optional<Blood> optionalBlood = bloodRepository.findById(BloodID);
 
         optionalBlood.ifPresent(st -> {
             st.setState(2);
-            st.setTested(tested);
+            st.setTested(true);
+            st.setUsable(flag);
         });
 
         return optionalBlood;
@@ -134,8 +162,7 @@ public class BloodServiceImpl implements BloodService
 
     @Override
     public Float checkAvailability(Float R, Float P, Float T) {
-        List<Blood> bloodList = this.getAllBloods();
-        bloodList = bloodList.stream().filter(b->b.getTested()==true && b.getCollectionDate()+86400*b.getShelfLife()>= Instant.now().getEpochSecond()).collect(Collectors.toList());
+        List<Blood> bloodList = getUsableBloods();
         Float RAvailable = bloodList.stream().filter(p->p.getType()=="r").map(p->p.getQuantity()).reduce(0f,(a,b)->a+b).floatValue();
         Float PAvailable = bloodList.stream().filter(p->p.getType()=="p").map(p->p.getQuantity()).reduce(0f,(a,b)->a+b).floatValue();
         Float TAvailable = bloodList.stream().filter(p->p.getType()=="t").map(p->p.getQuantity()).reduce(0f,(a,b)->a+b).floatValue();
@@ -148,12 +175,25 @@ public class BloodServiceImpl implements BloodService
     @Override
     public void honorRequest(Float R, Float P, Float T)
     {
-//        Float RNeeded = R, PNeeded = P, TNeeded = T;
-//        bloodList = bloodList.stream().filter(b->b.getTested()==true && b.getCollectionDate()+86400*b.getShelfLife()>= currentTime && b.getState()!=3).collect(Collectors.toList());
-//        while (RNeeded>0)
-//        {
-//
-//        }
+        Float RNeeded = R, PNeeded = P, TNeeded = T;
+        List<Blood> RbloodList = getUsableBloods().stream().filter(b->b.getType()=="r").collect(Collectors.toList());;
+        List<Blood> PbloodList = getUsableBloods().stream().filter(b->b.getType()=="p").collect(Collectors.toList());;
+        List<Blood> TbloodList = getUsableBloods().stream().filter(b->b.getType()=="t").collect(Collectors.toList());;
+        for(int i = 0 ; i<RbloodList.size() && RNeeded > 0; i++)
+        {
+            RNeeded = RNeeded - RbloodList.get(i).getQuantity();
+            RbloodList.get(i).setState(3);
+        }
+        for(int i = 0 ; i<PbloodList.size() && PNeeded > 0; i++)
+        {
+            PNeeded = PNeeded - PbloodList.get(i).getQuantity();
+            PbloodList.get(i).setState(3);
+        }
+        for(int i = 0 ; i<TbloodList.size() && TNeeded > 0; i++)
+        {
+            TNeeded = TNeeded - TbloodList.get(i).getQuantity();
+            TbloodList.get(i).setState(3);
+        }
     }
 
     @Override

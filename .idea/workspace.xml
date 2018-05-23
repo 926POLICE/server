@@ -8,7 +8,10 @@
   <component name="ChangeListManager">
     <list default="true" id="7e1d53c7-5b19-4df4-bcb7-3d8403a804e5" name="Default" comment="More changes">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/catalog-client/out/production/classes/ro/ubb/catalog/client/ClientApp.class" afterPath="$PROJECT_DIR$/catalog-client/out/production/classes/ro/ubb/catalog/client/ClientApp.class" />
+      <change beforePath="$PROJECT_DIR$/catalog-core/src/main/java/ro/ubb/catalog/core/model/Blood.java" afterPath="$PROJECT_DIR$/catalog-core/src/main/java/ro/ubb/catalog/core/model/Blood.java" />
+      <change beforePath="$PROJECT_DIR$/catalog-core/src/main/java/ro/ubb/catalog/core/service/BloodService.java" afterPath="$PROJECT_DIR$/catalog-core/src/main/java/ro/ubb/catalog/core/service/BloodService.java" />
+      <change beforePath="$PROJECT_DIR$/catalog-core/src/main/java/ro/ubb/catalog/core/service/BloodServiceImpl.java" afterPath="$PROJECT_DIR$/catalog-core/src/main/java/ro/ubb/catalog/core/service/BloodServiceImpl.java" />
+      <change beforePath="$PROJECT_DIR$/catalog-web/src/main/java/ro/ubb/catalog/web/controller/ClinicController.java" afterPath="$PROJECT_DIR$/catalog-web/src/main/java/ro/ubb/catalog/web/controller/ClinicController.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/.gradle/" />
@@ -56,18 +59,8 @@
       <file leaf-file-name="DonorController.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/catalog-web/src/main/java/ro/ubb/catalog/web/controller/DonorController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1107">
-              <caret line="56" column="21" lean-forward="false" selection-start-line="56" selection-start-column="13" selection-end-line="56" selection-end-column="21" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ClientApp.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/catalog-client/src/main/java/ro/ubb/catalog/client/ClientApp.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="85" column="0" lean-forward="false" selection-start-line="85" selection-start-column="2" selection-end-line="86" selection-end-column="38" />
+            <state relative-caret-position="338">
+              <caret line="118" column="33" lean-forward="false" selection-start-line="118" selection-start-column="18" selection-end-line="118" selection-end-column="33" />
               <folding />
             </state>
           </provider>
@@ -76,8 +69,38 @@
       <file leaf-file-name="BloodServiceImpl.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/catalog-core/src/main/java/ro/ubb/catalog/core/service/BloodServiceImpl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="282">
-              <caret line="149" column="5" lean-forward="true" selection-start-line="149" selection-start-column="5" selection-end-line="149" selection-end-column="5" />
+            <state relative-caret-position="-2979">
+              <caret line="69" column="27" lean-forward="false" selection-start-line="69" selection-start-column="15" selection-end-line="69" selection-end-column="27" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ClinicController.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/catalog-web/src/main/java/ro/ubb/catalog/web/controller/ClinicController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="261">
+              <caret line="96" column="54" lean-forward="false" selection-start-line="96" selection-start-column="54" selection-end-line="96" selection-end-column="54" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="BloodService.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/catalog-core/src/main/java/ro/ubb/catalog/core/service/BloodService.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="162">
+              <caret line="10" column="22" lean-forward="true" selection-start-line="10" selection-start-column="22" selection-end-line="10" selection-end-column="22" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="BloodController.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/catalog-web/src/main/java/ro/ubb/catalog/web/controller/BloodController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="177">
+              <caret line="54" column="42" lean-forward="false" selection-start-line="54" selection-start-column="42" selection-end-line="54" selection-end-column="42" />
               <folding />
             </state>
           </provider>
@@ -95,12 +118,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>insert io</find>
-      <find>999</find>
-      <find>stock</find>
-      <find>date</find>
-      <find>may</find>
-      <find>getid</find>
       <find>donation</find>
       <find>eligibi</find>
       <find>findby</find>
@@ -113,10 +130,8 @@
       <find>compati</find>
       <find>instant</find>
       <find>collectbl</find>
-      <find>testbl</find>
       <find>collect</find>
       <find>collectbloo</find>
-      <find>testblo</find>
       <find>adre</find>
       <find>patie</find>
       <find>re</find>
@@ -125,6 +140,14 @@
       <find>ch</find>
       <find>donor</find>
       <find>register</find>
+      <find>currenttime</find>
+      <find>testblo</find>
+      <find>honor</find>
+      <find>getall</find>
+      <find>testbl</find>
+      <find>getallbloo</find>
+      <find>ref</find>
+      <find>getallbloods</find>
     </findStrings>
     <replaceStrings>
       <replace>Doctor</replace>
@@ -908,7 +931,6 @@
         <option value="$PROJECT_DIR$/catalog-web/src/main/java/ro/ubb/catalog/web/controller/BloodController.java" />
         <option value="$PROJECT_DIR$/catalog-core/src/main/java/ro/ubb/catalog/core/service/DonationService.java" />
         <option value="$PROJECT_DIR$/catalog-core/src/main/java/ro/ubb/catalog/core/service/DonationServiceImpl.java" />
-        <option value="$PROJECT_DIR$/catalog-core/src/main/java/ro/ubb/catalog/core/model/Blood.java" />
         <option value="$PROJECT_DIR$/catalog-core/src/main/java/ro/ubb/catalog/core/repository/PersonnelRepository.java" />
         <option value="$PROJECT_DIR$/catalog-core/src/main/java/ro/ubb/catalog/core/model/Personnel.java" />
         <option value="$PROJECT_DIR$/catalog-core/src/main/java/ro/ubb/catalog/core/service/PersonnelService.java" />
@@ -927,15 +949,16 @@
         <option value="$PROJECT_DIR$/catalog-web/src/main/java/ro/ubb/catalog/web/converter/DonorConverter.java" />
         <option value="$PROJECT_DIR$/catalog-web/src/main/java/ro/ubb/catalog/web/converter/PatientConverter.java" />
         <option value="$PROJECT_DIR$/catalog-core/src/main/java/ro/ubb/catalog/core/model/Patient.java" />
-        <option value="$PROJECT_DIR$/catalog-web/src/main/java/ro/ubb/catalog/web/controller/ClinicController.java" />
-        <option value="$PROJECT_DIR$/catalog-core/src/main/java/ro/ubb/catalog/core/service/BloodService.java" />
-        <option value="$PROJECT_DIR$/catalog-core/src/main/java/ro/ubb/catalog/core/service/BloodServiceImpl.java" />
         <option value="$PROJECT_DIR$/catalog-core/src/main/java/ro/ubb/catalog/core/model/Donor.java" />
         <option value="$PROJECT_DIR$/catalog-core/src/main/java/ro/ubb/catalog/core/service/DonorService.java" />
         <option value="$PROJECT_DIR$/catalog-core/src/main/java/ro/ubb/catalog/core/service/DonorServiceImpl.java" />
         <option value="$PROJECT_DIR$/catalog-core/src/main/java/ro/ubb/catalog/core/model/Donation.java" />
-        <option value="$PROJECT_DIR$/catalog-web/src/main/java/ro/ubb/catalog/web/controller/DonorController.java" />
         <option value="$PROJECT_DIR$/catalog-client/src/main/java/ro/ubb/catalog/client/ClientApp.java" />
+        <option value="$PROJECT_DIR$/catalog-core/src/main/java/ro/ubb/catalog/core/model/Blood.java" />
+        <option value="$PROJECT_DIR$/catalog-core/src/main/java/ro/ubb/catalog/core/service/BloodService.java" />
+        <option value="$PROJECT_DIR$/catalog-web/src/main/java/ro/ubb/catalog/web/controller/ClinicController.java" />
+        <option value="$PROJECT_DIR$/catalog-core/src/main/java/ro/ubb/catalog/core/service/BloodServiceImpl.java" />
+        <option value="$PROJECT_DIR$/catalog-web/src/main/java/ro/ubb/catalog/web/controller/DonorController.java" />
       </list>
     </option>
   </component>
@@ -1533,7 +1556,7 @@
       <workItem from="1527085016133" duration="2194000" />
       <workItem from="1527092997469" duration="2415000" />
       <workItem from="1527095849176" duration="556000" />
-      <workItem from="1527097223899" duration="110000" />
+      <workItem from="1527097223899" duration="2034000" />
     </task>
     <task id="LOCAL-00001" summary="Tons of changes">
       <created>1526576596825</created>
@@ -1668,11 +1691,18 @@
       <option name="project" value="LOCAL" />
       <updated>1527096218630</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="More changes">
+      <created>1527097341317</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1527097341317</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="137229000" />
+    <option name="totallyTimeSpent" value="139153000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-9" y="-9" width="1938" height="1048" extended-state="6" />
@@ -1701,6 +1731,7 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295583" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.27228788" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="true" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32842582" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.16058002" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="true" content_ui="tabs" />
@@ -1711,7 +1742,6 @@
       <window_info id="Build" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32821077" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3272933" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32842582" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -1758,13 +1788,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="162">
           <caret line="8" column="26" lean-forward="false" selection-start-line="8" selection-start-column="26" selection-end-line="8" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/catalog-core/src/main/java/ro/ubb/catalog/core/model/BaseEntity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="567">
-          <caret line="42" column="18" lean-forward="false" selection-start-line="42" selection-start-column="18" selection-end-line="42" selection-end-column="18" />
         </state>
       </provider>
     </entry>
@@ -1821,6 +1844,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="297">
           <caret line="14" column="28" lean-forward="false" selection-start-line="14" selection-start-column="28" selection-end-line="14" selection-end-column="28" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1870,6 +1894,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="378">
           <caret line="14" column="16" lean-forward="false" selection-start-line="14" selection-start-column="16" selection-end-line="14" selection-end-column="16" />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1959,17 +1986,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/catalog-web/src/main/java/ro/ubb/catalog/web/controller/BloodController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2403">
-          <caret line="103" column="0" lean-forward="false" selection-start-line="103" selection-start-column="0" selection-end-line="109" selection-end-column="74" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/catalog-web/src/main/java/ro/ubb/catalog/web/dto/PatientDTO.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="324">
           <caret line="15" column="29" lean-forward="false" selection-start-line="15" selection-start-column="29" selection-end-line="15" selection-end-column="29" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1977,20 +1998,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="405">
           <caret line="15" column="30" lean-forward="false" selection-start-line="15" selection-start-column="21" selection-end-line="15" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/catalog-core/src/main/java/ro/ubb/catalog/core/service/BloodService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="594">
-          <caret line="24" column="21" lean-forward="false" selection-start-line="24" selection-start-column="21" selection-end-line="24" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/catalog-web/src/main/java/ro/ubb/catalog/web/controller/ClinicController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="432">
-          <caret line="71" column="8" lean-forward="true" selection-start-line="71" selection-start-column="8" selection-end-line="71" selection-end-column="180" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -2012,13 +2020,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="282">
           <caret line="20" column="14" lean-forward="false" selection-start-line="20" selection-start-column="14" selection-end-line="20" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/catalog-core/src/main/java/ro/ubb/catalog/core/model/Blood.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="228">
-          <caret line="23" column="29" lean-forward="false" selection-start-line="23" selection-start-column="21" selection-end-line="23" selection-end-column="29" />
         </state>
       </provider>
     </entry>
@@ -2067,14 +2068,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/catalog-core/src/main/java/ro/ubb/catalog/core/model/Request.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-366">
-          <caret line="39" column="55" lean-forward="false" selection-start-line="39" selection-start-column="55" selection-end-line="39" selection-end-column="55" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/catalog-web/src/main/java/ro/ubb/catalog/web/controller/RestResponseEntityExceptionHandler.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="228">
@@ -2082,11 +2075,30 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/catalog-web/src/main/java/ro/ubb/catalog/web/controller/DonorController.java">
+    <entry file="file://$PROJECT_DIR$/catalog-core/src/main/java/ro/ubb/catalog/core/model/Request.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1107">
-          <caret line="56" column="21" lean-forward="false" selection-start-line="56" selection-start-column="13" selection-end-line="56" selection-end-column="21" />
+        <state relative-caret-position="444">
+          <caret line="33" column="0" lean-forward="false" selection-start-line="33" selection-start-column="0" selection-end-line="40" selection-end-column="5" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/catalog-core/src/main/java/ro/ubb/catalog/core/model/BaseEntity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="567">
+          <caret line="42" column="18" lean-forward="false" selection-start-line="42" selection-start-column="18" selection-end-line="42" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/catalog-core/src/main/java/ro/ubb/catalog/core/model/Blood.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="579">
+          <caret line="85" column="15" lean-forward="false" selection-start-line="85" selection-start-column="15" selection-end-line="85" selection-end-column="15" />
+          <folding>
+            <element signature="e#2494#2495#0" expanded="true" />
+            <element signature="e#2559#2560#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -2098,10 +2110,42 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/catalog-web/src/main/java/ro/ubb/catalog/web/controller/ClinicController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="261">
+          <caret line="96" column="54" lean-forward="false" selection-start-line="96" selection-start-column="54" selection-end-line="96" selection-end-column="54" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/catalog-core/src/main/java/ro/ubb/catalog/core/service/BloodService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="162">
+          <caret line="10" column="22" lean-forward="true" selection-start-line="10" selection-start-column="22" selection-end-line="10" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/catalog-web/src/main/java/ro/ubb/catalog/web/controller/DonorController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="338">
+          <caret line="118" column="33" lean-forward="false" selection-start-line="118" selection-start-column="18" selection-end-line="118" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/catalog-web/src/main/java/ro/ubb/catalog/web/controller/BloodController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="177">
+          <caret line="54" column="42" lean-forward="false" selection-start-line="54" selection-start-column="42" selection-end-line="54" selection-end-column="42" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/catalog-core/src/main/java/ro/ubb/catalog/core/service/BloodServiceImpl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="282">
-          <caret line="149" column="5" lean-forward="true" selection-start-line="149" selection-start-column="5" selection-end-line="149" selection-end-column="5" />
+        <state relative-caret-position="-2979">
+          <caret line="69" column="27" lean-forward="false" selection-start-line="69" selection-start-column="15" selection-end-line="69" selection-end-column="27" />
           <folding />
         </state>
       </provider>

@@ -68,8 +68,7 @@ public class ClinicController
     {
         log.trace("getBloodStocks ENTERED!");
 
-        List<Blood> bloodList = bloodService.getAllBloods();
-        bloodList = bloodList.stream().filter(b->b.getTested()==true && b.getCollectionDate()+86400*b.getShelfLife()>= currentTime && b.getState()!=3).collect(Collectors.toList());
+        List<Blood> bloodList = bloodService.getUsableBloods();
 
         log.trace("getBloodStocks EXITING : {}",bloodList);
 
@@ -79,21 +78,14 @@ public class ClinicController
     @RequestMapping(value = "/bloodStocksUntested", method = RequestMethod.GET)
     Set<BloodDTO> getUntestedBloodStocks()
     {
-        List<Blood> bloodList = bloodService.getAllBloods();
-        bloodList = bloodList.stream().filter(p->p.getTested()==false).collect(Collectors.toList());
+        List<Blood> bloodList = bloodService.getUntestedBloods();
         return bloodConverter.convertModelsToDtos(bloodList);
     }
 
     @RequestMapping(value = "/bloodStocksUnusable", method = RequestMethod.GET)
     Set<BloodDTO> getUnusableBloodStocks()
     {
-        Set<Blood> to_return = new HashSet<>();
-        List<Blood> bloodList = bloodService.getAllBloods();
-        List<Blood> unusableBlood = bloodList.stream().filter(b->b.getUsable()==false).collect(Collectors.toList());
-        List<Blood> expiredBlood = bloodList.stream().filter(b->b.getCollectionDate()+86400*b.getShelfLife()< currentTime).collect(Collectors.toList());
-        to_return.addAll(unusableBlood);
-        to_return.addAll(expiredBlood);
-        return bloodConverter.convertModelsToDtos(to_return);
+        return bloodConverter.convertModelsToDtos(bloodService.getUnusableBloods());
     }
 
     @RequestMapping(value = "/patients", method = RequestMethod.GET)
