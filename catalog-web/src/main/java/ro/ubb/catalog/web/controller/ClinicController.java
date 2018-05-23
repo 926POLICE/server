@@ -66,8 +66,13 @@ public class ClinicController
     @RequestMapping(value = "/bloodStocks", method = RequestMethod.GET)
     Set<BloodDTO> getBloodStocks()
     {
+        log.trace("getBloodStocks ENTERED!");
+
         List<Blood> bloodList = bloodService.getAllBloods();
         bloodList = bloodList.stream().filter(b->b.getTested()==true && b.getCollectionDate()+86400*b.getShelfLife()>= currentTime && b.getState()!=3).collect(Collectors.toList());
+
+        log.trace("getBloodStocks EXITING : {}",bloodList);
+
         return bloodConverter.convertModelsToDtos(bloodList);
     }
 
@@ -94,6 +99,8 @@ public class ClinicController
     @RequestMapping(value = "/patients", method = RequestMethod.GET)
     Set<PatientDTO> getPatients()
     {
+        log.trace("getPatients ENTERED!");
+
         // lat/lng and math function to calculate the distance from a point x to a point y ;) (kudos to Prisacariu)
         List<Patient> patients = patientService.getAllPatients();
         List<Pair<Double,Patient>> pairs = new ArrayList<>();
@@ -101,6 +108,9 @@ public class ClinicController
         Collections.sort(pairs,(p1,p2)->(p1.getKey().compareTo(p2.getKey())));
         List<Patient> result = new ArrayList<>();
         pairs.forEach(p->result.add(p.getValue()));
+
+        log.trace("getPatients EXITED! {}",result);
+
         return patientConverter.convertModelsToDtos(result);
     }
 
