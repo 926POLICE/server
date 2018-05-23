@@ -21,5 +21,7 @@ public interface DonorService
 
     Optional<Donor> setEligibility(Long DonorID,Boolean eligibility);
 
+    Optional<Donor> setInfo(Long DonorID,String bloodType, Boolean rh, String anticorps);
+
     Boolean notifyDonorsNeeded(String BloodType,Boolean RH,final String Anticorps);
 }

@@ -133,16 +133,16 @@ public class BloodServiceImpl implements BloodService
     }
 
     @Override
-    public boolean checkAvailability(Float R, Float P, Float T) {
+    public Float checkAvailability(Float R, Float P, Float T) {
         List<Blood> bloodList = this.getAllBloods();
         bloodList = bloodList.stream().filter(b->b.getTested()==true && b.getCollectionDate()+86400*b.getShelfLife()>= Instant.now().getEpochSecond()).collect(Collectors.toList());
         Float RAvailable = bloodList.stream().filter(p->p.getType()=="r").map(p->p.getQuantity()).reduce(0f,(a,b)->a+b).floatValue();
         Float PAvailable = bloodList.stream().filter(p->p.getType()=="p").map(p->p.getQuantity()).reduce(0f,(a,b)->a+b).floatValue();
         Float TAvailable = bloodList.stream().filter(p->p.getType()=="t").map(p->p.getQuantity()).reduce(0f,(a,b)->a+b).floatValue();
         if(RAvailable>=R && PAvailable >= P && TAvailable>=T)
-            return true;
+            return 0f;
         else
-            return false;
+            return R - RAvailable + P - PAvailable + T - TAvailable;
     }
 
     @Override

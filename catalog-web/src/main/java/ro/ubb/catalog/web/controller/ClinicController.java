@@ -118,6 +118,7 @@ public class ClinicController
     Set<RequestDTO> getAllRequests()
     {
         List<Request> requests = requestService.getAllRequests();
+        requests = requests.stream().filter(r->r.getCompleted()==false).collect(Collectors.toList());
         Collections.sort(requests);
         return requestConverter.convertModelsToDtos(requests);
     }
@@ -130,7 +131,6 @@ public class ClinicController
         return donationConverter.convertModelsToDtos(donations);
     }
 
-    @SuppressWarnings("Duplicates")
     @RequestMapping(value = "/bloodStocks/{bloodId}", method = RequestMethod.PUT)
     BloodDTO updateBlood(@PathVariable final Long bloodId, @RequestBody final BloodDTO bloodDto)
     {
@@ -186,6 +186,33 @@ public class ClinicController
         log.trace("useBlood - method end");
 
         return new ResponseEntity(new EmptyJsonResponse(), HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/donors", method = RequestMethod.GET)
+    Set<DonorDTO> getDonors()
+    {
+        log.trace("getDonors ENTERED!");
+
+        List<Donor> donorList = donorService.getAllDonors();
+
+        log.trace("getDonors EXITING : {}",donorList);
+
+        return donorConverter.convertModelsToDtos(donorList);
+    }
+
+    @RequestMapping(value = "/donors/info/{donorID}", method = RequestMethod.PUT)
+    DonorDTO setDonorInfo(@PathVariable final Long donorID, @RequestBody Map<String, String> json)
+    {
+        log.trace("setDonorInfo entered");
+
+        Optional<Donor> donorOptional = donorService.setInfo(donorID,json.get("bloodtype"),Boolean.parseBoolean(json.get("rh")),json.get("anticorps"));
+
+        Map<String, DonorDTO> result = new HashMap<>();
+        donorOptional.ifPresent(b -> result.put("donor", donorConverter.convertModelToDto(b)));
+
+        log.trace("setDonorInfo exited");
+
+        return result.get("donor");
     }
 
     @RequestMapping(value = "/donors/eligibility/{donorID}", method = RequestMethod.PUT)
@@ -252,7 +279,7 @@ public List<BloodDTO> collectBlood(@RequestBody final Long DonationID, @RequestB
     }
 
     @RequestMapping(value = "/bloodStocks/available", method = RequestMethod.GET)
-    boolean checkAvailability(@RequestBody Map<String, String> json)
+    Float checkAvailability(@RequestBody Map<String, String> json)
     {
         /*
         // Returns true if the sum of the available stocks provides sufficient quantities for all the  specified components.
@@ -309,7 +336,7 @@ boolean checkCompatibility(@RequestBody final Long DonorID,@RequestBody final  L
     }
 
     @RequestMapping(value = "/requests/{requestID}", method = RequestMethod.PUT)
-    boolean processRequest(@PathVariable final Long requestID)
+    Float processRequest(@PathVariable final Long requestID)
     {
         Optional<Request> requestOptional = requestService.findByID(requestID);
         if(requestOptional.isPresent()==false)
@@ -317,9 +344,9 @@ boolean checkCompatibility(@RequestBody final Long DonorID,@RequestBody final  L
 
         Request request = requestOptional.get();
 
-        Boolean res = bloodService.checkAvailability(request.getRQuantity(),request.getPQuantity(),request.getTQuantity());
+        Float res = bloodService.checkAvailability(request.getRQuantity(),request.getPQuantity(),request.getTQuantity());
 
-        if(res==false)
+        if(res!=0)
             donorService.notifyDonorsNeeded(request.getPatient().getBloodType(),request.getPatient().getRh(),request.getPatient().getAnticorps());
 
         return res;

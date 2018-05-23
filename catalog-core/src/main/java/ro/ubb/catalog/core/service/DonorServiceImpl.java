@@ -76,6 +76,19 @@ public class DonorServiceImpl implements DonorService
     }
 
     @Override
+    public Optional<Donor> setInfo(Long DonorID, String bloodType, Boolean rh, String anticorps) {
+        Optional<Donor> optionalDonor = donorRepository.findById(DonorID);
+
+        optionalDonor.ifPresent(st -> {
+            st.setBloodType(bloodType);
+            st.setRh(rh);
+            st.setAnticorps(anticorps);
+        });
+
+        return optionalDonor;
+    }
+
+    @Override
     public Boolean notifyDonorsNeeded(String BloodType, Boolean RH, String Anticorps) {
         List<Donor> donors = this.getAllDonors();
         donors = donors.stream().filter(donor -> donor.getNextDonation() <= Instant.now().getEpochSecond() && donor.getAnticorps()==Anticorps && donor.getRh() == RH && donor.getBloodType()==BloodType).collect(Collectors.toList());
