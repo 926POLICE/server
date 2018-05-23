@@ -19,6 +19,7 @@ public class Donor extends Person implements Serializable
     private Boolean eligibility;
     private Boolean hasBeenNotified;
     private Boolean lastAnalysisResult;
+    private String medicalHistory;
 
     private String username;
     private String password;
@@ -27,6 +28,7 @@ public class Donor extends Person implements Serializable
         super(name, birthday, residence, address, bloodType, Rh, anticorps, isDonor, latitude, longitude);
         this.username = username;
         this.password = password;
+        this.medicalHistory="";
     }
 
     @Override

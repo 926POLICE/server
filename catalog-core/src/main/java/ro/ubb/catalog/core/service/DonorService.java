@@ -23,5 +23,7 @@ public interface DonorService
 
     Optional<Donor> setInfo(Long DonorID,String bloodType, Boolean rh, String anticorps);
 
+    Optional<Donor> updateMedicalHistory(Long DonorID, String medicalHistory);
+
     Boolean notifyDonorsNeeded(String BloodType,Boolean RH,final String Anticorps);
 }

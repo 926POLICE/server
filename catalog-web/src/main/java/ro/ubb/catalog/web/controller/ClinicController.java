@@ -348,6 +348,8 @@ boolean checkCompatibility(@RequestBody final Long DonorID,@RequestBody final  L
 
         if(res!=0)
             donorService.notifyDonorsNeeded(request.getPatient().getBloodType(),request.getPatient().getRh(),request.getPatient().getAnticorps());
+        else
+            bloodService.honorRequest(request.getRQuantity(),request.getPQuantity(),request.getTQuantity());
 
         return res;
     }

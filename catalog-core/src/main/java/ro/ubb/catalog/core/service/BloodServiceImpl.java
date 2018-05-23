@@ -146,6 +146,17 @@ public class BloodServiceImpl implements BloodService
     }
 
     @Override
+    public void honorRequest(Float R, Float P, Float T)
+    {
+//        Float RNeeded = R, PNeeded = P, TNeeded = T;
+//        bloodList = bloodList.stream().filter(b->b.getTested()==true && b.getCollectionDate()+86400*b.getShelfLife()>= currentTime && b.getState()!=3).collect(Collectors.toList());
+//        while (RNeeded>0)
+//        {
+//
+//        }
+    }
+
+    @Override
     public void useBlood(Long bloodId) {
         Optional<Blood> optionalBlood = bloodRepository.findById(bloodId);
 

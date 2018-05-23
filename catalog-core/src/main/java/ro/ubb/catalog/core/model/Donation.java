@@ -12,8 +12,7 @@ import java.util.Objects;
 @Entity
 @Table(name = "donations")
 @AllArgsConstructor
-public class Donation extends BaseEntity<Long> implements Serializable
-{
+public class Donation extends BaseEntity<Long> implements Serializable {
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Blood R; // field for Red Cells
 
@@ -52,17 +51,23 @@ public class Donation extends BaseEntity<Long> implements Serializable
         if (!(o instanceof Donation)) return false;
         if (!super.equals(o)) return false;
         Donation donation = (Donation) o;
-        return Objects.equals(R.getId(), donation.R.getId()) &&
-                Objects.equals(P.getId(), donation.P.getId()) &&
-                Objects.equals(T.getId(), donation.T.getId()) &&
-                Objects.equals(analysisResult, donation.analysisResult) &&
-                Objects.equals(donor.getId(), donation.donor.getId()) &&
-                Objects.equals(patient.getId(), donation.patient.getId());
+        if (R == null)
+            return
+                    Objects.equals(analysisResult, donation.analysisResult) &&
+                            Objects.equals(donor.getId(), donation.donor.getId());
+        else
+            return Objects.equals(R.getId(), donation.R.getId()) &&
+                    Objects.equals(P.getId(), donation.P.getId()) &&
+                    Objects.equals(T.getId(), donation.T.getId()) &&
+                    Objects.equals(analysisResult, donation.analysisResult) &&
+                    Objects.equals(donor.getId(), donation.donor.getId());
     }
 
     @Override
     public int hashCode() {
-
-        return Objects.hash(super.hashCode(), R.getId(), P.getId(), T.getId(), analysisResult, donor.getId(), patient.getId());
+        if (R == null)
+            return Objects.hash(super.hashCode(), analysisResult, donor.getId());
+        else
+            return Objects.hash(super.hashCode(), R.getId(), P.getId(), T.getId(), analysisResult, donor.getId());
     }
 }

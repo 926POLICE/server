@@ -22,5 +22,7 @@ public interface BloodService
 
     Float checkAvailability(Float R, Float P, Float T);
 
+    void honorRequest(Float R, Float P, Float T);
+
     void useBlood(Long bloodId);
 }
