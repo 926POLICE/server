@@ -78,6 +78,16 @@ public class DoctorController {
     @RequestMapping(value = "/requests/status", method = RequestMethod.GET)
     String checkRequestStatus(@RequestBody final Long PatientID)
     {
+        List<Request> requests=requestService.getAllRequests().stream()
+                .filter(request -> request.getPatient().getId()==PatientID)
+                .collect(Collectors.toList());
+
+
+        if(requests.isEmpty())
+            return "No request sent for this patient";
+
+        for(Request r:requests)
+            return r.getCompleted().toString();
         return null;
     }
 }

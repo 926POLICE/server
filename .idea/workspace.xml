@@ -64,12 +64,8 @@
       <file leaf-file-name="DoctorController.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/catalog-web/src/main/java/ro/ubb/catalog/web/controller/DoctorController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="271">
-              <caret line="80" column="20" lean-forward="true" selection-start-line="80" selection-start-column="20" selection-end-line="80" selection-end-column="20" />
-              <folding>
-                <element signature="e#1423#1424#0" expanded="true" />
-                <element signature="e#1450#1451#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="274">
+              <caret line="91" column="5" selection-start-line="91" selection-start-column="5" selection-end-line="91" selection-end-column="5" />
             </state>
           </provider>
         </entry>
@@ -78,7 +74,7 @@
         <entry file="file://$PROJECT_DIR$/catalog-web/src/main/java/ro/ubb/catalog/web/dto/RequestDTO.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="340">
-              <caret line="23" column="26" lean-forward="true" selection-start-line="16" selection-start-column="4" selection-end-line="23" selection-end-column="26" />
+              <caret line="23" column="26" selection-start-line="16" selection-start-column="4" selection-end-line="23" selection-end-column="26" />
             </state>
           </provider>
         </entry>
@@ -985,6 +981,11 @@
             <path>
               <item name="ISS_proto" type="b2602c69:ProjectViewProjectNode" />
               <item name="server" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="catalog-core" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+            </path>
+            <path>
+              <item name="ISS_proto" type="b2602c69:ProjectViewProjectNode" />
+              <item name="server" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
               <item name="catalog-web" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
             </path>
             <path>
@@ -1409,7 +1410,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="140287000" />
+    <option name="totallyTimeSpent" value="141164000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
@@ -1430,11 +1431,12 @@
       <window_info id="UI Designer" order="3" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Messages" order="9" weight="0.3272933" />
       <window_info anchor="right" id="Palette&#9;" order="6" />
       <window_info id="Image Layers" order="4" />
       <window_info anchor="bottom" id="Java Enterprise" order="10" weight="0.3295583" />
       <window_info anchor="right" id="Capture Analysis" order="7" />
-      <window_info anchor="bottom" x="0" y="29" width="1920" height="1001" id="Run" order="2" type="WINDOWED" weight="0.4259056" />
+      <window_info anchor="bottom" x="0" y="23" width="1536" height="801" id="Run" order="2" type="WINDOWED" weight="0.4259056" />
       <window_info anchor="bottom" id="Version Control" order="11" />
       <window_info anchor="bottom" id="Spring" order="12" />
       <window_info anchor="bottom" id="Terminal" order="13" weight="0.3295583" />
@@ -1470,7 +1472,6 @@
       <window_info anchor="bottom" id="Find" order="1" weight="0.32842582" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Build" order="8" weight="0.32821077" />
-      <window_info anchor="bottom" id="Messages" order="9" weight="0.3272933" />
       <window_info anchor="right" id="Gradle" order="8" weight="0.16058002" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info id="Designer" order="7" />
@@ -1835,18 +1836,14 @@
     <entry file="file://$PROJECT_DIR$/catalog-web/src/main/java/ro/ubb/catalog/web/dto/RequestDTO.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="340">
-          <caret line="23" column="26" lean-forward="true" selection-start-line="16" selection-start-column="4" selection-end-line="23" selection-end-column="26" />
+          <caret line="23" column="26" selection-start-line="16" selection-start-column="4" selection-end-line="23" selection-end-column="26" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/catalog-web/src/main/java/ro/ubb/catalog/web/controller/DoctorController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="271">
-          <caret line="80" column="20" lean-forward="true" selection-start-line="80" selection-start-column="20" selection-end-line="80" selection-end-column="20" />
-          <folding>
-            <element signature="e#1423#1424#0" expanded="true" />
-            <element signature="e#1450#1451#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="274">
+          <caret line="91" column="5" selection-start-line="91" selection-start-column="5" selection-end-line="91" selection-end-column="5" />
         </state>
       </provider>
     </entry>
