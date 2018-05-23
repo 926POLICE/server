@@ -83,8 +83,8 @@ public class ClientApp {
         theMap.put("username","TESTING");
         theMap.put("latitude","9000");
 
-        DonorDTO donator = restTemplate.postForObject("http://localhost:8080/api/donors",theMap,DonorDTO.class);
-        System.out.println(donator);
+//        DonorDTO donator = restTemplate.postForObject("http://localhost:8080/api/donors",theMap,DonorDTO.class);
+//        System.out.println(donator);
 
         try {
             restTemplate.delete("http://localhost:8080/api/bloodStocks/{bloodId}", 1l);
