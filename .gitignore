@@ -26,3 +26,5 @@ hs_err_pid*
 /client-alex
 
 /node_modules
+
+.idea
