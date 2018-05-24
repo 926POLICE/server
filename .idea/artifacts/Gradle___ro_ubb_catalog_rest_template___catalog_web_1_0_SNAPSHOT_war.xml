@@ -1,5 +1,5 @@
 <component name="ArtifactManager">
-  <artifact type="war" external-system-id="GRADLE" name="Gradle : ro.ubb.catalog-rest-template : catalog-web-1.0-SNAPSHOT.war">
+  <artifact type="war" name="Gradle : ro.ubb.catalog-rest-template : catalog-web-1.0-SNAPSHOT.war">
     <output-path>$PROJECT_DIR$/catalog-web/build/libs</output-path>
     <properties id="gradle-properties">
       <options external-project-path="$PROJECT_DIR$" />

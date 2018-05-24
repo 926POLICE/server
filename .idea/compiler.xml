@@ -4,5 +4,15 @@
     <annotationProcessing>
       <profile default="true" name="Default" enabled="true" />
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="catalog-client_main" target="1.8" />
+      <module name="catalog-client_test" target="1.8" />
+      <module name="catalog-core_main" target="1.8" />
+      <module name="catalog-core_test" target="1.8" />
+      <module name="catalog-web_main" target="1.8" />
+      <module name="catalog-web_test" target="1.8" />
+      <module name="ISS_proto_main" target="1.8" />
+      <module name="ISS_proto_test" target="1.8" />
+    </bytecodeTargetLevel>
   </component>
 </project>
