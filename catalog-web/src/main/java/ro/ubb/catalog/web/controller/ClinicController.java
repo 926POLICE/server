@@ -350,6 +350,11 @@ boolean checkCompatibility(@RequestBody final Long DonorID,@RequestBody final  L
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     LoginReply getUser(@RequestBody Map<String, String> json)
     {
+        log.trace("getUser entered!");
+
+        log.trace(json.get("username"));
+        log.trace(json.get("password"));
+
         String username = json.get("username");
         String password = json.get("password");
 
@@ -357,9 +362,11 @@ boolean checkCompatibility(@RequestBody final Long DonorID,@RequestBody final  L
         List<Doctor> doctorList = doctorService.getAllDoctors();
         List<Donor> donorList = donorService.getAllDonors();
 
-        personnelList = personnelList.stream().filter(p->p.getUsername()==username&&p.getPassword()==password).collect(Collectors.toList());
-        doctorList = doctorList.stream().filter(p->p.getUsername()==username&&p.getPassword()==password).collect(Collectors.toList());
-        donorList = donorList.stream().filter(p->p.getUsername()==username&&p.getPassword()==password).collect(Collectors.toList());
+        personnelList = personnelList.stream().filter(p->p.getUsername().equals(username)&&p.getPassword().equals(password)).collect(Collectors.toList());
+        doctorList = doctorList.stream().filter(p->p.getUsername().equals(username)&&p.getPassword().equals(password)).collect(Collectors.toList());
+        donorList = donorList.stream().filter(p->p.getUsername().equals(username)&&p.getPassword().equals(password)).collect(Collectors.toList());
+
+        log.trace("getUser exited!");
 
         if(personnelList.size()==0 && doctorList.size()==0 && donorList.size()==0)
             return new LoginReply("invalid",-1l);
