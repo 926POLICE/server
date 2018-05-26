@@ -3,11 +3,15 @@ package ro.ubb.catalog.web.controller;
 import javafx.util.Pair;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import ro.ubb.catalog.core.model.*;
+import ro.ubb.catalog.core.repository.ClinicRepository;
+import ro.ubb.catalog.core.repository.PersonnelRepository;
 import ro.ubb.catalog.core.service.*;
 import ro.ubb.catalog.core.utils.Utilities;
 import ro.ubb.catalog.web.converter.*;
@@ -24,7 +28,7 @@ import java.util.stream.Stream;
  */
 
 @RestController
-public class ClinicController
+public class ClinicController implements InitializingBean
 {
     // workload handler
 
@@ -54,6 +58,12 @@ public class ClinicController
     @Autowired
     private PersonnelService personnelService;
 
+    @Autowired
+    private ClinicRepository clinicRepository;
+
+    @Autowired
+    private PersonnelRepository personnelRepository;
+
     private BloodConverter bloodConverter = new BloodConverter();
     private DoctorConverter doctorConverter = new DoctorConverter();
     private DonationConverter donationConverter = new DonationConverter();
@@ -62,6 +72,70 @@ public class ClinicController
     private RequestConverter requestConverter = new RequestConverter();
 
     private Long currentTime = Instant.now().getEpochSecond();
+
+    private Boolean eraseAllFlag = false;
+
+    // http://www.baeldung.com/running-setup-logic-on-startup-in-spring
+    @Override
+    @Transactional
+    public void afterPropertiesSet() throws Exception {
+        if(eraseAllFlag==true)
+        {
+            clinicRepository.findAll().forEach(p->clinicRepository.deleteById(p.getId()));
+            doctorService.getAllDoctors().forEach(d->doctorService.deleteDoctor(d.getId()));
+            patientService.getAllPatients().forEach(p->patientService.deletePatient(p.getId()));
+            donorService.getAllDonors().forEach(d->donorService.deleteDonor(d.getId()));
+            donationService.getAllDonations().forEach(d->donationService.deleteDonation(d.getId()));
+            requestService.getAllRequests().forEach(r->requestService.deleteRequest(r.getId()));
+            bloodService.getAllBloods().forEach(b->bloodService.deleteBlood(b.getId()));
+            personnelRepository.findAll().forEach(p->personnelRepository.deleteById(p.getId()));
+
+            System.out.println("Cleared all the garbage sucessfully!");
+
+            Clinic clinic = clinicRepository.save(new Clinic(46.67,23.50));
+            Doctor doctor=doctorService.createDoctor("dre","dre","Dr. Dre","central");
+            Patient patient=patientService.createPatient("ionut",1l,"a","b","A",false,"none",false,1.0,2.0,"central");
+            Donor donor= donorService.createDonor("donor","donor","ionut",1l,"a","b","A",false,"none",false,1.0,2.0);
+            Donation donation = donationService.createDonation(donor.getId(),null,clinicService.getTheClinic().getId());
+            Request request = requestService.createRequest(patient.getId(),doctor.getId(),1.0f,2.0f,3.0f,1,clinic.getId());
+            Blood blood = bloodService.createBlood(currentTime,2.0f,1,"r",donation.getId(),clinic.getId());
+            bloodService.testBlood(blood.getId(),true);
+            personnelRepository.save(new Personnel("admin","admin"));
+
+            System.out.println(clinic);
+            System.out.println(doctor);
+            System.out.println(patient);
+            System.out.println(donor);
+            System.out.println(donation);
+            System.out.println(request);
+            System.out.println(blood);
+
+            System.out.println("Added garbage sucessfully!");
+
+            System.out.println(clinicRepository.findAll());
+            System.out.println(doctorService.getAllDoctors());
+            System.out.println(patientService.getAllPatients());
+            System.out.println(donorService.getAllDonors());
+            System.out.println(donationService.getAllDonations());
+            System.out.println(bloodService.getAllBloods());
+            System.out.println(requestService.getAllRequests());
+
+
+            System.out.println("ALL OK");
+        }
+        else
+        {
+            System.out.println(clinicRepository.findAll());
+            System.out.println(doctorService.getAllDoctors());
+            System.out.println(patientService.getAllPatients());
+            System.out.println(donorService.getAllDonors());
+            System.out.println(donationService.getAllDonations());
+            System.out.println(bloodService.getAllBloods());
+            System.out.println(requestService.getAllRequests());
+
+            System.out.println("ALL OK");
+        }
+    }
 
     @RequestMapping(value = "/bloodStocks", method = RequestMethod.GET)
     Set<BloodDTO> getBloodStocks()
@@ -266,6 +340,8 @@ public List<BloodDTO> collectBlood(@RequestBody final Long DonationID, @RequestB
         Donor donor = donation.getDonor();
         donor.setNextDonation(currentTime+86400 * 56);
         donor.setHasBeenNotified(false);
+
+        donationService.updateDonation(donation.getId(),R.getId(),P.getId(), T.getId(),donation.getDonor().getId(),donation.getAnalysisResult(),donation.getPatient().getId(),donation.getClinic().getId());
 
         return Stream.of(bloodConverter.convertModelToDto(R),bloodConverter.convertModelToDto(P),bloodConverter.convertModelToDto(T)).collect(Collectors.toSet());
     }

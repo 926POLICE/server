@@ -33,7 +33,7 @@ public class Donor extends Person implements Serializable
 
     @Override
     public String toString() {
-        return "Donor{" +
+        return "ID: " + super.getId()+ " Donor{" +
                 "nextDonation='" + nextDonation + '\'' +
                 ", eligibility=" + eligibility +
                 ", username='" + username + '\'' +

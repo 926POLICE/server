@@ -85,7 +85,12 @@ public class DonorController
     @RequestMapping(value = "/donors/history/{donorID}", method = RequestMethod.GET)
     List<DonationDTO> getAnalysisHistory(@RequestBody final Long DonorID)
     {
-        List<Donation> donations = donationService.getAllDonations().stream().filter(d->d.getDonor().getId()==DonorID).collect(Collectors.toList());
+        log.trace("getAnalysisHistory entered!");
+
+        List<Donation> donations = donationService.getAllDonations().stream().filter(d-> d.getDonor().getId().equals(DonorID)).collect(Collectors.toList());
+
+        log.trace("getAnalysisHistory exited!");
+
         return new ArrayList<>(donationConverter.convertModelsToDtos(donations));
     }
 
@@ -125,13 +130,14 @@ public class DonorController
     }
 
     @RequestMapping(value = "/donors/{donorID}", method = RequestMethod.PUT)
-    DonorDTO updatePersonalDetails(@RequestBody Map<String, String> json)
+    DonorDTO updatePersonalDetails(@PathVariable final Long  donorID, @RequestBody Map<String, String> json)
     {
         log.trace("---- updatePersonalDetails entered ----");
 
-        Long donorID = Long.parseLong(json.get("donorID"));
-
         Optional<Donor> donor = donorService.findbyID(donorID);
+
+        log.trace(donor.toString());
+
         if(donor.isPresent())
         {
             String name = json.get("name");
@@ -198,10 +204,23 @@ public class DonorController
     {
         log.trace("---- donate entered ----");
 
-        Long donorID = Long.parseLong(json.get("donorID"));
-        Long patientTD = Long.parseLong(json.get("patientID"));
+        // get the ID's in strings first.
+        log.trace(json.get("donorID"));
+        log.trace(json.get("patientID"));
 
-        Donation donation = donationService.createDonation(null,null,null,donorID,patientTD,clinicService.getTheClinic().getId());
+        Long donorID = Long.parseLong(json.get("donorID"));
+        Long patientTD;
+
+        try
+        {
+            patientTD = Long.parseLong(json.get("patientID"));
+        }
+        catch (Exception e)
+        {
+            patientTD = null;
+        }
+
+        Donation donation = donationService.createDonation(donorID,patientTD,clinicService.getTheClinic().getId());
 
         log.trace("donate: rsult={}",donation);
         return donationConverter.convertModelToDto(donation);

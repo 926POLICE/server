@@ -17,30 +17,11 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class ClinicServiceImpl implements ClinicService, InitializingBean {
+public class ClinicServiceImpl implements ClinicService {
     private static final Logger log = LoggerFactory.getLogger(DoctorServiceImpl.class);
 
     @Autowired
     private ClinicRepository clinicRepository;
-
-    // http://www.baeldung.com/running-setup-logic-on-startup-in-spring
-    @Override
-    @Transactional
-    public void afterPropertiesSet() throws Exception {
-        if (clinicRepository != null)
-            log.trace("Clinic Service initialized sucessfully!");
-        else
-            throw new RuntimeException("Error making sure there's only one clinic...");
-
-        List<Clinic> clinicList = clinicRepository.findAll();
-        if(clinicList.size()>1)
-        {
-            clinicList.forEach(p->clinicRepository.deleteById(p.getId()));
-            throw new RuntimeException("Too many clinics!");
-        }
-        else if (clinicList.size()==0)
-            clinicRepository.save(new Clinic(46.67,23.50));
-    }
 
     @Override
     public Clinic getTheClinic()

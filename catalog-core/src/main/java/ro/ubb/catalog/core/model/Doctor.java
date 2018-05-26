@@ -4,9 +4,13 @@ package ro.ubb.catalog.core.model;
 import lombok.*;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @NoArgsConstructor

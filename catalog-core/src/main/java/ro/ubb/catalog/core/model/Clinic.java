@@ -22,13 +22,13 @@ public class Clinic extends BaseEntity<Long> implements Serializable
         this.longitude = longitude;
     }
 
-    @OneToMany(fetch= FetchType.EAGER,cascade = CascadeType.ALL, mappedBy = "clinic")
+    @OneToMany(fetch= FetchType.EAGER, mappedBy = "clinic", orphanRemoval = true)
     private Set<Donation> donations = new HashSet<>();
 
-    @OneToMany(fetch=FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "clinic")
+    @OneToMany(fetch=FetchType.EAGER, mappedBy = "clinic", orphanRemoval = true)
     private Set<Request> requests  = new HashSet<>();
 
-    @OneToMany(fetch=FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "clinic")
+    @OneToMany(fetch=FetchType.EAGER, mappedBy = "clinic", orphanRemoval = true)
     private Set<Blood> bloodStock = new HashSet<>();
 
     @Override
@@ -49,7 +49,7 @@ public class Clinic extends BaseEntity<Long> implements Serializable
 
     @Override
     public String toString() {
-        return "Clinic{" +
+        return "ID: " + super.getId()+" Clinic{" +
                 "latitude=" + latitude +
                 ", longitude=" + longitude +
                 '}';

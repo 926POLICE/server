@@ -2,9 +2,11 @@ package ro.ubb.catalog.core.service;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import ro.ubb.catalog.core.model.Clinic;
 import ro.ubb.catalog.core.model.Doctor;
 import ro.ubb.catalog.core.repository.DoctorRepository;
 
@@ -12,12 +14,20 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class DoctorServiceImpl implements DoctorService
+public class DoctorServiceImpl implements DoctorService, InitializingBean
 {
     private static final Logger log = LoggerFactory.getLogger(DoctorServiceImpl.class);
 
     @Autowired
     private DoctorRepository doctorRepository;
+
+    // http://www.baeldung.com/running-setup-logic-on-startup-in-spring
+    @Override
+    @Transactional
+    public void afterPropertiesSet() throws Exception {
+//        Doctor d = new Doctor("dre","a","dre","dre");
+//        doctorRepository.save(d);
+    }
 
     @Override
     public List<Doctor> getAllDoctors() {

@@ -9,7 +9,7 @@ public interface DonationService
 {
     List<Donation> getAllDonations();
 
-    Donation createDonation(Long RBloodID, Long PBloodID, Long TBloodID, Long donorID, Long patientID, Long donationClinicID);
+    Donation createDonation(Long donorID, Long patientID, Long donationClinicID);
 
     Optional<Donation> updateDonation(Long DonationID, Long RBloodID, Long PBloodID, Long TBloodID, Long donorID, Boolean analysisResult, Long patientID, Long donationClinicID);
 

@@ -13,21 +13,21 @@ import java.util.Objects;
 @Table(name = "donations")
 @AllArgsConstructor
 public class Donation extends BaseEntity<Long> implements Serializable {
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.EAGER,optional = true)
     private Blood R; // field for Red Cells
 
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.EAGER, optional = true)
     private Blood P; // field for Plasma
 
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.EAGER,optional = true)
     private Blood T; // field for Thrombochytes
 
     private Boolean analysisResult;
 
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.EAGER)
     private Donor donor;
 
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.EAGER, optional = true)
     private Patient patient;
 
     @ManyToOne
@@ -35,14 +35,20 @@ public class Donation extends BaseEntity<Long> implements Serializable {
 
     @Override
     public String toString() {
+        if(patient==null || R==null)
         return "Donation{" +
-                "R=" + R.getId() +
-                ", P=" + P.getId() +
-                ", T=" + T.getId() +
-                ", analysisResult=" + analysisResult +
+                "analysisResult=" + analysisResult +
                 ", donor=" + donor.getId() +
-                ", patient=" + patient.getId() +
                 '}';
+        else
+            return "Donation{" +
+                    "R=" + R.getId() +
+                    ", P=" + P.getId() +
+                    ", T=" + T.getId() +
+                    ", analysisResult=" + analysisResult +
+                    ", patient=" + patient.getId()+
+                    ", donor=" + donor.getId() +
+                    '}';
     }
 
     @Override

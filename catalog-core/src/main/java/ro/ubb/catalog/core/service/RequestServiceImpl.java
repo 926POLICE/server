@@ -47,6 +47,7 @@ public class RequestServiceImpl implements RequestService
 
     @Override
     public Request createRequest(Long patientID, Long doctorID, Float RQuantity, Float PQuantity, Float TQuantity, Integer priority, Long clinicID) {
+        log.trace("createRequest entered!");
 
         Optional<Patient> patient = patientRepository.findById(patientID);
         Optional<Clinic> clinic = clinicRepository.findById(clinicID);
@@ -55,6 +56,9 @@ public class RequestServiceImpl implements RequestService
             throw new RuntimeException("Invalid request constructor!");
 
         Request request = requestRepository.save(new Request(RQuantity,PQuantity,TQuantity,priority,false,patient.get(),doctor.get(),clinic.get()));
+
+        log.trace("createRequest exited!");
+
         return request;
     }
 

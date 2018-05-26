@@ -12,8 +12,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class DonationServiceImpl implements DonationService
-{
+public class DonationServiceImpl implements DonationService {
     private static final Logger log = LoggerFactory.getLogger(DonationServiceImpl.class);
 
     @Autowired
@@ -29,7 +28,7 @@ public class DonationServiceImpl implements DonationService
     private DonorRepository donorRepository;
 
     @Autowired
-    private ClinicRepository clinicRepository;
+    private ClinicService clinicService;
 
     @Override
     public List<Donation> getAllDonations() {
@@ -43,19 +42,35 @@ public class DonationServiceImpl implements DonationService
     }
 
     @Override
-    public Donation createDonation(Long RBloodID, Long PBloodID, Long TBloodID, Long donorID, Long patientID, Long donationClinicID) {
-        Optional<Blood> RBlood = bloodRepository.findById(RBloodID);
-        Optional<Blood> PBlood = bloodRepository.findById(PBloodID);
-        Optional<Blood> TBlood = bloodRepository.findById(TBloodID);
-        Optional<Donor> donor = donorRepository.findById(donorID);
-        Optional<Patient> patient = patientRepository.findById(patientID);
-        Optional<Clinic> clinic = clinicRepository.findById(donationClinicID);
-        if(!RBlood.isPresent() || !PBlood.isPresent() || !TBlood.isPresent() || !donor.isPresent() || !patient.isPresent() || !clinic.isPresent())
-            throw new RuntimeException("Invalid donation constructor!");
-
-        Donation donation = donationRepository.save(new Donation(RBlood.get(),PBlood.get(),TBlood.get(),false,donor.get(),patient.get(),clinic.get()));
-        return donation;
+    public Donation createDonation(Long donorID, Long patientID, Long donationClinicID) {
+        if (patientID == null)
+            return donationRepository.save(new Donation(null, null, null, false, donorRepository.findById(donorID).get(), null, clinicService.getTheClinic()));
+        else
+            return donationRepository.save(new Donation(null, null, null, false, donorRepository.findById(donorID).get(), patientRepository.findById(patientID).get(), clinicService.getTheClinic()));
     }
+
+//    @Override
+//    public Donation createDonation(Long RBloodID, Long PBloodID, Long TBloodID, Long donorID, Long patientID, Long donationClinicID) {
+//        Optional<Blood> RBlood = bloodRepository.findById(RBloodID);
+//        Optional<Blood> PBlood = bloodRepository.findById(PBloodID);
+//        Optional<Blood> TBlood = bloodRepository.findById(TBloodID);
+//        Optional<Donor> donor = donorRepository.findById(donorID);
+//        Optional<Patient> patient = patientRepository.findById(patientID);
+//        Optional<Clinic> clinic = clinicRepository.findById(donationClinicID);
+//
+//        Blood R=null, P=null, T=null;
+//        Donor d=null;
+//        Patient p=null;
+//        if(RBlood.isPresent()==true)
+//            R=RBlood.get();
+//        if(PBlood.isPresent()==false)
+//            P = null;
+//        if(TBlood.isPresent()==false)
+//            T = null;
+//
+//        Donation donation = donationRepository.save(new Donation(RBlood.get(),PBlood.get(),TBlood.get(),false,donor.get(),patient.get(),clinic.get()));
+//        return donation;
+//    }
 
     @Override
     @Transactional
@@ -67,8 +82,7 @@ public class DonationServiceImpl implements DonationService
         Optional<Blood> TBlood = bloodRepository.findById(TBloodID);
         Optional<Donor> donor = donorRepository.findById(donorID);
         Optional<Patient> patient = patientRepository.findById(patientID);
-        Optional<Clinic> clinic = clinicRepository.findById(donationClinicID);
-        if(RBlood.isPresent()==false||PBlood.isPresent()==false||TBlood.isPresent()==false||donor.isPresent()==false||patient.isPresent()==false||clinic.isPresent()==false)
+        if (RBlood.isPresent() == false || PBlood.isPresent() == false || TBlood.isPresent() == false || donor.isPresent() == false || patient.isPresent() == false)
             throw new RuntimeException("Invalid donation update!");
 
         optionalDonation.ifPresent(st -> {
@@ -77,7 +91,6 @@ public class DonationServiceImpl implements DonationService
             st.setT(TBlood.get());
             st.setDonor(donor.get());
             st.setPatient(patient.get());
-            st.setClinic(clinic.get());
             st.setAnalysisResult(analysisResult);
         });
 

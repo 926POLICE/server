@@ -48,7 +48,8 @@ public class ClientApp {
         System.out.println();
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args)
+    {
         AnnotationConfigApplicationContext context =
                 new AnnotationConfigApplicationContext("ro.ubb.catalog.client.config");
         RestTemplate restTemplate = context.getBean(RestTemplate.class);
@@ -85,6 +86,8 @@ public class ClientApp {
 
 //        DonorDTO donator = restTemplate.postForObject("http://localhost:8080/api/donors",theMap,DonorDTO.class);
 //        System.out.println(donator);
+
+        //RequestDTO requestDTO = restTemplate.postForObject("")
 
         try {
             restTemplate.delete("http://localhost:8080/api/bloodStocks/{bloodId}", 1l);

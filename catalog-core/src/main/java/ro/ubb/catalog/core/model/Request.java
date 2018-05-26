@@ -22,10 +22,10 @@ public class Request extends BaseEntity<Long> implements Serializable, Comparabl
     private Integer priority;
     private Boolean completed;
 
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.EAGER)
     private Patient patient;
 
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.EAGER)
     private Doctor doctor;
 
     @ManyToOne
@@ -42,14 +42,12 @@ public class Request extends BaseEntity<Long> implements Serializable, Comparabl
 
     @Override
     public String toString() {
-        return "Request{" +
+        return "ID = " + super.getId() + " Request{" +
                 "RQuantity=" + RQuantity +
                 ", PQuantity=" + PQuantity +
                 ", TQuantity=" + TQuantity +
                 ", priority=" + priority +
                 ", completed=" + completed +
-                ", patient=" + patient.getId() +
-                ", doctor=" + doctor.getId() +
                 '}';
     }
 
@@ -69,8 +67,8 @@ public class Request extends BaseEntity<Long> implements Serializable, Comparabl
     }
 
     @Override
-    public int hashCode() {
-
-        return Objects.hash(super.hashCode(), RQuantity, PQuantity, TQuantity, priority, completed, patient.getId(), doctor.getId());
+    public int hashCode()
+    {
+        return Objects.hash(super.hashCode(), RQuantity, PQuantity, TQuantity, priority, completed);
     }
 }

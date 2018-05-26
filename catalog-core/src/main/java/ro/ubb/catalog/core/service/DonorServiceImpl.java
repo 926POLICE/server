@@ -41,6 +41,8 @@ public class DonorServiceImpl implements DonorService
     @Override
     @Transactional
     public Optional<Donor> updateDonor(Long DonorID, String name,Long birthday,String residence,String address,String bloodType,Boolean Rh,String anticorps,Boolean isDonor,Double latitude,Double longitude, Boolean eligibility, Long nextDonation, String username, String password) {
+        log.trace("updateDonor entered!");
+
         Optional<Donor> optionalDonor = donorRepository.findById(DonorID);
 
         optionalDonor.ifPresent(st -> {
@@ -59,6 +61,8 @@ public class DonorServiceImpl implements DonorService
             st.setUsername(username);
             st.setPassword(password);
         });
+
+        log.trace("updateDonor exited!");
 
         return optionalDonor;
     }

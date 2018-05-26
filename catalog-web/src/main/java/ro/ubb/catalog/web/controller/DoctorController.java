@@ -12,6 +12,7 @@ import ro.ubb.catalog.core.model.Doctor;
 import ro.ubb.catalog.core.model.Request;
 import ro.ubb.catalog.core.service.*;
 import ro.ubb.catalog.web.converter.BloodConverter;
+import ro.ubb.catalog.web.converter.RequestConverter;
 import ro.ubb.catalog.web.dto.*;
 
 import java.util.*;
@@ -43,19 +44,30 @@ public class DoctorController {
     @Autowired
     private RequestService requestService;
 
+    private RequestConverter requestConverter = new RequestConverter();
+
     @RequestMapping(value = "/requests", method = RequestMethod.POST)
     RequestDTO newBloodRequest(@RequestBody Map<String, String> json)
     {
+        log.trace("new Blood entered!");
+
         Long DoctorID=Long.parseLong(json.get("DoctorID"));
         Long PatientID=Long.parseLong(json.get("PatientID"));
-        Float RQuantity=Float.parseFloat(json.get("Rquantity"));
+        Float RQuantity=Float.parseFloat(json.get("RQuantity"));
         Float PQuantity=Float.parseFloat(json.get("PQuantity"));
         Float TQuantity=Float.parseFloat(json.get("TQuantity"));
 
-        Integer priority=Integer.parseInt(json.get("priority"));
+        Integer priority=Integer.parseInt(json.get("Priority"));
 
-        RequestDTO req=new RequestDTO(PatientID,DoctorID,RQuantity,PQuantity,TQuantity,priority,Boolean.FALSE,clinicService.getTheClinic().getId());
-        return req;
+        log.trace(DoctorID.toString());
+        log.trace(PatientID.toString());
+        log.trace(RQuantity.toString());
+
+        Request request = requestService.createRequest(PatientID,DoctorID,RQuantity,PQuantity,TQuantity,priority,clinicService.getTheClinic().getId());
+
+        log.trace("new Blood exited!");
+
+        return requestConverter.convertModelToDto(request);
     }
 
     @RequestMapping(value = "/requests/doctors", method = RequestMethod.GET)

@@ -1,16 +1,13 @@
 package ro.ubb.catalog.core.model;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
 
 @MappedSuperclass
 public abstract class BaseEntity<ID extends Serializable> implements Serializable {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.TABLE)
     @Column(unique = true, nullable = false)
     private ID id;
 

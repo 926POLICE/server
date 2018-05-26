@@ -28,7 +28,7 @@ public abstract class Person extends BaseEntity<Long> implements Serializable
 
     public boolean isCompatible(Person p)
     {
-        return this.getBloodType()==p.getBloodType() && this.getRh() == p.getRh() && this.getAnticorps() == p.getAnticorps();
+        return this.getBloodType().equals(p.getBloodType()) && this.getRh() == p.getRh() && this.getAnticorps().equals(p.getAnticorps());
     }
 
     @Override
