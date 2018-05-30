@@ -1,23 +1,21 @@
 package ro.ubb.catalog.web.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 @AllArgsConstructor
 @Setter
 @Getter
 @ToString
+@Builder
 public class PatientDTO  extends BaseDto {
     protected String name;
     protected Long birthday;
     protected String residence;
     protected String address;
-    protected String bloodType;
-    protected Boolean Rh;
+    protected String bloodtype;
+    protected Boolean rh;
     protected String anticorps;
-    protected Boolean isDonor;
+    protected Boolean isdonor;
     protected Double latitude;
     protected Double longitude;
 

@@ -17,6 +17,7 @@ import java.util.Set;
 @Getter
 @Setter
 @Table(name = "doctors")
+@Builder
 public class Doctor extends BaseEntity<Long> implements Serializable
 {
     private String name;
@@ -33,7 +34,7 @@ public class Doctor extends BaseEntity<Long> implements Serializable
 
     @Override
     public String toString() {
-        return "Doctor{" +
+        return "ID = " +super.getId()+" Doctor{" +
                 "name='" + name + '\'' +
                 ", hospital='" + hospital + '\'' +
                 ", username='" + username + '\'' +

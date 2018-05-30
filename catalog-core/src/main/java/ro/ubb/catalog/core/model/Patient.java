@@ -18,6 +18,7 @@ import java.util.Set;
 @Entity
 @Table(name = "patients")
 @AllArgsConstructor
+@Builder
 public class Patient extends Person implements Serializable
 {
     private String hospital;

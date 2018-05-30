@@ -28,7 +28,7 @@ import java.util.stream.Stream;
  */
 
 @RestController
-public class ClinicController implements InitializingBean
+public class ClinicController
 {
     // workload handler
 
@@ -72,70 +72,6 @@ public class ClinicController implements InitializingBean
     private RequestConverter requestConverter = new RequestConverter();
 
     private Long currentTime = Instant.now().getEpochSecond();
-
-    private Boolean eraseAllFlag = false;
-
-    // http://www.baeldung.com/running-setup-logic-on-startup-in-spring
-    @Override
-    @Transactional
-    public void afterPropertiesSet() throws Exception {
-        if(eraseAllFlag==true)
-        {
-            clinicRepository.findAll().forEach(p->clinicRepository.deleteById(p.getId()));
-            doctorService.getAllDoctors().forEach(d->doctorService.deleteDoctor(d.getId()));
-            patientService.getAllPatients().forEach(p->patientService.deletePatient(p.getId()));
-            donorService.getAllDonors().forEach(d->donorService.deleteDonor(d.getId()));
-            donationService.getAllDonations().forEach(d->donationService.deleteDonation(d.getId()));
-            requestService.getAllRequests().forEach(r->requestService.deleteRequest(r.getId()));
-            bloodService.getAllBloods().forEach(b->bloodService.deleteBlood(b.getId()));
-            personnelRepository.findAll().forEach(p->personnelRepository.deleteById(p.getId()));
-
-            System.out.println("Cleared all the garbage sucessfully!");
-
-            Clinic clinic = clinicRepository.save(new Clinic(46.67,23.50));
-            Doctor doctor=doctorService.createDoctor("dre","dre","Dr. Dre","central");
-            Patient patient=patientService.createPatient("ionut",1l,"a","b","A",false,"none",false,1.0,2.0,"central");
-            Donor donor= donorService.createDonor("donor","donor","ionut",1l,"a","b","A",false,"none",false,1.0,2.0);
-            Donation donation = donationService.createDonation(donor.getId(),null,clinicService.getTheClinic().getId());
-            Request request = requestService.createRequest(patient.getId(),doctor.getId(),1.0f,2.0f,3.0f,1,clinic.getId());
-            Blood blood = bloodService.createBlood(currentTime,2.0f,1,"r",donation.getId(),clinic.getId());
-            bloodService.testBlood(blood.getId(),true);
-            personnelRepository.save(new Personnel("admin","admin"));
-
-            System.out.println(clinic);
-            System.out.println(doctor);
-            System.out.println(patient);
-            System.out.println(donor);
-            System.out.println(donation);
-            System.out.println(request);
-            System.out.println(blood);
-
-            System.out.println("Added garbage sucessfully!");
-
-            System.out.println(clinicRepository.findAll());
-            System.out.println(doctorService.getAllDoctors());
-            System.out.println(patientService.getAllPatients());
-            System.out.println(donorService.getAllDonors());
-            System.out.println(donationService.getAllDonations());
-            System.out.println(bloodService.getAllBloods());
-            System.out.println(requestService.getAllRequests());
-
-
-            System.out.println("ALL OK");
-        }
-        else
-        {
-            System.out.println(clinicRepository.findAll());
-            System.out.println(doctorService.getAllDoctors());
-            System.out.println(patientService.getAllPatients());
-            System.out.println(donorService.getAllDonors());
-            System.out.println(donationService.getAllDonations());
-            System.out.println(bloodService.getAllBloods());
-            System.out.println(requestService.getAllRequests());
-
-            System.out.println("ALL OK");
-        }
-    }
 
     @RequestMapping(value = "/bloodStocks", method = RequestMethod.GET)
     Set<BloodDTO> getBloodStocks()
@@ -202,7 +138,7 @@ public class ClinicController implements InitializingBean
     {
         log.trace("updateBlood: bloodId={}, bloodDtoMap={}", bloodId, bloodDto);
 
-        Optional<Blood> bloodOptional = bloodService.updateBlood(bloodId,bloodDto.getCollectionDate(),bloodDto.getQuantity(),bloodDto.getState(),bloodDto.getType(),bloodDto.getTested(),bloodDto.getUsable(),bloodDto.getDonationID(),bloodDto.getClinicID());
+        Optional<Blood> bloodOptional = bloodService.updateBlood(bloodId,bloodDto.getCollectiondate(),bloodDto.getQuantity(),bloodDto.getState(),bloodDto.getType(),bloodDto.getTested(),bloodDto.getUsable(),bloodDto.getDonationid(),bloodDto.getClinicid());
 
         Map<String, BloodDTO> result = new HashMap<>();
         bloodOptional.ifPresent(blood -> result.put("blood", bloodConverter.convertModelToDto(blood)));
@@ -321,11 +257,11 @@ public class ClinicController implements InitializingBean
 @RequestMapping(value = "/bloodStocksUntested", method = RequestMethod.POST)
 public List<BloodDTO> collectBlood(@RequestBody final Long DonationID, @RequestBody final Float RQuantity, @RequestBody final Float PQuantity, @RequestBody final Float TQuantity, @RequestBody final String collectionDate)
          */
-        Long DonationID = Long.parseLong(json.get("DonationID"));
-        Float RQuantity = Float.parseFloat(json.get("RQuantity"));
-        Float PQuantity = Float.parseFloat(json.get("PQuantity"));
-        Float TQuantity = Float.parseFloat(json.get("TQuantity"));
-        Long collectionDate = Long.parseLong(json.get("collectionDate"));
+        Long DonationID = Long.parseLong(json.get("donationid"));
+        Float RQuantity = Float.parseFloat(json.get("rquantity"));
+        Float PQuantity = Float.parseFloat(json.get("pquantity"));
+        Float TQuantity = Float.parseFloat(json.get("tquantity"));
+        Long collectionDate = Long.parseLong(json.get("collectiondate"));
 
         Optional<Donation> donationOptional = donationService.findByID(DonationID);
         if(donationOptional.isPresent()==false)
@@ -355,9 +291,9 @@ public List<BloodDTO> collectBlood(@RequestBody final Long DonationID, @RequestB
 boolean checkAvailability(@RequestBody final Float Thrombocytes,@RequestBody final Float RedBloodCells,@RequestBody final Float Plasma);
          */
 
-        Float R = Float.parseFloat(json.get("RedBloodCells"));
-        Float P = Float.parseFloat(json.get("Plasma"));
-        Float T = Float.parseFloat(json.get("Thrombocytes"));
+        Float R = Float.parseFloat(json.get("redbloodcells"));
+        Float P = Float.parseFloat(json.get("plasma"));
+        Float T = Float.parseFloat(json.get("thrombocytes"));
 
         return bloodService.checkAvailability(R,P,T);
     }
@@ -371,9 +307,9 @@ boolean checkAvailability(@RequestBody final Float Thrombocytes,@RequestBody fin
 @RequestMapping(value = "/donors/notify", method = RequestMethod.PUT)
 boolean notifyDonorNeeded(@RequestBody final String BloodType,@RequestBody final Boolean RH,@RequestBody final String Anticorps);
          */
-        String bloodType = json.get("BloodType");
-        Boolean Rh = Boolean.parseBoolean(json.get("RH"));
-        String anticorps = json.get("Anticorps");
+        String bloodType = json.get("bloodtype");
+        Boolean Rh = Boolean.parseBoolean(json.get("rh"));
+        String anticorps = json.get("anticorps");
 
         donorService.notifyDonorsNeeded(bloodType,Rh,anticorps);
 
@@ -388,8 +324,8 @@ boolean notifyDonorNeeded(@RequestBody final String BloodType,@RequestBody final
 @RequestMapping(value = "/donors/compatibility", method = RequestMethod.GET)
 boolean checkCompatibility(@RequestBody final Long DonorID,@RequestBody final  Long PatientID);
          */
-        Long donorID = Long.parseLong(json.get("DonorID"));
-        Long patientID = Long.parseLong(json.get("PatientID"));
+        Long donorID = Long.parseLong(json.get("donorid"));
+        Long patientID = Long.parseLong(json.get("patientid"));
 
         Optional<Donor> donorOptional = donorService.findbyID(donorID);
         Optional<Patient> patientOptional = patientService.findByID(patientID);

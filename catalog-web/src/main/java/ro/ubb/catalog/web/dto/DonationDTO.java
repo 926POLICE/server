@@ -1,26 +1,24 @@
 package ro.ubb.catalog.web.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 @AllArgsConstructor
 @Setter
 @Getter
 @ToString
+@Builder
 public class DonationDTO  extends BaseDto {
-    private Long RBloodID; // field for Red Cells
+    private Long rbloodid; // field for Red Cells
 
-    private Long PBloodID; // field for Plasma
+    private Long pbloodid; // field for Plasma
 
-    private Long TBloodID; // field for Thrombochytes
+    private Long tbloodid; // field for Thrombochytes
 
-    private Long donorID;
+    private Long donorid;
 
-    private Long patientID;
+    private Long patientid;
 
-    private Boolean analysisResult;
+    private Boolean analysisresult;
 
-    private Long clinicID;
+    private Long clinicid;
 }

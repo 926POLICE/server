@@ -12,6 +12,7 @@ import java.util.*;
 @Getter
 @Setter
 @AllArgsConstructor
+@Builder
 public class Clinic extends BaseEntity<Long> implements Serializable
 {
     private Double latitude;

@@ -12,5 +12,5 @@ import lombok.ToString;
 public class LoginReply
 {
     private String type;
-    private Long ID;
+    private Long id;
 }

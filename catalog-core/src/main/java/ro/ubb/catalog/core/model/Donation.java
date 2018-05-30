@@ -12,6 +12,7 @@ import java.util.Objects;
 @Entity
 @Table(name = "donations")
 @AllArgsConstructor
+@Builder
 public class Donation extends BaseEntity<Long> implements Serializable {
     @OneToOne(fetch = FetchType.EAGER,optional = true)
     private Blood R; // field for Red Cells

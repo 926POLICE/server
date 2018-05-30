@@ -7,21 +7,22 @@ import lombok.*;
 @Getter
 @ToString
 @NoArgsConstructor
+@Builder
 public class DonorDTO  extends BaseDto
 {
     protected String name;
     protected Long birthday;
     protected String residence;
     protected String address;
-    protected String bloodType;
-    protected Boolean Rh;
+    protected String bloodtype;
+    protected Boolean rh;
     protected String anticorps;
-    protected Boolean isDonor;
+    protected Boolean isdonor;
     protected Double latitude;
     protected Double longitude;
 
-    private Long nextDonation;
+    private Long nextdonation;
     private Boolean eligibility;
-    private Boolean hasBeenNotified;
-    private Boolean lastAnalysisResult;
+    private Boolean hasbeennotified;
+    private Boolean lastanalysisresult;
 }

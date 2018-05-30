@@ -6,15 +6,16 @@ import lombok.*;
 @Setter
 @Getter
 @ToString
+@Builder
 public class BloodDTO extends BaseDto
 {
-    private Long collectionDate;
-    private Float quantity ;
+    private Long collectiondate;
+    private Float quantity;
     private Integer state;
     private String type;
-    private Integer shelfLife;
+    private Integer shelflife;
     private Boolean tested;
     private Boolean usable;
-    private Long donationID;
-    private Long clinicID;
+    private Long donationid;
+    private Long clinicid;
 }

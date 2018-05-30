@@ -83,11 +83,11 @@ public class DonorController
     }
 
     @RequestMapping(value = "/donors/history/{donorID}", method = RequestMethod.GET)
-    List<DonationDTO> getAnalysisHistory(@RequestBody final Long DonorID)
+    List<DonationDTO> getAnalysisHistory(@PathVariable final Long donorID)
     {
         log.trace("getAnalysisHistory entered!");
 
-        List<Donation> donations = donationService.getAllDonations().stream().filter(d-> d.getDonor().getId().equals(DonorID)).collect(Collectors.toList());
+        List<Donation> donations = donationService.getAllDonations().stream().filter(d-> d.getDonor().getId().equals(donorID)).collect(Collectors.toList());
 
         log.trace("getAnalysisHistory exited!");
 
@@ -95,7 +95,7 @@ public class DonorController
     }
 
     @RequestMapping(value = "/donors/nextDonation/{donorID}", method = RequestMethod.GET)
-    String getNextDonation(@RequestBody final Long donorID)
+    String getNextDonation(@PathVariable final Long donorID)
     {
         log.trace("getNextDonation: donorID={}",donorID);
 
@@ -111,7 +111,7 @@ public class DonorController
     }
 
     @RequestMapping(value = "/donors/bloodContainers/{donorID}", method = RequestMethod.GET)
-    List<BloodDTO> getBloodJourney(@RequestBody final Long donorID)
+    List<BloodDTO> getBloodJourney(@PathVariable final Long donorID)
     {
         log.trace("getBloodJourney: donorDI={}",donorID);
 
@@ -188,13 +188,13 @@ public class DonorController
     }
 
     @RequestMapping(value = "/donors/history/{donorID}", method = RequestMethod.PUT)
-    String updateMedicalHistory(@PathVariable final Long donorID, @RequestBody final String newHistory)
+    String updateMedicalHistory(@PathVariable final Long donorID, @RequestBody final String newhistory)
     {
-        log.trace("updateMedicalHistory: donorID={}, newHistory={}",donorID,newHistory);
+        log.trace("updateMedicalHistory: donorID={}, newHistory={}",donorID,newhistory);
 
-        donorService.updateMedicalHistory(donorID,newHistory);
+        donorService.updateMedicalHistory(donorID,newhistory);
 
-        log.trace("updateHistory: result={}",newHistory);
+        log.trace("updateHistory: result={}",newhistory);
 
         return donorService.findbyID(donorID).get().getMedicalHistory();
     }
@@ -203,17 +203,19 @@ public class DonorController
     DonationDTO donate(@RequestBody Map<String, String> json)
     {
         log.trace("---- donate entered ----");
+        log.trace("params:");
+        log.trace(json.toString());
 
         // get the ID's in strings first.
-        log.trace(json.get("donorID"));
-        log.trace(json.get("patientID"));
+        log.trace(json.get("donorid"));
+        log.trace(json.get("patientid"));
 
-        Long donorID = Long.parseLong(json.get("donorID"));
+        Long donorID = Long.parseLong(json.get("donorid"));
         Long patientTD;
 
         try
         {
-            patientTD = Long.parseLong(json.get("patientID"));
+            patientTD = Long.parseLong(json.get("patientid"));
         }
         catch (Exception e)
         {

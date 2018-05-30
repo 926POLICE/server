@@ -11,6 +11,8 @@ import java.util.Objects;
 @Getter
 @Setter
 @Table(name = "bloodContainers")
+@Builder
+@AllArgsConstructor
 public class Blood extends BaseEntity<Long> implements Serializable, Comparable<Blood> {
     private Long collectionDate;
     private Float quantity;
@@ -58,7 +60,8 @@ public class Blood extends BaseEntity<Long> implements Serializable, Comparable<
                 Objects.equals(type, blood.type) &&
                 Objects.equals(shelfLife, blood.shelfLife) &&
                 Objects.equals(tested, blood.tested) &&
-                Objects.equals(usable, blood.tested);
+                Objects.equals(usable, blood.tested) &&
+                Objects.equals(donation.getId(), blood.donation.getId());
     }
 
 

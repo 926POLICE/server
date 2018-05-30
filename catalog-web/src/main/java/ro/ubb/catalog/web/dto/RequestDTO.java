@@ -1,25 +1,23 @@
 package ro.ubb.catalog.web.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 @AllArgsConstructor
 @Setter
 @Getter
 @ToString
+@Builder
 public class RequestDTO  extends BaseDto {
-    private Long patientID;
+    private Long patientid;
 
-    private Long doctorID;
+    private Long doctorid;
 
-    private Float RQuantity;
-    private Float PQuantity;
-    private Float TQuantity;
+    private Float rquantity;
+    private Float pquantity;
+    private Float tquantity;
 
     private Integer priority;
     private Boolean completed;
 
-    private Long clinicID;
+    private Long clinicid;
 }

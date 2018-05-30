@@ -49,29 +49,6 @@ public class DonationServiceImpl implements DonationService {
             return donationRepository.save(new Donation(null, null, null, false, donorRepository.findById(donorID).get(), patientRepository.findById(patientID).get(), clinicService.getTheClinic()));
     }
 
-//    @Override
-//    public Donation createDonation(Long RBloodID, Long PBloodID, Long TBloodID, Long donorID, Long patientID, Long donationClinicID) {
-//        Optional<Blood> RBlood = bloodRepository.findById(RBloodID);
-//        Optional<Blood> PBlood = bloodRepository.findById(PBloodID);
-//        Optional<Blood> TBlood = bloodRepository.findById(TBloodID);
-//        Optional<Donor> donor = donorRepository.findById(donorID);
-//        Optional<Patient> patient = patientRepository.findById(patientID);
-//        Optional<Clinic> clinic = clinicRepository.findById(donationClinicID);
-//
-//        Blood R=null, P=null, T=null;
-//        Donor d=null;
-//        Patient p=null;
-//        if(RBlood.isPresent()==true)
-//            R=RBlood.get();
-//        if(PBlood.isPresent()==false)
-//            P = null;
-//        if(TBlood.isPresent()==false)
-//            T = null;
-//
-//        Donation donation = donationRepository.save(new Donation(RBlood.get(),PBlood.get(),TBlood.get(),false,donor.get(),patient.get(),clinic.get()));
-//        return donation;
-//    }
-
     @Override
     @Transactional
     public Optional<Donation> updateDonation(Long DonationID, Long RBloodID, Long PBloodID, Long TBloodID, Long donorID, Boolean analysisResult, Long patientID, Long donationClinicID) {

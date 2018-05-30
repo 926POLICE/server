@@ -13,6 +13,8 @@ import java.util.Objects;
 @Setter
 @Entity
 @Table(name = "donors")
+@Builder
+@AllArgsConstructor
 public class Donor extends Person implements Serializable
 {
     private Long nextDonation;
@@ -58,6 +60,9 @@ public class Donor extends Person implements Serializable
         Donor donor = (Donor) o;
         return Objects.equals(nextDonation, donor.nextDonation) &&
                 Objects.equals(eligibility, donor.eligibility) &&
+                Objects.equals(hasBeenNotified, donor.hasBeenNotified) &&
+                Objects.equals(lastAnalysisResult, donor.lastAnalysisResult) &&
+                Objects.equals(medicalHistory, donor.medicalHistory) &&
                 Objects.equals(username, donor.username) &&
                 Objects.equals(password, donor.password);
     }

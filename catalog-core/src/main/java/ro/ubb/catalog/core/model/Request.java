@@ -13,6 +13,7 @@ import java.util.Objects;
 @Getter
 @Setter
 @AllArgsConstructor
+@Builder
 public class Request extends BaseEntity<Long> implements Serializable, Comparable<Request>
 {
     private Float RQuantity;
