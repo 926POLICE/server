@@ -99,7 +99,7 @@ public class ClinicController
     }
 
     @RequestMapping(value = "/patients", method = RequestMethod.GET)
-    Set<PatientDTO> getPatients()
+    List<PatientDTO> getPatients()
     {
         log.trace("getPatients ENTERED!");
 
@@ -113,7 +113,9 @@ public class ClinicController
 
         log.trace("getPatients EXITED! {}",result);
 
-        return patientConverter.convertModelsToDtos(result);
+        List<PatientDTO> patientDTOList = new ArrayList<>();
+        result.forEach(p->patientDTOList.add(patientConverter.convertModelToDto(p)));
+        return patientDTOList;
     }
 
     @RequestMapping(value = "/requests", method = RequestMethod.GET)
@@ -171,7 +173,7 @@ public class ClinicController
     {
         log.trace("disposeBlood: bloodId={}", bloodId);
 
-        bloodService.useBlood(bloodId);
+        bloodService.deleteBlood(bloodId);
 
         log.trace("disposeBlood - method end");
 
@@ -183,7 +185,7 @@ public class ClinicController
     {
         log.trace("useBlood: bloodId={}", bloodId);
 
-        bloodService.deleteBlood(bloodId);
+        bloodService.useBlood(bloodId);
 
         log.trace("useBlood - method end");
 

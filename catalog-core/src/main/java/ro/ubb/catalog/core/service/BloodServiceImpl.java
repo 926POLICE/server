@@ -51,6 +51,7 @@ public class BloodServiceImpl implements BloodService
     public List<Blood> getUsableBloods() {
         List<Blood> bloodList = getAllBloods();
         bloodList = bloodList.stream().filter(b->b.getTested()==true && b.getUsable()==true && b.getCollectionDate()+86400*b.getShelfLife()>= currentTime && b.getState()!=3).collect(Collectors.toList());
+        // only needs to return blood containres that haven't expired and that haven't been marked as ready to ship to the hospitals
         return bloodList;
     }
 

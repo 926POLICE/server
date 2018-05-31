@@ -100,7 +100,7 @@ public class BloodController implements InitializingBean {
 
             Clinic clinic = clinicRepository.save(new Clinic(46.67,23.50));
             Doctor doctor=doctorService.createDoctor("dre","dre","Dr. Dre","central");
-            Patient patient=patientService.createPatient("ionut",1l,"a","b","A",false,"none",false,1.0,2.0,"central");
+            Patient patient=patientService.createPatient("ionut",1l,"a","b","A",false,"none",false,40.0,40.0,"central");
             Donor donor= donorService.createDonor("donor","donor","ionut",1l,"a","b","A",false,"none",false,1.0,2.0);
             Donation donation = donationService.createDonation(donor.getId(),null,clinicService.getTheClinic().getId());
             Request request = requestService.createRequest(patient.getId(),doctor.getId(),1.0f,2.0f,3.0f,1,clinic.getId());
@@ -246,6 +246,10 @@ String checkRequestStatus(@RequestBody final Long PatientID)
 
                 // DonationDTO donate(@RequestBody Map<String, String> json)
                 // @RequestBody final Long DonorID, @RequestBody final @Nullable Long PatientID
+
+                // Set<DonationDTO> getAllPendingDonations()
+                assert (clinicController.getAllPendingDonations().size()==0);
+
                 theMap.clear();
                 theMap.put("donorid",Long.toString(donor.getId()));
                 theMap.put("patientid",Long.toString(patient.getId()));
@@ -253,6 +257,150 @@ String checkRequestStatus(@RequestBody final Long PatientID)
                 assert (donationService.getAllDonations().size()==2);
                 assert (res.getDonorid()==donor.getId());
                 assert (res.getAnalysisresult()==false);
+
+                // --- Donor Controller tested
+
+                //     @RequestMapping(value = "/bloodStocks", method = RequestMethod.GET)
+                //    Set<BloodDTO> getBloodStocks()
+                Blood newBlood = bloodService.createBlood(1l,20f,2,"p",donation.getId(),clinic.getId());
+                Set<BloodDTO> bloodDTOSet = clinicController.getBloodStocks();
+                bloodDTOList = bloodDTOSet.stream().collect(Collectors.toList());
+                assert (bloodDTOList.get(0).getUsable()==true);
+                assert (bloodDTOList.get(0).getId()==blood.getId());
+                assert (bloodDTOSet.size()==1);
+                assert (bloodService.getAllBloods().size()==2);
+
+                // public List<Blood> getUnusableBloods()
+                clinicController.testBlood(blood.getId(),false);
+                bloodDTOSet = clinicController.getUnusableBloodStocks();
+                assert (bloodDTOSet.size()==1);
+                bloodDTOList = bloodDTOSet.stream().collect(Collectors.toList());
+                assert (bloodDTOList.get(0).getId()==blood.getId());
+
+                // public List<Blood> getUntestedBloods()
+                bloodDTOSet = clinicController.getUntestedBloodStocks();
+                assert (bloodDTOSet.size()==1);
+                bloodDTOList = bloodDTOSet.stream().collect(Collectors.toList());
+                assert (bloodDTOList.get(0).getQuantity()==20f);
+
+                // testBlood
+                clinicController.testBlood(newBlood.getId(),true);
+                bloodDTOSet = clinicController.getBloodStocks();
+                assert (bloodDTOSet.size()==2);
+                List<Long> bloodDTOIDs = bloodDTOSet.stream().map(b->b.getId()).collect(Collectors.toList());
+                assert (bloodDTOIDs.contains(newBlood.getId()));
+
+                //Set<PatientDTO> getPatients()
+                patientService.createPatient("gigel",2l,"a","b","AB",false,"unknown",false,1.0d,2.0d,"east");
+                List<PatientDTO> patientDTOList = clinicController.getPatients();
+                assert (patientDTOList.size()==2);
+                assert (patientDTOList.get(0).getLatitude()==40.0);
+
+                // Set<RequestDTO> getAllRequests()
+                requestDTOSet = clinicController.getAllRequests();
+                assert (requestDTOSet.size()==1);
+                requestService.updateRequest(request.getId(),request.getPatient().getId(),req.getDoctor().getId(),1.0f,2.0f,3.0f,2,true,clinic.getId());
+                requestDTOSet = clinicController.getAllRequests();
+                assert (requestDTOSet.size()==0);
+
+                // Set<DonationDTO> getAllPendingDonations()
+                Set<DonationDTO> donationDTOSet = clinicController.getAllPendingDonations();
+                assert (donationDTOSet.size()==1);
+
+                // Set<DonorDTO> getDonors()
+                Set<DonorDTO> donorDTOSet = clinicController.getDonors();
+                assert (donorDTOSet.size()==1);
+                List<DonorDTO> donorDTOList = donorDTOSet.stream().collect(Collectors.toList());
+                assert (donorDTOList.get(0).getId()==donor.getId());
+
+                /*
+                	// Will set the given parameters to the donor with the given ID.
+	// Parameters: bloodtype - string, rh - boolean, anticorps - string.
+    @RequestMapping(value = "/donors/info/{donorID}", method = RequestMethod.PUT)
+    DonorDTO setDonorInfo(@PathVariable final Long donorID, @RequestBody Map<String, String> json);
+                 */
+                theMap.clear();
+                theMap.put("bloodtype","0");
+                theMap.put("rh",Boolean.toString(true));
+                theMap.put("anticorps","are");
+                testDonor = donorService.findbyID(donor.getId()).get();
+                assert (!donor.getAnticorps().equals("are"));
+                clinicController.setDonorInfo(donor.getId(),theMap);
+                assert (donor.getAnticorps().equals("are"));
+
+                assert (clinicController.getEligibility(donor.getId())==false);
+                clinicController.setEligibility(donor.getId(),true);
+                assert (clinicController.getEligibility(donor.getId())==true);
+
+                // LoginReply getUser(@RequestBody Map<String, String> json)
+                theMap.clear();
+                theMap.put("username","gibberish");
+                theMap.put("password","gibberish");
+                LoginReply reply = clinicController.getUser(theMap);
+                assert (reply.getId()==-1l);
+                assert (reply.getType().equals("invalid"));
+
+                theMap.clear();
+                theMap.put("username",donor.getUsername());
+                theMap.put("password",donor.getPassword());
+                reply = clinicController.getUser(theMap);
+                assert (reply.getId()==-donor.getId());
+                assert (reply.getType().equals("donor"));
+
+                theMap.clear();
+                theMap.put("username",doctor.getUsername());
+                theMap.put("password",doctor.getPassword());
+                reply = clinicController.getUser(theMap);
+                assert (reply.getId()==-doctor.getId());
+                assert (reply.getType().equals("doctor"));
+
+                theMap.clear();
+                theMap.put("username","admin");
+                theMap.put("password","admin");
+                reply = clinicController.getUser(theMap);
+                assert (reply.getType().equals("personnel"));
+
+                // checkAvailability redbloodcells plasma thrombocytes
+                theMap.clear();
+                theMap.put("redbloodcells",Float.toString(2.0f));
+                theMap.put("plasma",Float.toString(0.0f));
+                theMap.put("thrombocytes",Float.toString(0.0f));
+                assert (clinicController.checkAvailability(theMap)==0.0f);
+                theMap.put("plasma",Float.toString(1.0f));
+                assert (clinicController.checkAvailability(theMap)==1.0f);
+
+                // boolean checkCompatibility(@RequestBody Map<String, String> json)
+                theMap.clear();
+                theMap.put("donorid",Long.toString(donor.getId()));
+                theMap.put("patientid",Long.toString(patient.getId()));
+                assert (clinicController.checkCompatibility(theMap)==false);
+                patientService.updatePatient(patient.getId(),patient.getName(),patient.getBirthday(),patient.getResidence(),patient.getAddress(),donor.getBloodType(),donor.getRh(),donor.getAnticorps(), patient.getIsDonor(),patient.getLatitude(),patient.getLongitude(),patient.getHospital());
+                assert (clinicController.checkCompatibility(theMap)==true);
+
+                //@RequestMapping(value = "/bloodStocks/{bloodId}", method = RequestMethod.PUT)
+                //BloodDTO updateBlood(@PathVariable final Long bloodId, @RequestBody final BloodDTO bloodDto)
+                /*
+                    private Long collectiondate;
+    private Float quantity;
+    private Integer state;
+    private String type;
+    private Integer shelflife;
+    private Boolean tested;
+    private Boolean usable;
+    private Long donationid;
+    private Long clinicid;
+                 */
+
+                // HERE !
+
+                // keep these at the end!
+
+                // dispose blood
+                clinicController.disposeBlood(newBlood.getId());
+                assert (clinicController.getUnusableBloodStocks().size()==0);
+                // use blood
+                clinicController.useBlood(blood.getId());
+                assert (clinicController.getBloodStocks().size()==0);
 
                 log.trace("ALL TESTS PASSED!");
             }
