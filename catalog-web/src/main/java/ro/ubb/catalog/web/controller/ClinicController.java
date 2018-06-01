@@ -271,15 +271,6 @@ public List<BloodDTO> collectBlood(@RequestBody final Long DonationID, @RequestB
         Blood P = bloodService.createBlood(collectionDate, PQuantity, 1, "p", DonationID, clinicService.getTheClinic().getId());
         Blood T = bloodService.createBlood(collectionDate, TQuantity, 1, "t", DonationID, clinicService.getTheClinic().getId());
 
-        try
-        {
-            Long val = R.getId();
-        }
-        catch (Exception e)
-        {
-            log.trace("Blood container NOT saved correctly!");
-        }
-
         Donation donation = donationOptional.get();
 
         Donor donor = donation.getDonor();
@@ -364,7 +355,10 @@ boolean checkCompatibility(@RequestBody final Long DonorID,@RequestBody final  L
         if (res != 0)
             donorService.notifyDonorsNeeded(request.getPatient().getBloodType(), request.getPatient().getRh(), request.getPatient().getAnticorps());
         else
+        {
+            requestService.updateRequest(request.getId(),request.getPatient().getId(),request.getDoctor().getId(),request.getRQuantity(),request.getPQuantity(),request.getTQuantity(),request.getPriority(),true,request.getClinic().getId());
             bloodService.honorRequest(request.getRQuantity(), request.getPQuantity(), request.getTQuantity());
+        }
 
         return res;
     }
