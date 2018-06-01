@@ -84,27 +84,27 @@ public class DoctorController
     }
 
     @RequestMapping(value = "/requests/doctors", method = RequestMethod.GET)
-    public Set<RequestDTO> getAllDoctorRequests(@RequestBody final Long DoctorID){
+    public List<RequestDTO> getAllDoctorRequests(@RequestBody final Long doctorid){
         List<Doctor> doctors=doctorService.getAllDoctors()
                 .stream()
-                .filter(doctor -> doctor.getId().equals(DoctorID))
+                .filter(doctor -> doctor.getId().equals(doctorid))
                 .collect(Collectors.toList());
 
         if(doctors.isEmpty())
             throw new RuntimeException("Doctor does not exist!");
 
         return requestService.getAllRequests().stream()
-                .filter(request -> request.getDoctor().getId()==DoctorID)
+                .filter(request -> request.getDoctor().getId()==doctorid)
                 .map(request -> new RequestDTO(request.getPatient().getId(),request.getDoctor().getId(), request.getRQuantity(),request.getPQuantity(),request.getTQuantity(), request.getPriority(),request.getCompleted(), request.getClinic().getId()))
-                .collect(Collectors.toSet());
+                .collect(Collectors.toList());
     }
 
 
     @RequestMapping(value = "/requests/status", method = RequestMethod.GET)
-    public String checkRequestStatus(@RequestBody final Long PatientID)
+    public String checkRequestStatus(@RequestBody final Long patientid)
     {
         List<Request> requests=requestService.getAllRequests().stream()
-                .filter(request -> request.getPatient().getId()==PatientID)
+                .filter(request -> request.getPatient().getId()==patientid)
                 .collect(Collectors.toList());
 
 
@@ -117,10 +117,10 @@ public class DoctorController
     }
 
     public void addSampleData() throws Exception {
-            Clinic clinic = clinicRepository.save(new Clinic(46.67,23.50));
+            Clinic clinic = clinicRepository.save(new Clinic(46.67f,23.50f));
             Doctor doctor=doctorService.createDoctor("dre","dre","Dr. Dre","central");
-            Patient patient=patientService.createPatient("ionut",1l,"a","b","A",false,"none",false,1.0,2.0,"central");
-            Donor donor= donorService.createDonor("donor","donor","ionut",1l,"a","b","A",false,"none",false,1.0,2.0);
+            Patient patient=patientService.createPatient("ionut",1l,"a","b","A",false,"none",false,1.0f,2.0f,"central");
+            Donor donor= donorService.createDonor("donor","donor","ionut",1l,"a","b","A",false,"none",false,1.0f,2.0f);
             Donation donation = donationService.createDonation(donor.getId(),null,clinicService.getTheClinic().getId());
             Request request = requestService.createRequest(patient.getId(),doctor.getId(),1.0f,2.0f,3.0f,1,clinic.getId());
             Blood blood = bloodService.createBlood(currentTime,2.0f,1,"r",donation.getId(),clinic.getId());

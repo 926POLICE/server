@@ -16,8 +16,8 @@ public class PatientDTO  extends BaseDto {
     protected Boolean rh;
     protected String anticorps;
     protected Boolean isdonor;
-    protected Double latitude;
-    protected Double longitude;
+    protected Float latitude;
+    protected Float longitude;
 
     private String hospital;
 }

@@ -52,24 +52,33 @@ public class DonationServiceImpl implements DonationService {
     @Override
     @Transactional
     public Optional<Donation> updateDonation(Long DonationID, Long RBloodID, Long PBloodID, Long TBloodID, Long donorID, Boolean analysisResult, Long patientID, Long donationClinicID) {
+        log.trace("updateDonation Entered!");
+
         Optional<Donation> optionalDonation = donationRepository.findById(DonationID);
 
         Optional<Blood> RBlood = bloodRepository.findById(RBloodID);
         Optional<Blood> PBlood = bloodRepository.findById(PBloodID);
         Optional<Blood> TBlood = bloodRepository.findById(TBloodID);
         Optional<Donor> donor = donorRepository.findById(donorID);
-        Optional<Patient> patient = patientRepository.findById(patientID);
-        if (RBlood.isPresent() == false || PBlood.isPresent() == false || TBlood.isPresent() == false || donor.isPresent() == false || patient.isPresent() == false)
+        Optional<Patient> patientOptional = patientRepository.findById(patientID);
+        if (RBlood.isPresent() == false || PBlood.isPresent() == false || TBlood.isPresent() == false || donor.isPresent() == false)
             throw new RuntimeException("Invalid donation update!");
 
+        Patient patient = null;
+        if(patientOptional.isPresent())
+            patient=patientOptional.get();
+
+        Patient finalPatient = patient;
         optionalDonation.ifPresent(st -> {
             st.setR(RBlood.get());
             st.setP(PBlood.get());
             st.setT(TBlood.get());
             st.setDonor(donor.get());
-            st.setPatient(patient.get());
+            st.setPatient(finalPatient);
             st.setAnalysisResult(analysisResult);
         });
+
+        log.trace("updateDonation Exited!");
 
         return optionalDonation;
     }

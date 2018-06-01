@@ -11,9 +11,9 @@ public interface DonorService
 {
     List<Donor> getAllDonors();
 
-    Donor createDonor(String username, String password, String name,Long birthday,String residence,String address, String bloodType,Boolean Rh,String anticorps,Boolean isDonor,Double latitude,Double longitude);
+    Donor createDonor(String username, String password, String name,Long birthday,String residence,String address, String bloodType,Boolean Rh,String anticorps,Boolean isDonor,Float latitude,Float longitude);
 
-    Optional<Donor> updateDonor(Long DonorID, String name,Long birthday,String residence,String address, String bloodType,Boolean Rh,String anticorps,Boolean isDonor,Double latitude,Double longitude, Boolean eligibility, Long nextDonation, String username, String password);
+    Optional<Donor> updateDonor(Long DonorID, String name,Long birthday,String residence,String address, String bloodType,Boolean Rh,String anticorps,Boolean isDonor,Float latitude,Float longitude, Boolean eligibility, Boolean hasBeenNotified, Long nextDonation, String username, String password);
 
     Optional<Donor> findbyID(Long DonorID);
 
@@ -22,6 +22,8 @@ public interface DonorService
     Optional<Donor> setEligibility(Long DonorID,Boolean eligibility);
 
     Optional<Donor> setInfo(Long DonorID,String bloodType, Boolean rh, String anticorps);
+
+    Optional<Donor> setLastAnalysisResult(Long DonorID, Boolean flag);
 
     Optional<Donor> updateMedicalHistory(Long DonorID, String medicalHistory);
 

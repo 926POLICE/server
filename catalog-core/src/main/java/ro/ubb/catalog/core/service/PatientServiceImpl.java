@@ -31,14 +31,14 @@ public class PatientServiceImpl implements PatientService
     }
 
     @Override
-    public Patient createPatient(String name,Long birthday,String residence,String address,String bloodType,Boolean Rh,String anticorps,Boolean isPatient,Double latitude,Double longitude, String hospital) {
+    public Patient createPatient(String name,Long birthday,String residence,String address,String bloodType,Boolean Rh,String anticorps,Boolean isPatient,Float latitude,Float longitude, String hospital) {
         Patient patient = patientRepository.save(new Patient(name,birthday,residence,address,bloodType,Rh,anticorps,isPatient,latitude,longitude,hospital));
         return patient;
     }
 
     @Override
     @Transactional
-    public Optional<Patient> updatePatient(Long patientId, String name,Long birthday,String residence,String address,String bloodType,Boolean Rh,String anticorps,Boolean isDonor,Double latitude,Double longitude, String hospital) {
+    public Optional<Patient> updatePatient(Long patientId, String name,Long birthday,String residence,String address,String bloodType,Boolean Rh,String anticorps,Boolean isDonor,Float latitude,Float longitude, String hospital) {
         Optional<Patient> optionalPatient = patientRepository.findById(patientId);
 
         optionalPatient.ifPresent(st -> {

@@ -10,9 +10,9 @@ public interface PatientService
 {
     List<Patient> getAllPatients();
 
-    Patient createPatient(String name,Long birthday,String residence,String address,String bloodType,Boolean Rh,String anticorps,Boolean isDonor,Double latitude,Double longitude, String hospital);
+    Patient createPatient(String name,Long birthday,String residence,String address,String bloodType,Boolean Rh,String anticorps,Boolean isDonor,Float latitude,Float longitude, String hospital);
 
-    Optional<Patient> updatePatient(Long patientId, String name,Long birthday,String residence,String address,String bloodType,Boolean Rh,String anticorps,Boolean isDonor,Double latitude,Double longitude, String hospital);
+    Optional<Patient> updatePatient(Long patientId, String name,Long birthday,String residence,String address,String bloodType,Boolean Rh,String anticorps,Boolean isDonor,Float latitude,Float longitude, String hospital);
 
     void deletePatient(Long id);
 

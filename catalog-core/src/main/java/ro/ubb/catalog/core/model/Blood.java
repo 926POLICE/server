@@ -73,7 +73,7 @@ public class Blood extends BaseEntity<Long> implements Serializable, Comparable<
 
     @Override
     public String toString() {
-        return "Blood{" +
+        return "ID: "+super.getId()+" Blood{" +
                 "collectionDate='" + collectionDate + '\'' +
                 ", quantity=" + quantity +
                 ", state=" + state +

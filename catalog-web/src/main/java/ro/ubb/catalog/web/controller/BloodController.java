@@ -98,10 +98,10 @@ public class BloodController implements InitializingBean {
 
             System.out.println("Cleared all the garbage sucessfully!");
 
-            Clinic clinic = clinicRepository.save(new Clinic(46.67,23.50));
+            Clinic clinic = clinicRepository.save(new Clinic(46.67f,23.50f));
             Doctor doctor=doctorService.createDoctor("dre","dre","Dr. Dre","central");
-            Patient patient=patientService.createPatient("ionut",1l,"a","b","A",false,"none",false,40.0,40.0,"central");
-            Donor donor= donorService.createDonor("donor","donor","ionut",1l,"a","b","A",false,"none",false,1.0,2.0);
+            Patient patient=patientService.createPatient("ionut",1l,"a","b","A",false,"none",false,40.0f,40.0f,"central");
+            Donor donor= donorService.createDonor("donor","donor","ionut",1l,"a","b","A",false,"none",false,1.0f,2.0f);
             Donation donation = donationService.createDonation(donor.getId(),null,clinicService.getTheClinic().getId());
             Request request = requestService.createRequest(patient.getId(),doctor.getId(),1.0f,2.0f,3.0f,1,clinic.getId());
             Blood blood = bloodService.createBlood(currentTime,2.0f,1,"r",donation.getId(),clinic.getId());
@@ -133,8 +133,8 @@ public class BloodController implements InitializingBean {
             {
                 Map<String,String> theMap = new HashMap<>();
 
-                Set<RequestDTO> requestDTOSet = doctorController.getAllDoctorRequests(doctor.getId());
-                assert (requestDTOSet.size()==1);
+                List<RequestDTO> requestDTOList = doctorController.getAllDoctorRequests(doctor.getId());
+                assert (requestDTOList.size()==1);
 //
                 //@RequestMapping(value = "/requests", method = RequestMethod.POST)
                 //RequestDTO newBloodRequest(@RequestBody final Long PatientID,@RequestBody final Long DoctorID, @RequestBody final Integer priority,@RequestBody final Float Rquantity, @RequestBody final Float Pquantity, @RequestBody final Float Tquantity)
@@ -142,12 +142,12 @@ public class BloodController implements InitializingBean {
                 theMap.put("patientid",patient.getId().toString());
                 theMap.put("doctorid",doctor.getId().toString());
                 theMap.put("priority",Integer.toString(1));
-                theMap.put("rquantity",Double.toString(1.0));
-                theMap.put("pquantity",Double.toString(1.0));
-                theMap.put("tquantity",Double.toString(1.0));
+                theMap.put("rquantity",Float.toString(1.0f));
+                theMap.put("pquantity",Float.toString(1.0f));
+                theMap.put("tquantity",Float.toString(1.0f));
                 RequestDTO requestDTO = doctorController.newBloodRequest(theMap);
-                requestDTOSet = doctorController.getAllDoctorRequests(doctor.getId());
-                assert (requestDTOSet.size()==2);
+                requestDTOList = doctorController.getAllDoctorRequests(doctor.getId());
+                assert (requestDTOList.size()==2);
                 Request req = requestService.findByID(requestDTO.getId()).get();
                 assert (req.getPriority()==1);
 
@@ -161,15 +161,15 @@ String checkRequestStatus(@RequestBody final Long PatientID)
 
                 // DOCTOR TESTED (still needs some 'minor' work)
 
-                // DonorDTO registerUser(@RequestBody final String username,@RequestBody final String password,@RequestBody final String name,@RequestBody final String birthday,@RequestBody final String residence,@RequestBody final Double latitude,@RequestBody final Double longitude)
+                // DonorDTO registerUser(@RequestBody final String username,@RequestBody final String password,@RequestBody final String name,@RequestBody final String birthday,@RequestBody final String residence,@RequestBody final Float latitude,@RequestBody final Float longitude)
                 theMap.clear();
                 theMap.put("username","john");
                 theMap.put("password","john");
                 theMap.put("name","john");
                 theMap.put("birthday",Long.toString(1l));
                 theMap.put("residence","john");
-                theMap.put("latitude",Double.toString(1.0f));
-                theMap.put("longitude",Double.toString(1.0f));
+                theMap.put("latitude",Float.toString(1.0f));
+                theMap.put("longitude",Float.toString(1.0f));
                 DonorDTO dd = donorController.registerUser(theMap);
                 assert (donorService.getAllDonors().size()==2);
                 assert (dd.getLatitude()==1.0f);
@@ -182,8 +182,8 @@ String checkRequestStatus(@RequestBody final Long PatientID)
                     theMap.put("name","john");
                     theMap.put("birthday",Long.toString(1l));
                     theMap.put("residence","john");
-                    theMap.put("latitude",Double.toString(1.0f));
-                    theMap.put("longitude",Double.toString(1.0f));
+                    theMap.put("latitude",Float.toString(1.0f));
+                    theMap.put("longitude",Float.toString(1.0f));
                     donorController.registerUser(theMap);
                     throw new RuntimeException("YEE!");
                 }
@@ -202,7 +202,7 @@ String checkRequestStatus(@RequestBody final Long PatientID)
                 //    @RequestMapping(value = "/donors/nextDonation/{donorID}", method = RequestMethod.GET)
                 //    String getNextDonation(@PathVariable final Long donorID)
 
-                donorService.updateDonor(donor.getId(),donor.getName(),donor.getBirthday(),doctor.getHospital(),donor.getAddress(),donor.getBloodType(),donor.getRh(),donor.getAnticorps(),donor.getIsDonor(),donor.getLatitude(),donor.getLongitude(),donor.getEligibility(),blood.getCollectionDate() + 86400 * 56,donor.getUsername(),donor.getPassword());
+                donorService.updateDonor(donor.getId(),donor.getName(),donor.getBirthday(),doctor.getHospital(),donor.getAddress(),donor.getBloodType(),donor.getRh(),donor.getAnticorps(),donor.getIsDonor(),donor.getLatitude(),donor.getLongitude(),donor.getEligibility(),donor.getHasBeenNotified(),blood.getCollectionDate() + 86400 * 56,donor.getUsername(),donor.getPassword());
 
                 String nextDonation = donorController.getNextDonation(donor.getId());
 
@@ -220,13 +220,13 @@ String checkRequestStatus(@RequestBody final Long PatientID)
                 assert (bloodDTOList.get(0).getState()==1);
 
                 //     @RequestMapping(value = "/donors/{donorID}", method = RequestMethod.PUT)
-                //DonorDTO updatePersonalDetails(@PathVariable final  Long DonorID, @RequestBody final String name,@RequestBody final String birthday,@RequestBody final String residence,@RequestBody final Double latitude,@RequestBody final Double longitude)
+                //DonorDTO updatePersonalDetails(@PathVariable final  Long DonorID, @RequestBody final String name,@RequestBody final String birthday,@RequestBody final String residence,@RequestBody final Float latitude,@RequestBody final Float longitude)
                 theMap.clear();
                 theMap.put("name","ares");
                 theMap.put("birthday",Long.toString(donor.getBirthday()));
                 theMap.put("residence","homestead");
-                theMap.put("latitude",Double.toString(1.0f));
-                theMap.put("longitude",Double.toString(1.0f));
+                theMap.put("latitude",Float.toString(1.0f));
+                theMap.put("longitude",Float.toString(1.0f));
                 donorController.updatePersonalDetails(donor.getId(),theMap);
 
                 Donor testDonor = donorService.findbyID(donor.getId()).get();
@@ -263,54 +263,53 @@ String checkRequestStatus(@RequestBody final Long PatientID)
                 //     @RequestMapping(value = "/bloodStocks", method = RequestMethod.GET)
                 //    Set<BloodDTO> getBloodStocks()
                 Blood newBlood = bloodService.createBlood(1l,20f,2,"p",donation.getId(),clinic.getId());
-                Set<BloodDTO> bloodDTOSet = clinicController.getBloodStocks();
-                bloodDTOList = bloodDTOSet.stream().collect(Collectors.toList());
+                List<BloodDTO> bloodDTOList2 = clinicController.getBloodStocks();
+                bloodDTOList = bloodDTOList2.stream().collect(Collectors.toList());
                 assert (bloodDTOList.get(0).getUsable()==true);
                 assert (bloodDTOList.get(0).getId()==blood.getId());
-                assert (bloodDTOSet.size()==1);
+                assert (bloodDTOList2.size()==1);
                 assert (bloodService.getAllBloods().size()==2);
 
                 // public List<Blood> getUnusableBloods()
                 clinicController.testBlood(blood.getId(),false);
-                bloodDTOSet = clinicController.getUnusableBloodStocks();
-                assert (bloodDTOSet.size()==1);
-                bloodDTOList = bloodDTOSet.stream().collect(Collectors.toList());
+                bloodDTOList2 = clinicController.getUnusableBloodStocks();
+                assert (bloodDTOList2.size()==1);
+                bloodDTOList = bloodDTOList2.stream().collect(Collectors.toList());
                 assert (bloodDTOList.get(0).getId()==blood.getId());
 
                 // public List<Blood> getUntestedBloods()
-                bloodDTOSet = clinicController.getUntestedBloodStocks();
-                assert (bloodDTOSet.size()==1);
-                bloodDTOList = bloodDTOSet.stream().collect(Collectors.toList());
+                bloodDTOList2 = clinicController.getUntestedBloodStocks();
+                assert (bloodDTOList2.size()==1);
+                bloodDTOList = bloodDTOList2.stream().collect(Collectors.toList());
                 assert (bloodDTOList.get(0).getQuantity()==20f);
 
                 // testBlood
                 clinicController.testBlood(newBlood.getId(),true);
-                bloodDTOSet = clinicController.getBloodStocks();
-                assert (bloodDTOSet.size()==2);
-                List<Long> bloodDTOIDs = bloodDTOSet.stream().map(b->b.getId()).collect(Collectors.toList());
+                bloodDTOList2 = clinicController.getBloodStocks();
+                assert (bloodDTOList2.size()==2);
+                List<Long> bloodDTOIDs = bloodDTOList2.stream().map(b->b.getId()).collect(Collectors.toList());
                 assert (bloodDTOIDs.contains(newBlood.getId()));
 
                 //Set<PatientDTO> getPatients()
-                patientService.createPatient("gigel",2l,"a","b","AB",false,"unknown",false,1.0d,2.0d,"east");
+                patientService.createPatient("gigel",2l,"a","b","AB",false,"unknown",false,1.0f,2.0f,"east");
                 List<PatientDTO> patientDTOList = clinicController.getPatients();
                 assert (patientDTOList.size()==2);
                 assert (patientDTOList.get(0).getLatitude()==40.0);
 
                 // Set<RequestDTO> getAllRequests()
-                requestDTOSet = clinicController.getAllRequests();
-                assert (requestDTOSet.size()==1);
+                requestDTOList = clinicController.getAllRequests();
+                assert (requestDTOList.size()==1);
                 requestService.updateRequest(request.getId(),request.getPatient().getId(),req.getDoctor().getId(),1.0f,2.0f,3.0f,2,true,clinic.getId());
-                requestDTOSet = clinicController.getAllRequests();
-                assert (requestDTOSet.size()==0);
+                requestDTOList = clinicController.getAllRequests();
+                assert (requestDTOList.size()==0);
 
                 // Set<DonationDTO> getAllPendingDonations()
-                Set<DonationDTO> donationDTOSet = clinicController.getAllPendingDonations();
-                assert (donationDTOSet.size()==1);
+                List<DonationDTO> donationDTOList1 = clinicController.getAllPendingDonations();
+                assert (donationDTOList1.size()==1);
 
                 // Set<DonorDTO> getDonors()
-                Set<DonorDTO> donorDTOSet = clinicController.getDonors();
-                assert (donorDTOSet.size()==1);
-                List<DonorDTO> donorDTOList = donorDTOSet.stream().collect(Collectors.toList());
+                List<DonorDTO> donorDTOList = clinicController.getDonors();
+                assert (donorDTOList.size()==1);
                 assert (donorDTOList.get(0).getId()==donor.getId());
 
                 /*
@@ -380,7 +379,7 @@ String checkRequestStatus(@RequestBody final Long PatientID)
                 //@RequestMapping(value = "/bloodStocks/{bloodId}", method = RequestMethod.PUT)
                 //BloodDTO updateBlood(@PathVariable final Long bloodId, @RequestBody final BloodDTO bloodDto)
                 /*
-                    private Long collectiondate;
+    private Long collectiondate;
     private Float quantity;
     private Integer state;
     private String type;
@@ -391,7 +390,67 @@ String checkRequestStatus(@RequestBody final Long PatientID)
     private Long clinicid;
                  */
 
-                // HERE !
+                theMap.clear();
+                theMap.put("collectiondate",Long.toString(2l));
+                theMap.put("quantity",Float.toString(2.71f));
+                theMap.put("state",Integer.toString(1));
+                theMap.put("type","B");
+                theMap.put("tested",Boolean.toString(false));
+                theMap.put("usable",Boolean.toString(true));
+                theMap.put("donationid",blood.getDonation().getId().toString());
+                theMap.put("clinicid",clinicService.getTheClinic().getId().toString());
+                clinicController.updateBlood(blood.getId(),theMap);
+                assert (blood.getQuantity()==2.71f);
+                assert (!blood.getTested());
+                assert (blood.getUsable());
+                assert (blood.getType().equals("B"));
+
+                // collectBlood
+                assert (donation.getR()==null);
+                Long time = currentTime;
+                theMap.clear();
+                theMap.put("donationid",Long.toString(donation.getId()));
+                theMap.put("collectiondate",Long.toString(time));
+                theMap.put("rquantity",Float.toString(90f));
+                theMap.put("pquantity",Float.toString(70f));
+                theMap.put("tquantity",Float.toString(50f));
+                clinicController.collectBlood(theMap);
+                assert (donation.getR().getQuantity()==90f);
+                assert (donation.getP().getQuantity()==70f);
+                assert (donation.getT().getQuantity()==50f);
+                assert (donation.getR().getCollectionDate().equals(time));
+                assert (donor.getNextDonation()==time+86400 * 56);
+                log.trace("VICTORY! collectBlood");
+
+                // getAllDonors: donors=[ID: 751 Donor{nextDonation='1', eligibility=false, username='john', password='john', name='john', birthday='1', residence='john', bloodType='', Rh=true, anticorps='', isDonor=true, latitude=1.0, longitude=1.0}, ID: 752 Donor{nextDonation='1', eligibility=false, username='john', password='john', name='john', birthday='1', residence='john', bloodType='', Rh=true, anticorps='', isDonor=true, latitude=1.0, longitude=1.0}, ID: 745 Donor{nextDonation='1532684251', eligibility=true, username='donor', password='donor', name='ares', birthday='1', residence='homestead', bloodType='A', Rh=false, anticorps='none', isDonor=true, latitude=1.0, longitude=1.0}]
+                // notifyDonorsNeeded
+                theMap.clear();
+                theMap.put("bloodtype","A");
+                theMap.put("rh",Boolean.toString(false));
+                theMap.put("anticorps","none");
+                clinicController.notifyDonorNeeded(theMap);
+                assert (donorService.getAllDonors().stream().filter(d-> d.getHasBeenNotified()).collect(Collectors.toList()).size()==1);
+
+                log.trace("About to test processRequest");
+                // processRequest : requestID
+
+                log.trace("All bloods BEFORE: " + bloodService.getAllBloods().toString());
+
+                Blood R = donationService.findByID(donation.getId()).get().getR();
+                Blood P = donationService.findByID(donation.getId()).get().getP();
+                Blood T = donationService.findByID(donation.getId()).get().getT();
+                clinicController.testBlood(R.getId(),true);
+                clinicController.testBlood(P.getId(),true);
+                clinicController.testBlood(T.getId(),true);
+
+                Request testRequest = requestService.createRequest(patient.getId(),doctor.getId(),90f,70f,50f,3,clinic.getId());
+                Integer size = bloodService.getUsableBloods().size();
+                clinicController.processRequest(request.getId());
+                Integer newSize = bloodService.getUsableBloods().size();
+
+                log.trace("All bloods AFTER: " + bloodService.getAllBloods().toString());
+                log.trace("Old size: " + size.toString() + " new size: "+newSize.toString());
+                assert ((size-3)==newSize);
 
                 // keep these at the end!
 
@@ -400,6 +459,7 @@ String checkRequestStatus(@RequestBody final Long PatientID)
                 assert (clinicController.getUnusableBloodStocks().size()==0);
                 // use blood
                 clinicController.useBlood(blood.getId());
+                assert (blood.getState()==3);
                 assert (clinicController.getBloodStocks().size()==0);
 
                 log.trace("ALL TESTS PASSED!");
@@ -425,7 +485,7 @@ String checkRequestStatus(@RequestBody final Long PatientID)
     }
 
         @RequestMapping(value = "/bloods", method = RequestMethod.GET)
-    public Set<BloodDTO> getBloodsList() {
+    public List<BloodDTO> getBloodsList() {
         log.trace("getBloods");
 
         try

@@ -33,14 +33,14 @@ public class DonorServiceImpl implements DonorService
     }
 
     @Override
-    public Donor createDonor(String username, String password,String name,Long birthday,String residence,String address,String bloodType,Boolean Rh,String anticorps,Boolean isDonor,Double latitude,Double longitude) {
+    public Donor createDonor(String username, String password,String name,Long birthday,String residence,String address,String bloodType,Boolean Rh,String anticorps,Boolean isDonor,Float latitude,Float longitude) {
         Donor donor = donorRepository.save(new Donor(name,birthday,residence,address,bloodType,Rh,anticorps,isDonor,latitude,longitude,username,password));
         return donor;
     }
 
     @Override
     @Transactional
-    public Optional<Donor> updateDonor(Long DonorID, String name,Long birthday,String residence,String address,String bloodType,Boolean Rh,String anticorps,Boolean isDonor,Double latitude,Double longitude, Boolean eligibility, Long nextDonation, String username, String password) {
+    public Optional<Donor> updateDonor(Long DonorID, String name,Long birthday,String residence,String address,String bloodType,Boolean Rh,String anticorps,Boolean isDonor,Float latitude,Float longitude, Boolean eligibility,Boolean hasBeenNotified, Long nextDonation, String username, String password) {
         log.trace("updateDonor entered!");
 
         Optional<Donor> optionalDonor = donorRepository.findById(DonorID);
@@ -60,6 +60,7 @@ public class DonorServiceImpl implements DonorService
             st.setNextDonation(nextDonation);
             st.setUsername(username);
             st.setPassword(password);
+            st.setHasBeenNotified(hasBeenNotified);
         });
 
         log.trace("updateDonor exited!");
@@ -80,6 +81,7 @@ public class DonorServiceImpl implements DonorService
     }
 
     @Override
+    @Transactional
     public Optional<Donor> setInfo(Long DonorID, String bloodType, Boolean rh, String anticorps) {
         Optional<Donor> optionalDonor = donorRepository.findById(DonorID);
 
@@ -93,6 +95,19 @@ public class DonorServiceImpl implements DonorService
     }
 
     @Override
+    @Transactional
+    public Optional<Donor> setLastAnalysisResult(Long DonorID, Boolean flag) {
+        Optional<Donor> optionalDonor = donorRepository.findById(DonorID);
+
+        optionalDonor.ifPresent(st -> {
+            st.setLastAnalysisResult(flag);
+        });
+
+        return optionalDonor;
+    }
+
+    @Override
+    @Transactional
     public Optional<Donor> updateMedicalHistory(Long DonorID, String medicalHistory) {
         Optional<Donor> optionalDonor = donorRepository.findById(DonorID);
 
@@ -104,9 +119,10 @@ public class DonorServiceImpl implements DonorService
     }
 
     @Override
+    @Transactional
     public Boolean notifyDonorsNeeded(String BloodType, Boolean RH, String Anticorps) {
         List<Donor> donors = this.getAllDonors();
-        donors = donors.stream().filter(donor -> donor.getNextDonation() <= Instant.now().getEpochSecond() && donor.getAnticorps()==Anticorps && donor.getRh() == RH && donor.getBloodType()==BloodType).collect(Collectors.toList());
+        donors = donors.stream().filter(donor -> donor.getNextDonation() <= Instant.now().getEpochSecond() && donor.getAnticorps().equals(Anticorps) && donor.getRh() == RH && donor.getBloodType().equals(BloodType)).collect(Collectors.toList());
         Boolean res = false;
         if(donors.size()>0)
             res = true;

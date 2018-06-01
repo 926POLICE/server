@@ -15,10 +15,10 @@ import java.util.*;
 @Builder
 public class Clinic extends BaseEntity<Long> implements Serializable
 {
-    private Double latitude;
-    private Double longitude;
+    private Float latitude;
+    private Float longitude;
 
-    public Clinic(Double latitude, Double longitude) {
+    public Clinic(Float latitude, Float longitude) {
         this.latitude = latitude;
         this.longitude = longitude;
     }

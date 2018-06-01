@@ -23,8 +23,8 @@ public abstract class Person extends BaseEntity<Long> implements Serializable
     protected Boolean Rh;
     protected String anticorps;
     protected Boolean isDonor;
-    protected Double latitude;
-    protected Double longitude;
+    protected Float latitude;
+    protected Float longitude;
 
     public boolean isCompatible(Person p)
     {

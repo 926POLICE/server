@@ -18,8 +18,8 @@ public class DonorDTO  extends BaseDto
     protected Boolean rh;
     protected String anticorps;
     protected Boolean isdonor;
-    protected Double latitude;
-    protected Double longitude;
+    protected Float latitude;
+    protected Float longitude;
 
     private Long nextdonation;
     private Boolean eligibility;

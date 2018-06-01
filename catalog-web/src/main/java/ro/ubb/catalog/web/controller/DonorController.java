@@ -65,8 +65,8 @@ public class DonorController
         String name = json.get("name");
         String birthString = json.get("birthday");
         String residence = json.get("residence");
-        Double latitude = Double.parseDouble(json.get("latitude"));
-        Double longitude = Double.parseDouble(json.get("longitude"));
+        Float latitude = Float.parseFloat(json.get("latitude"));
+        Float longitude = Float.parseFloat(json.get("longitude"));
         Long birthday = Long.parseLong(birthString);
 
         // username-u ar trebui sa fie unic nu? I mean nu cred ca poti sa ai doi useri cu acelasi username da parole diferite
@@ -82,24 +82,24 @@ public class DonorController
         return donorDTO1;
     }
 
-    @RequestMapping(value = "/donors/history/{donorID}", method = RequestMethod.GET)
-    List<DonationDTO> getAnalysisHistory(@PathVariable final Long donorID)
+    @RequestMapping(value = "/donors/history/{donorid}", method = RequestMethod.GET)
+    List<DonationDTO> getAnalysisHistory(@PathVariable final Long donorid)
     {
         log.trace("getAnalysisHistory entered!");
 
-        List<Donation> donations = donationService.getAllDonations().stream().filter(d-> d.getDonor().getId().equals(donorID)).collect(Collectors.toList());
+        List<Donation> donations = donationService.getAllDonations().stream().filter(d-> d.getDonor().getId().equals(donorid)).collect(Collectors.toList());
 
         log.trace("getAnalysisHistory exited!");
 
         return new ArrayList<>(donationConverter.convertModelsToDtos(donations));
     }
 
-    @RequestMapping(value = "/donors/nextDonation/{donorID}", method = RequestMethod.GET)
-    String getNextDonation(@PathVariable final Long donorID)
+    @RequestMapping(value = "/donors/nextDonation/{donorid}", method = RequestMethod.GET)
+    String getNextDonation(@PathVariable final Long donorid)
     {
-        log.trace("getNextDonation: donorID={}",donorID);
+        log.trace("getNextDonation: donorID={}",donorid);
 
-        Optional<Donor> donorOptional = donorService.findbyID(donorID);
+        Optional<Donor> donorOptional = donorService.findbyID(donorid);
         if(donorOptional.isPresent()) {
             String nextDonation = donorOptional.get().getNextDonation().toString();
 
@@ -110,14 +110,14 @@ public class DonorController
             throw new RuntimeException("Invalid donor ID!");
     }
 
-    @RequestMapping(value = "/donors/bloodContainers/{donorID}", method = RequestMethod.GET)
-    List<BloodDTO> getBloodJourney(@PathVariable final Long donorID)
+    @RequestMapping(value = "/donors/bloodContainers/{donorid}", method = RequestMethod.GET)
+    List<BloodDTO> getBloodJourney(@PathVariable final Long donorid)
     {
-        log.trace("getBloodJourney: donorDI={}",donorID);
+        log.trace("getBloodJourney: donorDI={}",donorid);
 
         List<Donation> donations = new ArrayList<>();
         List<BloodDTO> bloodContainers = new ArrayList<>();
-        Optional<Donor> donorOptional = donorService.findbyID(donorID);
+        Optional<Donor> donorOptional = donorService.findbyID(donorid);
         if(donorOptional.isPresent())
         {
             donations = donationService.getAllDonations().stream().filter(d->d.getDonor().equals(donorOptional.get())).collect(Collectors.toList());
@@ -129,12 +129,12 @@ public class DonorController
         return bloodContainers;
     }
 
-    @RequestMapping(value = "/donors/{donorID}", method = RequestMethod.PUT)
-    DonorDTO updatePersonalDetails(@PathVariable final Long  donorID, @RequestBody Map<String, String> json)
+    @RequestMapping(value = "/donors/{donorid}", method = RequestMethod.PUT)
+    DonorDTO updatePersonalDetails(@PathVariable final Long  donorid, @RequestBody Map<String, String> json)
     {
         log.trace("---- updatePersonalDetails entered ----");
 
-        Optional<Donor> donor = donorService.findbyID(donorID);
+        Optional<Donor> donor = donorService.findbyID(donorid);
 
         log.trace(donor.toString());
 
@@ -143,8 +143,8 @@ public class DonorController
             String name = json.get("name");
             String birthString = json.get("birthday");
             String residence = json.get("residence");
-            Double latitude = Double.parseDouble(json.get("latitude"));
-            Double longitude = Double.parseDouble(json.get("longitude"));
+            Float latitude = Float.parseFloat(json.get("latitude"));
+            Float longitude = Float.parseFloat(json.get("longitude"));
 
             Long birthday = Long.parseLong(birthString);
 
@@ -157,7 +157,7 @@ public class DonorController
             String username = donor.get().getUsername();
             String password = donor.get().getPassword();
 
-            Optional<Donor> donorOptional = donorService.updateDonor(donorID,name,birthday,residence,address,bloodType,Rh,anticorps,true,latitude,longitude,eligibility,nextDonation,username,password);
+            Optional<Donor> donorOptional = donorService.updateDonor(donorid,name,birthday,residence,address,bloodType,Rh,anticorps,true,latitude,longitude,eligibility,donor.get().getHasBeenNotified(),nextDonation,username,password);
 
             Map<String, DonorDTO> result = new HashMap<>();
             donorOptional.ifPresent(donor1 -> result.put("donor", donorConverter.convertModelToDto(donor1)));
@@ -170,12 +170,12 @@ public class DonorController
             throw new RuntimeException("Invalid donor ID!");
     }
 
-    @RequestMapping(value = "/donors/{donorID}", method = RequestMethod.GET)
-    DonorDTO getPersonalDetails(@PathVariable final  Long donorID)
+    @RequestMapping(value = "/donors/{donorid}", method = RequestMethod.GET)
+    DonorDTO getPersonalDetails(@PathVariable final  Long donorid)
     {
-        log.trace("getPersonalDetails: donorID={}",donorID);
+        log.trace("getPersonalDetails: donorID={}",donorid);
 
-        Optional<Donor> donorOptional = donorService.findbyID(donorID);
+        Optional<Donor> donorOptional = donorService.findbyID(donorid);
         if(donorOptional.isPresent()) {
             DonorDTO donorDTO = donorConverter.convertModelToDto(donorOptional.get());
 
@@ -187,16 +187,16 @@ public class DonorController
 
     }
 
-    @RequestMapping(value = "/donors/history/{donorID}", method = RequestMethod.PUT)
-    String updateMedicalHistory(@PathVariable final Long donorID, @RequestBody final String newhistory)
+    @RequestMapping(value = "/donors/history/{donorid}", method = RequestMethod.PUT)
+    String updateMedicalHistory(@PathVariable final Long donorid, @RequestBody final String newhistory)
     {
-        log.trace("updateMedicalHistory: donorID={}, newHistory={}",donorID,newhistory);
+        log.trace("updateMedicalHistory: donorID={}, newHistory={}",donorid,newhistory);
 
-        donorService.updateMedicalHistory(donorID,newhistory);
+        donorService.updateMedicalHistory(donorid,newhistory);
 
         log.trace("updateHistory: result={}",newhistory);
 
-        return donorService.findbyID(donorID).get().getMedicalHistory();
+        return donorService.findbyID(donorid).get().getMedicalHistory();
     }
 
     @RequestMapping(value = "/donations", method = RequestMethod.POST)

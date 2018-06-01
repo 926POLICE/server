@@ -5,8 +5,8 @@ import static java.lang.StrictMath.sqrt;
 
 public class Utilities
 {
-    public static Double distance(Double latitude, Double longitude, Double destination_latitude, Double destination_longitude)
+    public static Float distance(Float latitude, Float longitude, Float destination_latitude, Float destination_longitude)
     {
-        return sqrt(pow(latitude-destination_latitude,2)-pow(longitude-destination_longitude,2));
+        return (float)sqrt(pow(latitude-destination_latitude,2)-pow(longitude-destination_longitude,2));
     }
 }

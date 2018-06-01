@@ -14,20 +14,12 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class DoctorServiceImpl implements DoctorService, InitializingBean
+public class DoctorServiceImpl implements DoctorService
 {
     private static final Logger log = LoggerFactory.getLogger(DoctorServiceImpl.class);
 
     @Autowired
     private DoctorRepository doctorRepository;
-
-    // http://www.baeldung.com/running-setup-logic-on-startup-in-spring
-    @Override
-    @Transactional
-    public void afterPropertiesSet() throws Exception {
-//        Doctor d = new Doctor("dre","a","dre","dre");
-//        doctorRepository.save(d);
-    }
 
     @Override
     public List<Doctor> getAllDoctors() {

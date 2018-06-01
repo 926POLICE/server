@@ -28,8 +28,7 @@ import java.util.stream.Stream;
  */
 
 @RestController
-public class ClinicController
-{
+public class ClinicController {
     // workload handler
 
     private static final Logger log = LoggerFactory.getLogger(BloodController.class);
@@ -74,73 +73,75 @@ public class ClinicController
     private Long currentTime = Instant.now().getEpochSecond();
 
     @RequestMapping(value = "/bloodStocks", method = RequestMethod.GET)
-    Set<BloodDTO> getBloodStocks()
-    {
+    List<BloodDTO> getBloodStocks() {
         log.trace("getBloodStocks ENTERED!");
 
         List<Blood> bloodList = bloodService.getUsableBloods();
 
-        log.trace("getBloodStocks EXITING : {}",bloodList);
+        log.trace("getBloodStocks EXITING : {}", bloodList);
 
         return bloodConverter.convertModelsToDtos(bloodList);
     }
 
     @RequestMapping(value = "/bloodStocksUntested", method = RequestMethod.GET)
-    Set<BloodDTO> getUntestedBloodStocks()
-    {
+    List<BloodDTO> getUntestedBloodStocks() {
         List<Blood> bloodList = bloodService.getUntestedBloods();
         return bloodConverter.convertModelsToDtos(bloodList);
     }
 
     @RequestMapping(value = "/bloodStocksUnusable", method = RequestMethod.GET)
-    Set<BloodDTO> getUnusableBloodStocks()
-    {
+    List<BloodDTO> getUnusableBloodStocks() {
         return bloodConverter.convertModelsToDtos(bloodService.getUnusableBloods());
     }
 
     @RequestMapping(value = "/patients", method = RequestMethod.GET)
-    List<PatientDTO> getPatients()
-    {
+    List<PatientDTO> getPatients() {
         log.trace("getPatients ENTERED!");
 
         // lat/lng and math function to calculate the distance from a point x to a point y ;) (kudos to Prisacariu)
         List<Patient> patients = patientService.getAllPatients();
-        List<Pair<Double,Patient>> pairs = new ArrayList<>();
-        patients.forEach(p->pairs.add(new Pair<>(Utilities.distance(p.getLatitude(),p.getLongitude(),clinicService.getTheClinic().getLatitude(),clinicService.getTheClinic().getLongitude()),p)));
-        Collections.sort(pairs,(p1,p2)->(p1.getKey().compareTo(p2.getKey())));
+        List<Pair<Float, Patient>> pairs = new ArrayList<>();
+        patients.forEach(p -> pairs.add(new Pair<>(Utilities.distance(p.getLatitude(), p.getLongitude(), clinicService.getTheClinic().getLatitude(), clinicService.getTheClinic().getLongitude()), p)));
+        Collections.sort(pairs, (p1, p2) -> (p1.getKey().compareTo(p2.getKey())));
         List<Patient> result = new ArrayList<>();
-        pairs.forEach(p->result.add(p.getValue()));
+        pairs.forEach(p -> result.add(p.getValue()));
 
-        log.trace("getPatients EXITED! {}",result);
+        log.trace("getPatients EXITED! {}", result);
 
         List<PatientDTO> patientDTOList = new ArrayList<>();
-        result.forEach(p->patientDTOList.add(patientConverter.convertModelToDto(p)));
+        result.forEach(p -> patientDTOList.add(patientConverter.convertModelToDto(p)));
         return patientDTOList;
     }
 
     @RequestMapping(value = "/requests", method = RequestMethod.GET)
-    Set<RequestDTO> getAllRequests()
-    {
+    List<RequestDTO> getAllRequests() {
         List<Request> requests = requestService.getAllRequests();
-        requests = requests.stream().filter(r->r.getCompleted()==false).collect(Collectors.toList());
+        requests = requests.stream().filter(r -> r.getCompleted() == false).collect(Collectors.toList());
         Collections.sort(requests);
         return requestConverter.convertModelsToDtos(requests);
     }
 
     @RequestMapping(value = "/pendingDonations", method = RequestMethod.GET)
-    Set<DonationDTO> getAllPendingDonations()
-    {
+    List<DonationDTO> getAllPendingDonations() {
         List<Donation> donations = donationService.getAllDonations();
-        donations = donations.stream().filter(d->d.getR()==null).collect(Collectors.toList());
+        donations = donations.stream().filter(d -> d.getR() == null).collect(Collectors.toList());
         return donationConverter.convertModelsToDtos(donations);
     }
 
-    @RequestMapping(value = "/bloodStocks/{bloodId}", method = RequestMethod.PUT)
-    BloodDTO updateBlood(@PathVariable final Long bloodId, @RequestBody final BloodDTO bloodDto)
-    {
-        log.trace("updateBlood: bloodId={}, bloodDtoMap={}", bloodId, bloodDto);
+    @RequestMapping(value = "/bloodStocks/{bloodid}", method = RequestMethod.PUT)
+    BloodDTO updateBlood(@PathVariable final Long bloodid, @RequestBody Map<String, String> json) {
+        log.trace("updateBlood: bloodId={}, bloodDtoMap={}", bloodid, json);
 
-        Optional<Blood> bloodOptional = bloodService.updateBlood(bloodId,bloodDto.getCollectiondate(),bloodDto.getQuantity(),bloodDto.getState(),bloodDto.getType(),bloodDto.getTested(),bloodDto.getUsable(),bloodDto.getDonationid(),bloodDto.getClinicid());
+        Long collectiondate = Long.parseLong(json.get("collectiondate"));
+        Float quantity = Float.parseFloat(json.get("quantity"));
+        Integer state = Integer.parseInt(json.get("state"));
+        String type = json.get("type");
+        Boolean tested = Boolean.parseBoolean(json.get("tested"));
+        Boolean usable = Boolean.parseBoolean(json.get("usable"));
+        Long donationid = Long.parseLong(json.get("donationid"));
+        Long clinicid = Long.parseLong(json.get("clinicid"));
+
+        Optional<Blood> bloodOptional = bloodService.updateBlood(bloodid, collectiondate, quantity, state, type, tested, usable, donationid, clinicid);
 
         Map<String, BloodDTO> result = new HashMap<>();
         bloodOptional.ifPresent(blood -> result.put("blood", bloodConverter.convertModelToDto(blood)));
@@ -150,42 +151,41 @@ public class ClinicController
         return result.get("blood");
     }
 
-    @RequestMapping(value = "/bloodStocksUntested/{bloodId}", method = RequestMethod.PUT)
-    BloodDTO testBlood(@PathVariable final Long bloodId, @RequestBody final boolean flag)
-    {
-        log.trace("setBloodFlag: bloodId={}, flag={}", bloodId, flag);
+    @RequestMapping(value = "/bloodStocksUntested/{bloodid}", method = RequestMethod.PUT)
+    BloodDTO testBlood(@PathVariable final Long bloodid, @RequestBody final boolean flag) {
+        log.trace("setBloodFlag: bloodId={}, flag={}", bloodid, flag);
 
-        Optional<Blood> bloodOptional = bloodService.testBlood(bloodId,flag);
+        Optional<Blood> bloodOptional = bloodService.testBlood(bloodid, flag);
 
         Map<String, BloodDTO> result = new HashMap<>();
         bloodOptional.ifPresent(b -> result.put("blood", bloodConverter.convertModelToDto(b)));
 
-        bloodOptional.get().getDonation().setAnalysisResult(flag);
-        bloodOptional.get().getDonation().getDonor().setLastAnalysisResult(flag);
+        bloodService.testBlood(bloodid,flag);
+        donorService.setLastAnalysisResult(bloodOptional.get().getDonation().getDonor().getId(),flag);
+        //bloodOptional.get().getDonation().setAnalysisResult(flag);
+        //bloodOptional.get().getDonation().getDonor().setLastAnalysisResult(flag);
 
         log.trace("setBloodFlag: result={}", result);
 
         return result.get("blood");
     }
 
-    @RequestMapping(value = "/bloodStocksUnusable/{bloodId}", method = RequestMethod.DELETE)
-    public ResponseEntity disposeBlood(@PathVariable final Long bloodId)
-    {
-        log.trace("disposeBlood: bloodId={}", bloodId);
+    @RequestMapping(value = "/bloodStocksUnusable/{bloodid}", method = RequestMethod.DELETE)
+    public ResponseEntity disposeBlood(@PathVariable final Long bloodid) {
+        log.trace("disposeBlood: bloodId={}", bloodid);
 
-        bloodService.deleteBlood(bloodId);
+        bloodService.deleteBlood(bloodid);
 
         log.trace("disposeBlood - method end");
 
         return new ResponseEntity(new EmptyJsonResponse(), HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/bloodStocks/{bloodId}", method = RequestMethod.DELETE)
-    public ResponseEntity useBlood(@PathVariable final Long bloodId)
-    {
-        log.trace("useBlood: bloodId={}", bloodId);
+    @RequestMapping(value = "/bloodStocks/{bloodid}", method = RequestMethod.DELETE)
+    public ResponseEntity useBlood(@PathVariable final Long bloodid) {
+        log.trace("useBlood: bloodId={}", bloodid);
 
-        bloodService.useBlood(bloodId);
+        bloodService.useBlood(bloodid);
 
         log.trace("useBlood - method end");
 
@@ -193,23 +193,21 @@ public class ClinicController
     }
 
     @RequestMapping(value = "/donors", method = RequestMethod.GET)
-    Set<DonorDTO> getDonors()
-    {
+    List<DonorDTO> getDonors() {
         log.trace("getDonors ENTERED!");
 
         List<Donor> donorList = donorService.getAllDonors();
 
-        log.trace("getDonors EXITING : {}",donorList);
+        log.trace("getDonors EXITING : {}", donorList);
 
         return donorConverter.convertModelsToDtos(donorList);
     }
 
-    @RequestMapping(value = "/donors/info/{donorID}", method = RequestMethod.PUT)
-    DonorDTO setDonorInfo(@PathVariable final Long donorID, @RequestBody Map<String, String> json)
-    {
+    @RequestMapping(value = "/donors/info/{donorid}", method = RequestMethod.PUT)
+    DonorDTO setDonorInfo(@PathVariable final Long donorid, @RequestBody Map<String, String> json) {
         log.trace("setDonorInfo entered");
 
-        Optional<Donor> donorOptional = donorService.setInfo(donorID,json.get("bloodtype"),Boolean.parseBoolean(json.get("rh")),json.get("anticorps"));
+        Optional<Donor> donorOptional = donorService.setInfo(donorid, json.get("bloodtype"), Boolean.parseBoolean(json.get("rh")), json.get("anticorps"));
 
         Map<String, DonorDTO> result = new HashMap<>();
         donorOptional.ifPresent(b -> result.put("donor", donorConverter.convertModelToDto(b)));
@@ -219,12 +217,11 @@ public class ClinicController
         return result.get("donor");
     }
 
-    @RequestMapping(value = "/donors/eligibility/{donorID}", method = RequestMethod.PUT)
-    DonorDTO setEligibility(@PathVariable final Long donorID, @RequestBody final boolean flag)
-    {
-        log.trace("setEligibility: bloodId={}, flag={}", donorID, flag);
+    @RequestMapping(value = "/donors/eligibility/{donorid}", method = RequestMethod.PUT)
+    DonorDTO setEligibility(@PathVariable final Long donorid, @RequestBody final boolean flag) {
+        log.trace("setEligibility: bloodId={}, flag={}", donorid, flag);
 
-        Optional<Donor> donorOptional = donorService.setEligibility(donorID,flag);
+        Optional<Donor> donorOptional = donorService.setEligibility(donorid, flag);
 
         Map<String, DonorDTO> result = new HashMap<>();
         donorOptional.ifPresent(b -> result.put("donor", donorConverter.convertModelToDto(b)));
@@ -234,26 +231,26 @@ public class ClinicController
         return result.get("donor");
     }
 
-    @RequestMapping(value = "/donors/eligibility/{donorID}", method = RequestMethod.GET)
-    boolean getEligibility(@PathVariable final Long donorID)
-    {
+    @RequestMapping(value = "/donors/eligibility/{donorid}", method = RequestMethod.GET)
+    boolean getEligibility(@PathVariable final Long donorid) {
         log.trace("getEligibility Entered!");
 
-        Optional<Donor> donorOptional = donorService.findbyID(donorID);
+        Optional<Donor> donorOptional = donorService.findbyID(donorid);
 
-        if(donorOptional.isPresent()==false)
+        if (donorOptional.isPresent() == false)
             throw new RuntimeException("Attempted to get eligibility for an inexistent donor...");
 
         Donor donor = donorOptional.get();
 
-        log.trace("getEligibility result: "+donor.getEligibility()+" \nexiting...");
+        log.trace("getEligibility result: " + donor.getEligibility() + " \nexiting...");
 
-        return donor.getEligibility() && donor.getNextDonation() <= currentTime ;
+        return donor.getEligibility() && donor.getNextDonation() <= currentTime;
     }
 
     @RequestMapping(value = "/bloodStocksUntested", method = RequestMethod.POST)
-    public Set<BloodDTO> collectBlood(@RequestBody Map<String, String> json)
-    {
+    public List<BloodDTO> collectBlood(@RequestBody Map<String, String> json) {
+        log.trace("collectBlood entered!");
+
         /*
         // Will add blood to the donation with the associated ID a new blood container, placed automatically in the untested section.
 @RequestMapping(value = "/bloodStocksUntested", method = RequestMethod.POST)
@@ -266,27 +263,40 @@ public List<BloodDTO> collectBlood(@RequestBody final Long DonationID, @RequestB
         Long collectionDate = Long.parseLong(json.get("collectiondate"));
 
         Optional<Donation> donationOptional = donationService.findByID(DonationID);
-        if(donationOptional.isPresent()==false)
+        if (donationOptional.isPresent() == false)
             throw new RuntimeException("Invalid donation!");
 
         // public Blood(Long collectionDate, Float quantity, Integer state, String type, Donation donation, Clinic clinic)
-        Blood R = bloodService.createBlood(collectionDate,RQuantity,1,"r",DonationID,clinicService.getTheClinic().getId());
-        Blood P = bloodService.createBlood(collectionDate,PQuantity,1,"p",DonationID,clinicService.getTheClinic().getId());
-        Blood T = bloodService.createBlood(collectionDate,TQuantity,1,"t",DonationID,clinicService.getTheClinic().getId());
+        Blood R = bloodService.createBlood(collectionDate, RQuantity, 1, "r", DonationID, clinicService.getTheClinic().getId());
+        Blood P = bloodService.createBlood(collectionDate, PQuantity, 1, "p", DonationID, clinicService.getTheClinic().getId());
+        Blood T = bloodService.createBlood(collectionDate, TQuantity, 1, "t", DonationID, clinicService.getTheClinic().getId());
+
+        try
+        {
+            Long val = R.getId();
+        }
+        catch (Exception e)
+        {
+            log.trace("Blood container NOT saved correctly!");
+        }
 
         Donation donation = donationOptional.get();
+
         Donor donor = donation.getDonor();
-        donor.setNextDonation(currentTime+86400 * 56);
-        donor.setHasBeenNotified(false);
+        donorService.updateDonor(donor.getId(), donor.getName(), donor.getBirthday(), donor.getResidence(), donor.getAddress(), donor.getBloodType(), donor.getRh(), donor.getAnticorps(), donor.getIsDonor(), donor.getLatitude(), donor.getLongitude(), donor.getEligibility(), false, currentTime + 86400 * 56, donor.getUsername(), donor.getPassword());
 
-        donationService.updateDonation(donation.getId(),R.getId(),P.getId(), T.getId(),donation.getDonor().getId(),donation.getAnalysisResult(),donation.getPatient().getId(),donation.getClinic().getId());
+        Long patientID=-1l;
+        if(donation.getPatient()!=null)
+            patientID = donation.getPatient().getId();
+        donationService.updateDonation(donation.getId(), R.getId(), P.getId(), T.getId(), donation.getDonor().getId(), donation.getAnalysisResult(), patientID, donation.getClinic().getId());
 
-        return Stream.of(bloodConverter.convertModelToDto(R),bloodConverter.convertModelToDto(P),bloodConverter.convertModelToDto(T)).collect(Collectors.toSet());
+        log.trace("collectBlood exited!");
+
+        return Stream.of(bloodConverter.convertModelToDto(R), bloodConverter.convertModelToDto(P), bloodConverter.convertModelToDto(T)).collect(Collectors.toList());
     }
 
     @RequestMapping(value = "/bloodStocks/available", method = RequestMethod.GET)
-    Float checkAvailability(@RequestBody Map<String, String> json)
-    {
+    Float checkAvailability(@RequestBody Map<String, String> json) {
         /*
         // Returns true if the sum of the available stocks provides sufficient quantities for all the  specified components.
 @RequestMapping(value = "/bloodStocks/available", method = RequestMethod.GET)
@@ -297,12 +307,11 @@ boolean checkAvailability(@RequestBody final Float Thrombocytes,@RequestBody fin
         Float P = Float.parseFloat(json.get("plasma"));
         Float T = Float.parseFloat(json.get("thrombocytes"));
 
-        return bloodService.checkAvailability(R,P,T);
+        return bloodService.checkAvailability(R, P, T);
     }
 
     @RequestMapping(value = "/donors/notify", method = RequestMethod.PUT)
-    boolean notifyDonorNeeded(@RequestBody Map<String, String> json)
-    {
+    boolean notifyDonorNeeded(@RequestBody Map<String, String> json) {
         /*
         // Will notify the closest donors that has passed the time since the last donation that match the given attributes.
 // Calls for all available donors.
@@ -313,14 +322,13 @@ boolean notifyDonorNeeded(@RequestBody final String BloodType,@RequestBody final
         Boolean Rh = Boolean.parseBoolean(json.get("rh"));
         String anticorps = json.get("anticorps");
 
-        donorService.notifyDonorsNeeded(bloodType,Rh,anticorps);
+        donorService.notifyDonorsNeeded(bloodType, Rh, anticorps);
 
         return false;
     }
 
     @RequestMapping(value = "/donors/compatibility", method = RequestMethod.GET)
-    boolean checkCompatibility(@RequestBody Map<String, String> json)
-    {
+    boolean checkCompatibility(@RequestBody Map<String, String> json) {
         /*
         // Will check that the donor with ID is compatible with the patient with given ID. Return true ok and false if not. Throws an exception if either ID does not exist.
 @RequestMapping(value = "/donors/compatibility", method = RequestMethod.GET)
@@ -332,7 +340,7 @@ boolean checkCompatibility(@RequestBody final Long DonorID,@RequestBody final  L
         Optional<Donor> donorOptional = donorService.findbyID(donorID);
         Optional<Patient> patientOptional = patientService.findByID(patientID);
 
-        if(donorOptional.isPresent()==false || patientOptional.isPresent()==false)
+        if (donorOptional.isPresent() == false || patientOptional.isPresent() == false)
             throw new RuntimeException("Invalid donor and/or patient!");
 
         Donor donor = donorOptional.get();
@@ -341,29 +349,29 @@ boolean checkCompatibility(@RequestBody final Long DonorID,@RequestBody final  L
         return patient.isCompatible(donor);
     }
 
-    @RequestMapping(value = "/requests/{requestID}", method = RequestMethod.PUT)
-    Float processRequest(@PathVariable final Long requestID)
-    {
-        Optional<Request> requestOptional = requestService.findByID(requestID);
-        if(requestOptional.isPresent()==false)
+    @RequestMapping(value = "/requests/{requestid}", method = RequestMethod.PUT)
+    Float processRequest(@PathVariable final Long requestid) {
+        Optional<Request> requestOptional = requestService.findByID(requestid);
+        if (requestOptional.isPresent() == false)
             throw new RuntimeException("Invalid request ID!!");
 
         Request request = requestOptional.get();
 
-        Float res = bloodService.checkAvailability(request.getRQuantity(),request.getPQuantity(),request.getTQuantity());
+        Float res = bloodService.checkAvailability(request.getRQuantity(), request.getPQuantity(), request.getTQuantity());
 
-        if(res!=0)
-            donorService.notifyDonorsNeeded(request.getPatient().getBloodType(),request.getPatient().getRh(),request.getPatient().getAnticorps());
+        log.trace("ProcessRequest result: " + res.toString());
+
+        if (res != 0)
+            donorService.notifyDonorsNeeded(request.getPatient().getBloodType(), request.getPatient().getRh(), request.getPatient().getAnticorps());
         else
-            bloodService.honorRequest(request.getRQuantity(),request.getPQuantity(),request.getTQuantity());
+            bloodService.honorRequest(request.getRQuantity(), request.getPQuantity(), request.getTQuantity());
 
         return res;
     }
 
     // Looks up for doctors/donors/personnel having the username and password. Returns a JSON with two fields: String Type (which can be 'doctor', 'donor', 'personnel' or 'invalid', if the username and password are invalid) and Long ID (the ID of the doctor/donor - will be -1 if invalid). The client program will remember the given ID and will use it during the session to send further requests.
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    LoginReply getUser(@RequestBody Map<String, String> json)
-    {
+    LoginReply getUser(@RequestBody Map<String, String> json) {
         log.trace("getUser entered!");
 
         log.trace(json.get("username"));
@@ -376,18 +384,18 @@ boolean checkCompatibility(@RequestBody final Long DonorID,@RequestBody final  L
         List<Doctor> doctorList = doctorService.getAllDoctors();
         List<Donor> donorList = donorService.getAllDonors();
 
-        personnelList = personnelList.stream().filter(p->p.getUsername().equals(username)&&p.getPassword().equals(password)).collect(Collectors.toList());
-        doctorList = doctorList.stream().filter(p->p.getUsername().equals(username)&&p.getPassword().equals(password)).collect(Collectors.toList());
-        donorList = donorList.stream().filter(p->p.getUsername().equals(username)&&p.getPassword().equals(password)).collect(Collectors.toList());
+        personnelList = personnelList.stream().filter(p -> p.getUsername().equals(username) && p.getPassword().equals(password)).collect(Collectors.toList());
+        doctorList = doctorList.stream().filter(p -> p.getUsername().equals(username) && p.getPassword().equals(password)).collect(Collectors.toList());
+        donorList = donorList.stream().filter(p -> p.getUsername().equals(username) && p.getPassword().equals(password)).collect(Collectors.toList());
 
         log.trace("getUser exited!");
 
-        if(personnelList.size()==0 && doctorList.size()==0 && donorList.size()==0)
-            return new LoginReply("invalid",-1l);
-        else if (doctorList.size()>0)
-            return new LoginReply("doctor",doctorList.get(0).getId());
-        else if (donorList.size()>0)
-            return new LoginReply("donor",donorList.get(0).getId());
-        else return new LoginReply("personnel",personnelList.get(0).getId());
+        if (personnelList.size() == 0 && doctorList.size() == 0 && donorList.size() == 0)
+            return new LoginReply("invalid", -1l);
+        else if (doctorList.size() > 0)
+            return new LoginReply("doctor", doctorList.get(0).getId());
+        else if (donorList.size() > 0)
+            return new LoginReply("donor", donorList.get(0).getId());
+        else return new LoginReply("personnel", personnelList.get(0).getId());
     }
 }
