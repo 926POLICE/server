@@ -85,7 +85,7 @@ public class BloodController implements InitializingBean {
     @Override
     @Transactional
     public void afterPropertiesSet() throws Exception {
-        if(eraseAllFlag==true)
+        if(eraseAllFlag)
         {
             clinicRepository.findAll().forEach(p->clinicRepository.deleteById(p.getId()));
             doctorService.getAllDoctors().forEach(d->doctorService.deleteDoctor(d.getId()));
@@ -157,7 +157,7 @@ public class BloodController implements InitializingBean {
 String checkRequestStatus(@RequestBody final Long PatientID)
                  */
                 String val = doctorController.checkRequestStatus(patient.getId());
-                assert (val==Boolean.toString(false));
+                assert (val.equals(Boolean.toString(false)));
 
                 // DOCTOR TESTED (still needs some 'minor' work)
 
@@ -197,7 +197,7 @@ String checkRequestStatus(@RequestBody final Long PatientID)
 
                 List<DonationDTO> donationDTOList = donorController.getAnalysisHistory(donor.getId());
                 assert (donationDTOList.size()==1);
-                assert (donationDTOList.get(0).getClinicid()==clinicService.getTheClinic().getId());
+                assert (donationDTOList.get(0).getClinicid().equals(clinicService.getTheClinic().getId()));
 
                 //    @RequestMapping(value = "/donors/nextDonation/{donorID}", method = RequestMethod.GET)
                 //    String getNextDonation(@PathVariable final Long donorID)
@@ -216,7 +216,7 @@ String checkRequestStatus(@RequestBody final Long PatientID)
                 //    List<BloodDTO> getBloodJourney(@PathVariable final Long donorID)
                 List<BloodDTO> bloodDTOList = donorController.getBloodJourney(donor.getId());
                 assert (bloodDTOList.size()==1);
-                assert (bloodDTOList.get(0).getQuantity()==blood.getQuantity());
+                assert (bloodDTOList.get(0).getQuantity().equals(blood.getQuantity()));
                 assert (bloodDTOList.get(0).getState()==1);
 
                 //     @RequestMapping(value = "/donors/{donorID}", method = RequestMethod.PUT)
@@ -235,14 +235,14 @@ String checkRequestStatus(@RequestBody final Long PatientID)
 
                 // DonorDTO getPersonalDetails(@PathVariable final  Long donorID)
                 DonorDTO donorDTO = donorController.getPersonalDetails(donor.getId());
-                assert (donor.getName()==donorDTO.getName());
-                assert (donor.getResidence()==donorDTO.getResidence());
+                assert (donor.getName().equals(donorDTO.getName()));
+                assert (donor.getResidence().equals(donorDTO.getResidence()));
 
                 // String updateMedicalHistory(@PathVariable final Long donorID, @RequestBody final String newHistory)
                 String history = donor.getMedicalHistory();
                 donorController.updateMedicalHistory(donor.getId(),"blabla");
                 testDonor = donorService.findbyID(donor.getId()).get();
-                assert (testDonor.getMedicalHistory()==(history+"blabla"));
+                assert (testDonor.getMedicalHistory().equals(history + "blabla"));
 
                 // DonationDTO donate(@RequestBody Map<String, String> json)
                 // @RequestBody final Long DonorID, @RequestBody final @Nullable Long PatientID
@@ -255,8 +255,8 @@ String checkRequestStatus(@RequestBody final Long PatientID)
                 theMap.put("patientid",Long.toString(patient.getId()));
                 DonationDTO res = donorController.donate(theMap);
                 assert (donationService.getAllDonations().size()==2);
-                assert (res.getDonorid()==donor.getId());
-                assert (res.getAnalysisresult()==false);
+                assert (res.getDonorid().equals(donor.getId()));
+                assert (!res.getAnalysisresult());
 
                 // --- Donor Controller tested
 
@@ -265,8 +265,8 @@ String checkRequestStatus(@RequestBody final Long PatientID)
                 Blood newBlood = bloodService.createBlood(1l,20f,2,"p",donation.getId(),clinic.getId());
                 List<BloodDTO> bloodDTOList2 = clinicController.getBloodStocks();
                 bloodDTOList = bloodDTOList2.stream().collect(Collectors.toList());
-                assert (bloodDTOList.get(0).getUsable()==true);
-                assert (bloodDTOList.get(0).getId()==blood.getId());
+                assert (bloodDTOList.get(0).getUsable());
+                assert (bloodDTOList.get(0).getId().equals(blood.getId()));
                 assert (bloodDTOList2.size()==1);
                 assert (bloodService.getAllBloods().size()==2);
 
@@ -275,7 +275,7 @@ String checkRequestStatus(@RequestBody final Long PatientID)
                 bloodDTOList2 = clinicController.getUnusableBloodStocks();
                 assert (bloodDTOList2.size()==1);
                 bloodDTOList = bloodDTOList2.stream().collect(Collectors.toList());
-                assert (bloodDTOList.get(0).getId()==blood.getId());
+                assert (bloodDTOList.get(0).getId().equals(blood.getId()));
 
                 // public List<Blood> getUntestedBloods()
                 bloodDTOList2 = clinicController.getUntestedBloodStocks();
@@ -310,7 +310,7 @@ String checkRequestStatus(@RequestBody final Long PatientID)
                 // Set<DonorDTO> getDonors()
                 List<DonorDTO> donorDTOList = clinicController.getDonors();
                 assert (donorDTOList.size()==1);
-                assert (donorDTOList.get(0).getId()==donor.getId());
+                assert (donorDTOList.get(0).getId().equals(donor.getId()));
 
                 /*
                 	// Will set the given parameters to the donor with the given ID.
@@ -327,9 +327,9 @@ String checkRequestStatus(@RequestBody final Long PatientID)
                 clinicController.setDonorInfo(donor.getId(),theMap);
                 assert (donor.getAnticorps().equals("are"));
 
-                assert (clinicController.getEligibility(donor.getId())==false);
+                assert (!clinicController.getEligibility(donor.getId()));
                 clinicController.setEligibility(donor.getId(),true);
-                assert (clinicController.getEligibility(donor.getId())==true);
+                assert (clinicController.getEligibility(donor.getId()));
 
                 // LoginReply getUser(@RequestBody Map<String, String> json)
                 theMap.clear();
@@ -343,14 +343,14 @@ String checkRequestStatus(@RequestBody final Long PatientID)
                 theMap.put("username",donor.getUsername());
                 theMap.put("password",donor.getPassword());
                 reply = clinicController.getUser(theMap);
-                assert (reply.getId()==-donor.getId());
+                assert (reply.getId()==donor.getId());
                 assert (reply.getType().equals("donor"));
 
                 theMap.clear();
                 theMap.put("username",doctor.getUsername());
                 theMap.put("password",doctor.getPassword());
                 reply = clinicController.getUser(theMap);
-                assert (reply.getId()==-doctor.getId());
+                assert (reply.getId()==doctor.getId());
                 assert (reply.getType().equals("doctor"));
 
                 theMap.clear();
@@ -372,9 +372,9 @@ String checkRequestStatus(@RequestBody final Long PatientID)
                 theMap.clear();
                 theMap.put("donorid",Long.toString(donor.getId()));
                 theMap.put("patientid",Long.toString(patient.getId()));
-                assert (clinicController.checkCompatibility(theMap)==false);
+                assert (!clinicController.checkCompatibility(theMap));
                 patientService.updatePatient(patient.getId(),patient.getName(),patient.getBirthday(),patient.getResidence(),patient.getAddress(),donor.getBloodType(),donor.getRh(),donor.getAnticorps(), patient.getIsDonor(),patient.getLatitude(),patient.getLongitude(),patient.getHospital());
-                assert (clinicController.checkCompatibility(theMap)==true);
+                assert (clinicController.checkCompatibility(theMap));
 
                 //@RequestMapping(value = "/bloodStocks/{bloodId}", method = RequestMethod.PUT)
                 //BloodDTO updateBlood(@PathVariable final Long bloodId, @RequestBody final BloodDTO bloodDto)
@@ -419,7 +419,7 @@ String checkRequestStatus(@RequestBody final Long PatientID)
                 assert (donation.getP().getQuantity()==70f);
                 assert (donation.getT().getQuantity()==50f);
                 assert (donation.getR().getCollectionDate().equals(time));
-                assert (donor.getNextDonation()==time+86400 * 56);
+                assert (donor.getNextDonation() == (time + (86400 * 56)));
                 log.trace("VICTORY! collectBlood");
 
                 // getAllDonors: donors=[ID: 751 Donor{nextDonation='1', eligibility=false, username='john', password='john', name='john', birthday='1', residence='john', bloodType='', Rh=true, anticorps='', isDonor=true, latitude=1.0, longitude=1.0}, ID: 752 Donor{nextDonation='1', eligibility=false, username='john', password='john', name='john', birthday='1', residence='john', bloodType='', Rh=true, anticorps='', isDonor=true, latitude=1.0, longitude=1.0}, ID: 745 Donor{nextDonation='1532684251', eligibility=true, username='donor', password='donor', name='ares', birthday='1', residence='homestead', bloodType='A', Rh=false, anticorps='none', isDonor=true, latitude=1.0, longitude=1.0}]

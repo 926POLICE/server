@@ -52,7 +52,7 @@ public class RequestServiceImpl implements RequestService
         Optional<Patient> patient = patientRepository.findById(patientID);
         Optional<Clinic> clinic = clinicRepository.findById(clinicID);
         Optional<Doctor> doctor = doctorRepository.findById(doctorID);
-        if(doctor.isPresent()==false||patient.isPresent()==false||clinic.isPresent()==false)
+        if(!doctor.isPresent() || !patient.isPresent() || !clinic.isPresent())
             throw new RuntimeException("Invalid request constructor!");
 
         Request request = requestRepository.save(new Request(RQuantity,PQuantity,TQuantity,priority,false,patient.get(),doctor.get(),clinic.get()));
@@ -70,7 +70,7 @@ public class RequestServiceImpl implements RequestService
         Optional<Patient> patient = patientRepository.findById(patientID);
         Optional<Clinic> clinic = clinicRepository.findById(clinicID);
         Optional<Doctor> doctor = doctorRepository.findById(doctorID);
-        if(doctor.isPresent()==false||patient.isPresent()==false||clinic.isPresent()==false)
+        if(!doctor.isPresent() || !patient.isPresent() || !clinic.isPresent())
             throw new RuntimeException("Invalid request update!");
 
         optionalRequest.ifPresent(st -> {

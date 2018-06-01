@@ -61,7 +61,7 @@ public class DonationServiceImpl implements DonationService {
         Optional<Blood> TBlood = bloodRepository.findById(TBloodID);
         Optional<Donor> donor = donorRepository.findById(donorID);
         Optional<Patient> patientOptional = patientRepository.findById(patientID);
-        if (RBlood.isPresent() == false || PBlood.isPresent() == false || TBlood.isPresent() == false || donor.isPresent() == false)
+        if (!RBlood.isPresent() || !PBlood.isPresent() || !TBlood.isPresent() || !donor.isPresent())
             throw new RuntimeException("Invalid donation update!");
 
         Patient patient = null;

@@ -94,7 +94,7 @@ public class DoctorController
             throw new RuntimeException("Doctor does not exist!");
 
         return requestService.getAllRequests().stream()
-                .filter(request -> request.getDoctor().getId()==doctorid)
+                .filter(request -> request.getDoctor().getId().equals(doctorid))
                 .map(request -> new RequestDTO(request.getPatient().getId(),request.getDoctor().getId(), request.getRQuantity(),request.getPQuantity(),request.getTQuantity(), request.getPriority(),request.getCompleted(), request.getClinic().getId()))
                 .collect(Collectors.toList());
     }
@@ -104,7 +104,7 @@ public class DoctorController
     public String checkRequestStatus(@RequestBody final Long patientid)
     {
         List<Request> requests=requestService.getAllRequests().stream()
-                .filter(request -> request.getPatient().getId()==patientid)
+                .filter(request -> request.getPatient().getId().equals(patientid))
                 .collect(Collectors.toList());
 
 

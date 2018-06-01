@@ -116,7 +116,7 @@ public class ClinicController {
     @RequestMapping(value = "/requests", method = RequestMethod.GET)
     List<RequestDTO> getAllRequests() {
         List<Request> requests = requestService.getAllRequests();
-        requests = requests.stream().filter(r -> r.getCompleted() == false).collect(Collectors.toList());
+        requests = requests.stream().filter(r -> !r.getCompleted()).collect(Collectors.toList());
         Collections.sort(requests);
         return requestConverter.convertModelsToDtos(requests);
     }
@@ -237,7 +237,7 @@ public class ClinicController {
 
         Optional<Donor> donorOptional = donorService.findbyID(donorid);
 
-        if (donorOptional.isPresent() == false)
+        if (!donorOptional.isPresent())
             throw new RuntimeException("Attempted to get eligibility for an inexistent donor...");
 
         Donor donor = donorOptional.get();
@@ -263,7 +263,7 @@ public List<BloodDTO> collectBlood(@RequestBody final Long DonationID, @RequestB
         Long collectionDate = Long.parseLong(json.get("collectiondate"));
 
         Optional<Donation> donationOptional = donationService.findByID(DonationID);
-        if (donationOptional.isPresent() == false)
+        if (!donationOptional.isPresent())
             throw new RuntimeException("Invalid donation!");
 
         // public Blood(Long collectionDate, Float quantity, Integer state, String type, Donation donation, Clinic clinic)
@@ -340,7 +340,7 @@ boolean checkCompatibility(@RequestBody final Long DonorID,@RequestBody final  L
         Optional<Donor> donorOptional = donorService.findbyID(donorID);
         Optional<Patient> patientOptional = patientService.findByID(patientID);
 
-        if (donorOptional.isPresent() == false || patientOptional.isPresent() == false)
+        if (!donorOptional.isPresent() || !patientOptional.isPresent())
             throw new RuntimeException("Invalid donor and/or patient!");
 
         Donor donor = donorOptional.get();
@@ -352,7 +352,7 @@ boolean checkCompatibility(@RequestBody final Long DonorID,@RequestBody final  L
     @RequestMapping(value = "/requests/{requestid}", method = RequestMethod.PUT)
     Float processRequest(@PathVariable final Long requestid) {
         Optional<Request> requestOptional = requestService.findByID(requestid);
-        if (requestOptional.isPresent() == false)
+        if (!requestOptional.isPresent())
             throw new RuntimeException("Invalid request ID!!");
 
         Request request = requestOptional.get();

@@ -47,7 +47,7 @@ public class BloodServiceImpl implements BloodService
     @Override
     public List<Blood> getUsableBloods() {
         List<Blood> bloodList = getAllBloods();
-        bloodList = bloodList.stream().filter(b->b.getTested()==true && b.getUsable()==true && b.getCollectionDate()+86400*b.getShelfLife()>= currentTime && b.getState()!=3).collect(Collectors.toList());
+        bloodList = bloodList.stream().filter(b-> b.getTested() && b.getUsable() && b.getCollectionDate()+86400*b.getShelfLife()>= currentTime && b.getState()!=3).collect(Collectors.toList());
         // only needs to return blood containres that haven't expired and that haven't been marked as ready to ship to the hospitals
         Collections.sort(bloodList);
         return bloodList;
@@ -57,7 +57,7 @@ public class BloodServiceImpl implements BloodService
     public List<Blood> getUnusableBloods() {
         Set<Blood> to_return = new HashSet<>();
         List<Blood> bloodList = getAllBloods();
-        List<Blood> unusableBlood = bloodList.stream().filter(b->b.getUsable()==false).collect(Collectors.toList());
+        List<Blood> unusableBlood = bloodList.stream().filter(b-> !b.getUsable()).collect(Collectors.toList());
         List<Blood> expiredBlood = bloodList.stream().filter(b->b.getCollectionDate()+86400*b.getShelfLife()< currentTime).collect(Collectors.toList());
         to_return.addAll(unusableBlood);
         to_return.addAll(expiredBlood);
@@ -66,7 +66,7 @@ public class BloodServiceImpl implements BloodService
 
     @Override
     public List<Blood> getUntestedBloods() {
-        return getAllBloods().stream().filter(p->p.getTested()==false).collect(Collectors.toList());
+        return getAllBloods().stream().filter(p-> !p.getTested()).collect(Collectors.toList());
     }
 
     @Override

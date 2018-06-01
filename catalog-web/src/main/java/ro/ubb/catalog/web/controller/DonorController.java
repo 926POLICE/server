@@ -70,7 +70,7 @@ public class DonorController
         Long birthday = Long.parseLong(birthString);
 
         // username-u ar trebui sa fie unic nu? I mean nu cred ca poti sa ai doi useri cu acelasi username da parole diferite
-        List<Donor> donors = donorService.getAllDonors().stream().filter(donor->donor.getUsername()==username).collect(Collectors.toList());
+        List<Donor> donors = donorService.getAllDonors().stream().filter(donor-> donor.getUsername().equals(username)).collect(Collectors.toList());
         if(!donors.isEmpty())
             throw new RuntimeException("This username is already taken!");
 
