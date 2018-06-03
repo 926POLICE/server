@@ -199,11 +199,11 @@ String checkRequestStatus(@RequestBody final Long PatientID)
 
                 donorService.updateDonor(donor.getId(), donor.getName(), donor.getBirthday(), doctor.getHospital(), donor.getAddress(), donor.getBloodType(), donor.getRh(), donor.getAnticorps(), donor.getIsDonor(), donor.getLatitude(), donor.getLongitude(), donor.getEligibility(), donor.getHasBeenNotified(), blood.getCollectionDate() + 86400 * 56, donor.getUsername(), donor.getPassword());
 
-                String nextDonation = donorController.getNextDonation(donor.getId());
+                Long nextDonation = donorController.getNextDonation(donor.getId());
 
                 log.trace("Next donation is:");
-                log.trace(nextDonation);
-                Long nextDonationLong = Long.parseLong(nextDonation);
+                log.trace(nextDonation.toString());
+                Long nextDonationLong = nextDonation;
 
                 assert (nextDonationLong == blood.getCollectionDate() + 86400 * 56);
 

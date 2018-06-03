@@ -20,5 +20,7 @@ public class DonationDTO  extends BaseDto {
 
     private Boolean analysisresult;
 
+    private Long date;
+
     private Long clinicid;
 }

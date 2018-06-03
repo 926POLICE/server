@@ -95,13 +95,13 @@ public class DonorController
     }
 
     @RequestMapping(value = "/donors/nextDonation/{donorid}", method = RequestMethod.GET)
-    String getNextDonation(@PathVariable final Long donorid)
+    Long getNextDonation(@PathVariable final Long donorid)
     {
         log.trace("getNextDonation: donorID={}",donorid);
 
         Optional<Donor> donorOptional = donorService.findbyID(donorid);
         if(donorOptional.isPresent()) {
-            String nextDonation = donorOptional.get().getNextDonation().toString();
+            Long nextDonation = donorOptional.get().getNextDonation();
 
             log.trace("getNextDonation: result={}",nextDonation);
             return nextDonation;
