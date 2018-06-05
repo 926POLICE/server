@@ -12,11 +12,17 @@ public class DonationConverter extends BaseConverter<Donation,DonationDTO> {
     @Override
     public DonationDTO convertModelToDto(Donation donation)
     {
-        Long R, P, T, donor, patient,clinic;
+        Long R, P, T, donor, patient,clinic, date;
         if(donation.getR()==null)
+        {
             R=-1L;
+            date = 0l;
+        }
         else
+        {
             R=donation.getR().getId();
+            date = donation.getR().getCollectionDate();
+        }
         if(donation.getP()==null)
             P=-1L;
         else
@@ -38,7 +44,7 @@ public class DonationConverter extends BaseConverter<Donation,DonationDTO> {
         else
             clinic = donation.getClinic().getId();
 
-        DonationDTO res = new DonationDTO(R,P,T,donor,patient,donation.getAnalysisResult(),clinic);
+        DonationDTO res = new DonationDTO(R,P,T,donor,patient,donation.getAnalysisResult(),date,clinic);
 
         res.setId(donation.getId());
 

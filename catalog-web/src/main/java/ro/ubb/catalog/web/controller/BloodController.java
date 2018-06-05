@@ -81,19 +81,24 @@ public class BloodController implements InitializingBean {
 
     private RestTemplate restTemplate = new RestTemplate();
 
+    private void clearAll()
+    {
+        clinicRepository.findAll().forEach(p -> clinicRepository.deleteById(p.getId()));
+        doctorService.getAllDoctors().forEach(d -> doctorService.deleteDoctor(d.getId()));
+        patientService.getAllPatients().forEach(p -> patientService.deletePatient(p.getId()));
+        donorService.getAllDonors().forEach(d -> donorService.deleteDonor(d.getId()));
+        donationService.getAllDonations().forEach(d -> donationService.deleteDonation(d.getId()));
+        requestService.getAllRequests().forEach(r -> requestService.deleteRequest(r.getId()));
+        bloodService.getAllBloods().forEach(b -> bloodService.deleteBlood(b.getId()));
+        personnelRepository.findAll().forEach(p -> personnelRepository.deleteById(p.getId()));
+    }
+
     // http://www.baeldung.com/running-setup-logic-on-startup-in-spring
     @Override
     @Transactional
     public void afterPropertiesSet() throws Exception {
         if (eraseAllFlag) {
-            clinicRepository.findAll().forEach(p -> clinicRepository.deleteById(p.getId()));
-            doctorService.getAllDoctors().forEach(d -> doctorService.deleteDoctor(d.getId()));
-            patientService.getAllPatients().forEach(p -> patientService.deletePatient(p.getId()));
-            donorService.getAllDonors().forEach(d -> donorService.deleteDonor(d.getId()));
-            donationService.getAllDonations().forEach(d -> donationService.deleteDonation(d.getId()));
-            requestService.getAllRequests().forEach(r -> requestService.deleteRequest(r.getId()));
-            bloodService.getAllBloods().forEach(b -> bloodService.deleteBlood(b.getId()));
-            personnelRepository.findAll().forEach(p -> personnelRepository.deleteById(p.getId()));
+            clearAll();
 
             System.out.println("Cleared all the garbage sucessfully!");
 
@@ -102,7 +107,7 @@ public class BloodController implements InitializingBean {
             Patient patient = patientService.createPatient("ionut", 1l, "a", "b", "A", false, "none", false, 40.0f, 40.0f, "central");
             Donor donor = donorService.createDonor("donor", "donor", "ionut", 1l, "a", "b", "A", false, "none", false, 1.0f, 2.0f);
             Donation donation = donationService.createDonation(donor.getId(), null, clinicService.getTheClinic().getId());
-            Request request = requestService.createRequest(patient.getId(), doctor.getId(), 1.0f, 2.0f, 3.0f, 1, clinic.getId());
+            Request request = requestService.createRequest(patient.getId(), doctor.getId(), 1.0f, 2.0f, 3.0f, 1,1l, clinic.getId());
             Blood blood = bloodService.createBlood(currentTime, 2.0f, 1, "r", donation.getId(), clinic.getId());
             bloodService.testBlood(blood.getId(), true);
             personnelRepository.save(new Personnel("admin", "admin"));
@@ -437,11 +442,8 @@ String checkRequestStatus(@RequestBody final Long PatientID)
                 // getAllDonors: donors=[ID: 751 Donor{nextDonation='1', eligibility=false, username='john', password='john', name='john', birthday='1', residence='john', bloodType='', Rh=true, anticorps='', isDonor=true, latitude=1.0, longitude=1.0}, ID: 752 Donor{nextDonation='1', eligibility=false, username='john', password='john', name='john', birthday='1', residence='john', bloodType='', Rh=true, anticorps='', isDonor=true, latitude=1.0, longitude=1.0}, ID: 745 Donor{nextDonation='1532684251', eligibility=true, username='donor', password='donor', name='ares', birthday='1', residence='homestead', bloodType='A', Rh=false, anticorps='none', isDonor=true, latitude=1.0, longitude=1.0}]
                 // notifyDonorsNeeded
                 theMap.clear();
-                theMap.put("bloodtype", "A");
-                theMap.put("rh", Boolean.toString(false));
-                theMap.put("anticorps", "none");
                 assert (donorService.getAllDonors().stream().filter(d -> d.getHasBeenNotified()).collect(Collectors.toList()).size() == 0);
-                clinicController.notifyDonorNeeded(theMap);
+                clinicController.notifyDonorNeeded(patient.getId());
                 assert (donorService.getAllDonors().stream().filter(d -> d.getHasBeenNotified()).collect(Collectors.toList()).size() == 1);
 
 //                log.trace("About to test processRequest");
@@ -457,7 +459,7 @@ String checkRequestStatus(@RequestBody final Long PatientID)
                 clinicController.testBlood(T.getId(), true);
                 assert (donorController.getAnalysisHistory(donor.getId()).stream().map(d->d.getAnalysisresult()).collect(Collectors.toList()).contains(true));
 
-                Request testRequest = requestService.createRequest(patient.getId(), doctor.getId(), 90f, 70f, 50f, 3, clinic.getId());
+                Request testRequest = requestService.createRequest(patient.getId(), doctor.getId(), 90f, 70f, 50f, 3, 2l,clinic.getId());
                 size = bloodService.getUsableBloods().size();
                 assert (request.getCompleted()==false);
                 clinicController.processRequest(request.getId());
@@ -487,6 +489,24 @@ String checkRequestStatus(@RequestBody final Long PatientID)
                 assert (clinicController.getBloodStocks().size() == 0);
 
                 log.trace("ALL TESTS PASSED!");
+
+                clearAll();
+                clinic = clinicRepository.save(new Clinic(46.67f, 23.50f));
+                doctor = doctorService.createDoctor("dre", "dre", "Dr. Dre", "central");
+                patient = patientService.createPatient("ionut", 1l, "a", "b", "A", false, "none", false, 40.0f, 40.0f, "central");
+                donor = donorService.createDonor("donor", "donor", "ionut", 1l, "a", "b", "A", false, "none", false, 1.0f, 2.0f);
+                donation = donationService.createDonation(donor.getId(), null, clinicService.getTheClinic().getId());
+                request = requestService.createRequest(patient.getId(), doctor.getId(), 1.0f, 2.0f, 3.0f, 1,1l, clinic.getId());
+                blood = bloodService.createBlood(currentTime, 2.0f, 1, "r", donation.getId(), clinic.getId());
+                bloodService.testBlood(blood.getId(), true);
+                blood = bloodService.createBlood(currentTime, 3.0f, 1, "p", donation.getId(), clinic.getId());
+                bloodService.testBlood(blood.getId(), false);
+                blood = bloodService.createBlood(currentTime, 5.0f, 1, "t", donation.getId(), clinic.getId());
+                personnelRepository.save(new Personnel("admin", "admin"));
+
+
+
+                log.trace("Re-added test data sucessfully!");
             } catch (Exception e) {
                 log.trace("TESTING FAILED: ");
                 log.trace(e.getMessage() + " " + e.getLocalizedMessage());

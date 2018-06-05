@@ -29,6 +29,8 @@ public class Request extends BaseEntity<Long> implements Serializable, Comparabl
     @OneToOne(fetch = FetchType.EAGER)
     private Doctor doctor;
 
+    private Long date;
+
     @ManyToOne
     private Clinic clinic;
 

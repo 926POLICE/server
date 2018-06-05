@@ -46,16 +46,21 @@ public class RequestServiceImpl implements RequestService
     }
 
     @Override
-    public Request createRequest(Long patientID, Long doctorID, Float RQuantity, Float PQuantity, Float TQuantity, Integer priority, Long clinicID) {
+    public Request createRequest(Long patientID, Long doctorID, Float RQuantity, Float PQuantity, Float TQuantity, Integer priority, Long date,Long clinicID) {
         log.trace("createRequest entered!");
 
         Optional<Patient> patient = patientRepository.findById(patientID);
         Optional<Clinic> clinic = clinicRepository.findById(clinicID);
         Optional<Doctor> doctor = doctorRepository.findById(doctorID);
-        if(!doctor.isPresent() || !patient.isPresent() || !clinic.isPresent())
-            throw new RuntimeException("Invalid request constructor!");
 
-        Request request = requestRepository.save(new Request(RQuantity,PQuantity,TQuantity,priority,false,patient.get(),doctor.get(),clinic.get()));
+        if(!doctor.isPresent())
+            throw new RuntimeException("Doctor not found!");
+        else if (!patient.isPresent())
+            throw new RuntimeException("Patient not found!");
+        else if (!clinic.isPresent())
+            throw new RuntimeException("Clinic not found!");
+
+        Request request = requestRepository.save(new Request(RQuantity,PQuantity,TQuantity,priority,false,patient.get(),doctor.get(),date,clinic.get()));
 
         log.trace("createRequest exited!");
 

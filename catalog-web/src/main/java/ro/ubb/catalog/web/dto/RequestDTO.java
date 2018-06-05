@@ -19,5 +19,7 @@ public class RequestDTO  extends BaseDto {
     private Integer priority;
     private Boolean completed;
 
+    private Long date;
+
     private Long clinicid;
 }

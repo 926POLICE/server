@@ -84,13 +84,22 @@ public class ClinicController {
     }
 
     @RequestMapping(value = "/bloodStocksUntested", method = RequestMethod.GET)
-    List<BloodDTO> getUntestedBloodStocks() {
+    List<BloodDTO> getUntestedBloodStocks()
+    {
+        log.trace("Get untested Bloods entered!");
+
         List<Blood> bloodList = bloodService.getUntestedBloods();
+
+        log.trace("Get untested Bloods exited!");
+
         return bloodConverter.convertModelsToDtos(bloodList);
     }
 
     @RequestMapping(value = "/bloodStocksUnusable", method = RequestMethod.GET)
-    List<BloodDTO> getUnusableBloodStocks() {
+    List<BloodDTO> getUnusableBloodStocks()
+    {
+        log.trace("Get Unusable Bloods entered&exited!");
+
         return bloodConverter.convertModelsToDtos(bloodService.getUnusableBloods());
     }
 
@@ -247,6 +256,23 @@ public class ClinicController {
         return donor.getEligibility() && donor.getNextDonation() <= currentTime;
     }
 
+    @RequestMapping(value = "/donors/notified/{donorid}", method = RequestMethod.GET)
+    boolean getNotified(@PathVariable final Long donorid)
+    {
+        log.trace("getNotified Entered!");
+
+        Optional<Donor> donorOptional = donorService.findbyID(donorid);
+
+        if (!donorOptional.isPresent())
+            throw new RuntimeException("Attempted to get notified for an inexistent donor...");
+
+        Donor donor = donorOptional.get();
+
+        log.trace("getNotified result: " + donor.getHasBeenNotified() + " \nexiting...");
+
+        return donor.getHasBeenNotified();
+    }
+
     @RequestMapping(value = "/bloodStocksUntested", method = RequestMethod.POST)
     public List<BloodDTO> collectBlood(@RequestBody Map<String, String> json) {
         log.trace("collectBlood entered!");
@@ -301,17 +327,17 @@ boolean checkAvailability(@RequestBody final Float Thrombocytes,@RequestBody fin
         return bloodService.checkAvailability(R, P, T);
     }
 
-    @RequestMapping(value = "/donors/notify", method = RequestMethod.PUT)
-    boolean notifyDonorNeeded(@RequestBody Map<String, String> json) {
+    @RequestMapping(value = "/donors/notify/{patientid}", method = RequestMethod.PUT)
+    boolean notifyDonorNeeded(@PathVariable final Long patientid) {
         /*
         // Will notify the closest donors that has passed the time since the last donation that match the given attributes.
 // Calls for all available donors.
 @RequestMapping(value = "/donors/notify", method = RequestMethod.PUT)
 boolean notifyDonorNeeded(@RequestBody final String BloodType,@RequestBody final Boolean RH,@RequestBody final String Anticorps);
          */
-        String bloodType = json.get("bloodtype");
-        Boolean Rh = Boolean.parseBoolean(json.get("rh"));
-        String anticorps = json.get("anticorps");
+        String bloodType = patientService.findByID(patientid).get().getBloodType();
+        Boolean Rh = patientService.findByID(patientid).get().getRh();
+        String anticorps = patientService.findByID(patientid).get().getAnticorps();
 
         donorService.notifyDonorsNeeded(bloodType, Rh, anticorps);
 

@@ -69,22 +69,21 @@ public class DoctorController
         Float RQuantity=Float.parseFloat(json.get("rquantity"));
         Float PQuantity=Float.parseFloat(json.get("pquantity"));
         Float TQuantity=Float.parseFloat(json.get("tquantity"));
-
         Integer priority=Integer.parseInt(json.get("priority"));
 
         log.trace(DoctorID.toString());
         log.trace(PatientID.toString());
         log.trace(RQuantity.toString());
 
-        Request request = requestService.createRequest(PatientID,DoctorID,RQuantity,PQuantity,TQuantity,priority,clinicService.getTheClinic().getId());
+        Request request = requestService.createRequest(PatientID,DoctorID,RQuantity,PQuantity,TQuantity,priority,currentTime,clinicService.getTheClinic().getId());
 
         log.trace("new Blood exited!");
 
         return requestConverter.convertModelToDto(request);
     }
 
-    @RequestMapping(value = "/requests/doctors", method = RequestMethod.GET)
-    public List<RequestDTO> getAllDoctorRequests(@RequestBody final Long doctorid){
+    @RequestMapping(value = "/requests/doctors/{doctorid}", method = RequestMethod.GET)
+    public List<RequestDTO> getAllDoctorRequests(@PathVariable final Long doctorid){
         List<Doctor> doctors=doctorService.getAllDoctors()
                 .stream()
                 .filter(doctor -> doctor.getId().equals(doctorid))
@@ -95,7 +94,7 @@ public class DoctorController
 
         return requestService.getAllRequests().stream()
                 .filter(request -> request.getDoctor().getId().equals(doctorid))
-                .map(request -> new RequestDTO(request.getPatient().getId(),request.getDoctor().getId(), request.getRQuantity(),request.getPQuantity(),request.getTQuantity(), request.getPriority(),request.getCompleted(), request.getClinic().getId()))
+                .map(request -> new RequestDTO(request.getPatient().getId(),request.getDoctor().getId(), request.getRQuantity(),request.getPQuantity(),request.getTQuantity(), request.getPriority(),request.getCompleted(), request.getDate(),request.getClinic().getId()))
                 .collect(Collectors.toList());
     }
 
@@ -114,17 +113,5 @@ public class DoctorController
         for(Request r:requests)
             return r.getCompleted().toString();
         return null;
-    }
-
-    public void addSampleData() throws Exception {
-            Clinic clinic = clinicRepository.save(new Clinic(46.67f,23.50f));
-            Doctor doctor=doctorService.createDoctor("dre","dre","Dr. Dre","central");
-            Patient patient=patientService.createPatient("ionut",1l,"a","b","A",false,"none",false,1.0f,2.0f,"central");
-            Donor donor= donorService.createDonor("donor","donor","ionut",1l,"a","b","A",false,"none",false,1.0f,2.0f);
-            Donation donation = donationService.createDonation(donor.getId(),null,clinicService.getTheClinic().getId());
-            Request request = requestService.createRequest(patient.getId(),doctor.getId(),1.0f,2.0f,3.0f,1,clinic.getId());
-            Blood blood = bloodService.createBlood(currentTime,2.0f,1,"r",donation.getId(),clinic.getId());
-            bloodService.testBlood(blood.getId(),true);
-            personnelRepository.save(new Personnel("admin","admin"));
     }
 }

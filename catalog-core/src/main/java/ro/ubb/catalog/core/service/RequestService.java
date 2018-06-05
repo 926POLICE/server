@@ -9,7 +9,7 @@ public interface RequestService
 {
     List<Request> getAllRequests();
 
-    Request createRequest(Long patientID, Long doctorID, Float RQuantity, Float PQuantity, Float TQuantity, Integer priority, Long clinicID);
+    Request createRequest(Long patientID, Long doctorID, Float RQuantity, Float PQuantity, Float TQuantity, Integer priority,Long date, Long clinicID);
 
     Optional<Request> updateRequest(Long requestID, Long patientID, Long doctorID, Float RQuantity, Float PQuantity, Float TQuantity, Integer priority, Boolean completed, Long clinicID);
 

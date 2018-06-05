@@ -26,7 +26,7 @@ public class RequestConverter extends BaseConverter<Request,RequestDTO> {
         else
             clinic = request.getClinic().getId();
 
-        RequestDTO res = new RequestDTO(patient,doctor,request.getRQuantity(),request.getPQuantity(),request.getTQuantity(),request.getPriority(),request.getCompleted(),clinic);
+        RequestDTO res = new RequestDTO(patient,doctor,request.getRQuantity(),request.getPQuantity(),request.getTQuantity(),request.getPriority(),request.getCompleted(),request.getDate(),clinic);
 
         res.setId(request.getId());
 
