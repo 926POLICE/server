@@ -14,6 +14,8 @@ import ro.ubb.catalog.web.converter.DonationConverter;
 import ro.ubb.catalog.web.converter.DonorConverter;
 import ro.ubb.catalog.web.dto.*;
 
+import java.text.SimpleDateFormat;
+import java.time.Instant;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Collectors;
@@ -53,8 +55,10 @@ public class DonorController
     private DonationConverter donationConverter = new DonationConverter();
     private BloodConverter bloodConverter = new BloodConverter();
 
+    private Long currentTime = Instant.now().getEpochSecond();
+
     @RequestMapping(value = "/donors", method = RequestMethod.POST)
-    DonorDTO registerUser(@RequestBody Map<String, String> json)
+    public DonorDTO registerUser(@RequestBody Map<String, String> json)
     {
         // Don't forget the case where the username and password already exist !!
 
@@ -83,7 +87,7 @@ public class DonorController
     }
 
     @RequestMapping(value = "/donors/history/{donorid}", method = RequestMethod.GET)
-    List<DonationDTO> getAnalysisHistory(@PathVariable final Long donorid)
+    public List<DonationDTO> getAnalysisHistory(@PathVariable final Long donorid)
     {
         log.trace("getAnalysisHistory entered!");
 
@@ -95,7 +99,7 @@ public class DonorController
     }
 
     @RequestMapping(value = "/donors/nextDonation/{donorid}", method = RequestMethod.GET)
-    Long getNextDonation(@PathVariable final Long donorid)
+    public Long getNextDonation(@PathVariable final Long donorid)
     {
         log.trace("getNextDonation: donorID={}",donorid);
 
@@ -111,7 +115,7 @@ public class DonorController
     }
 
     @RequestMapping(value = "/donors/bloodContainers/{donorid}", method = RequestMethod.GET)
-    List<BloodDTO> getBloodJourney(@PathVariable final Long donorid)
+    public List<BloodDTO> getBloodJourney(@PathVariable final Long donorid)
     {
         log.trace("getBloodJourney: donorDI={}",donorid);
 
@@ -130,7 +134,7 @@ public class DonorController
     }
 
     @RequestMapping(value = "/donors/{donorid}", method = RequestMethod.PUT)
-    DonorDTO updatePersonalDetails(@PathVariable final Long  donorid, @RequestBody Map<String, String> json)
+    public DonorDTO updatePersonalDetails(@PathVariable final Long  donorid, @RequestBody Map<String, String> json)
     {
         log.trace("---- updatePersonalDetails entered ----");
 
@@ -171,7 +175,7 @@ public class DonorController
     }
 
     @RequestMapping(value = "/donors/{donorid}", method = RequestMethod.GET)
-    DonorDTO getPersonalDetails(@PathVariable final  Long donorid)
+    public DonorDTO getPersonalDetails(@PathVariable final  Long donorid)
     {
         log.trace("getPersonalDetails: donorID={}",donorid);
 
@@ -188,11 +192,13 @@ public class DonorController
     }
 
     @RequestMapping(value = "/donors/history/{donorid}", method = RequestMethod.PUT)
-    String updateMedicalHistory(@PathVariable final Long donorid, @RequestBody final String newhistory)
+    public String updateMedicalHistory(@PathVariable final Long donorid, @RequestBody final String newhistory)
     {
         log.trace("updateMedicalHistory: donorID={}, newHistory={}",donorid,newhistory);
 
-        donorService.updateMedicalHistory(donorid,newhistory);
+        String date = new SimpleDateFormat("dd-MM-yyyy").format(new Date());
+
+        donorService.updateMedicalHistory(donorid,date+":"+newhistory+"\n");
 
         log.trace("updateHistory: result={}",newhistory);
 
@@ -200,7 +206,7 @@ public class DonorController
     }
 
     @RequestMapping(value = "/donations", method = RequestMethod.POST)
-    DonationDTO donate(@RequestBody Map<String, String> json)
+    public DonationDTO donate(@RequestBody Map<String, String> json)
     {
         log.trace("---- donate entered ----");
         log.trace("params:");

@@ -94,6 +94,7 @@ public class DoctorController
 
         return requestService.getAllRequests().stream()
                 .filter(request -> request.getDoctor().getId().equals(doctorid))
+                .filter(r-> !r.getCompleted())
                 .map(request -> new RequestDTO(request.getPatient().getId(),request.getDoctor().getId(), request.getRQuantity(),request.getPQuantity(),request.getTQuantity(), request.getPriority(),request.getCompleted(), request.getDate(),request.getClinic().getId()))
                 .collect(Collectors.toList());
     }

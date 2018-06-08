@@ -102,6 +102,8 @@ public class BloodController implements InitializingBean {
 
             System.out.println("Cleared all the garbage sucessfully!");
 
+            assert (clinicController.getAllPendingDonations().size()==0);
+
             Clinic clinic = clinicRepository.save(new Clinic(46.67f, 23.50f));
             Doctor doctor = doctorService.createDoctor("dre", "dre", "Dr. Dre", "central");
             Patient patient = patientService.createPatient("ionut", 1l, "a", "b", "A", false, "none", false, 40.0f, 40.0f, "central");

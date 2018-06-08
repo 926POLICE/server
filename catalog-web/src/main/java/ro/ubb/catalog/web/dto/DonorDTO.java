@@ -25,4 +25,5 @@ public class DonorDTO  extends BaseDto
     private Boolean eligibility;
     private Boolean hasbeennotified;
     private Boolean lastanalysisresult;
+    private String medicalHistory;
 }
