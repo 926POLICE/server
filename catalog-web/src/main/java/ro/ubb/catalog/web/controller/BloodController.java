@@ -259,6 +259,17 @@ String checkRequestStatus(@RequestBody final Long PatientID)
                 assert (donationService.getAllDonations().size() == 2);
                 assert (res.getDonorid().equals(donor.getId()));
                 assert (!res.getAnalysisresult());
+                assert (clinicController.getAllPendingDonations().size() == 1);
+
+                Donor badDonor =  donorService.createDonor("bad", "bad", "ionut", 1l, "a", "b", "A", false, "none", false, 1.0f, 2.0f);
+                badDonor.setEligibility(false);
+                theMap.clear();
+                theMap.put("donorid", Long.toString(badDonor.getId()));
+                theMap.put("patientid", Long.toString(patient.getId()));
+                res = donorController.donate(theMap);
+                assert (clinicController.getAllPendingDonations().size() == 1);
+                assert (donationService.getAllDonations().size() == 2);
+                assert (res.getDonorid()==-1L);
 
                 // --- Donor Controller tested
 

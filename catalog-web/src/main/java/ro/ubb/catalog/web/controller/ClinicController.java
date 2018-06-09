@@ -133,10 +133,9 @@ public class ClinicController {
     @RequestMapping(value = "/pendingDonations", method = RequestMethod.GET)
     public List<DonationDTO> getAllPendingDonations()
     {
+        log.trace("GetAllPendingDonations entered!");
         try
         {
-            log.trace("GetAllPendingDonations entered!");
-
             List<Donation> donations = donationService.getAllDonations();
 
             donations = donations.stream().filter(d -> d.getR() == null).collect(Collectors.toList());
@@ -147,7 +146,10 @@ public class ClinicController {
         }
         catch (Exception e)
         {
-            log.trace(e.getStackTrace().toString());
+            log.trace(Arrays.toString(e.getStackTrace()));
+
+            log.trace("GetAllPendingDonations failed!");
+
             return new ArrayList<>();
         }
     }
@@ -184,7 +186,7 @@ public class ClinicController {
         Map<String, BloodDTO> result = new HashMap<>();
         bloodOptional.ifPresent(b -> result.put("blood", bloodConverter.convertModelToDto(b)));
 
-        donorService.setLastAnalysisResult(bloodOptional.get().getDonation().getDonor().getId(),flag);
+        donorService.setLastAnalysisResult(bloodOptional.get().getDonation().getDonor().getId(),!flag);
 
         log.trace("testBlood: result={}", result);
 

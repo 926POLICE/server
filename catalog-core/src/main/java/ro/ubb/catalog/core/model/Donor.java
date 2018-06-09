@@ -33,8 +33,8 @@ public class Donor extends Person implements Serializable
         this.medicalHistory="";
         lastAnalysisResult=true;
         hasBeenNotified=false;
-        nextDonation=1l;
-        eligibility=false;
+        nextDonation= 1L;
+        eligibility=true;
     }
 
     @Override
