@@ -186,7 +186,7 @@ public class ClinicController {
         Map<String, BloodDTO> result = new HashMap<>();
         bloodOptional.ifPresent(b -> result.put("blood", bloodConverter.convertModelToDto(b)));
 
-        donorService.setLastAnalysisResult(bloodOptional.get().getDonation().getDonor().getId(),!flag);
+        donorService.setLastAnalysisResult(bloodOptional.get().getDonation().getDonor().getId(),flag);
 
         log.trace("testBlood: result={}", result);
 
