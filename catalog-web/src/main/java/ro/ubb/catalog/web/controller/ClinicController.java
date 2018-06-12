@@ -338,7 +338,7 @@ boolean checkAvailability(@RequestBody final Float Thrombocytes,@RequestBody fin
         Float P = Float.parseFloat(json.get("plasma"));
         Float T = Float.parseFloat(json.get("thrombocytes"));
 
-        return bloodService.checkAvailability(R, P, T);
+        return bloodService.checkAvailability(Request.builder().RQuantity(R).PQuantity(P).TQuantity(T).build());
     }
 
     @RequestMapping(value = "/donors/notify/{patientid}", method = RequestMethod.PUT)
@@ -349,11 +349,8 @@ boolean checkAvailability(@RequestBody final Float Thrombocytes,@RequestBody fin
 @RequestMapping(value = "/donors/notify", method = RequestMethod.PUT)
 boolean notifyDonorNeeded(@RequestBody final String BloodType,@RequestBody final Boolean RH,@RequestBody final String Anticorps);
          */
-        String bloodType = patientService.findByID(patientid).get().getBloodType();
-        Boolean Rh = patientService.findByID(patientid).get().getRh();
-        String anticorps = patientService.findByID(patientid).get().getAnticorps();
 
-        donorService.notifyDonorsNeeded(bloodType, Rh, anticorps);
+        donorService.notifyDonorsNeeded(patientService.findByID(patientid).get());
 
         return false;
     }
@@ -388,16 +385,16 @@ boolean checkCompatibility(@RequestBody final Long DonorID,@RequestBody final  L
 
         Request request = requestOptional.get();
 
-        Float res = bloodService.checkAvailability(request.getRQuantity(), request.getPQuantity(), request.getTQuantity());
+        Float res = bloodService.checkAvailability(request);
 
         log.trace("ProcessRequest result: " + res.toString());
 
         if (res != 0)
-            donorService.notifyDonorsNeeded(request.getPatient().getBloodType(), request.getPatient().getRh(), request.getPatient().getAnticorps());
+            donorService.notifyDonorsNeeded(request.getPatient());
         else
         {
             requestService.updateRequest(request.getId(),request.getPatient().getId(),request.getDoctor().getId(),request.getRQuantity(),request.getPQuantity(),request.getTQuantity(),request.getPriority(),true,request.getClinic().getId());
-            bloodService.honorRequest(request.getRQuantity(), request.getPQuantity(), request.getTQuantity());
+            bloodService.honorRequest(request);
         }
 
         return res;

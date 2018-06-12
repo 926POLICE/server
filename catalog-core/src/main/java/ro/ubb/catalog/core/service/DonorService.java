@@ -2,6 +2,7 @@ package ro.ubb.catalog.core.service;
 
 import com.sun.org.apache.xpath.internal.operations.Bool;
 import ro.ubb.catalog.core.model.Donor;
+import ro.ubb.catalog.core.model.Patient;
 
 import javax.swing.text.html.Option;
 import java.util.List;
@@ -27,5 +28,5 @@ public interface DonorService
 
     Optional<Donor> updateMedicalHistory(Long DonorID, String medicalHistory);
 
-    Boolean notifyDonorsNeeded(String BloodType,Boolean RH,final String Anticorps);
+    Boolean notifyDonorsNeeded(Patient p);
 }

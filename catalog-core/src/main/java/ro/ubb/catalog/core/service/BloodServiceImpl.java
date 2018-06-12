@@ -6,9 +6,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ro.ubb.catalog.core.model.Blood;
-import ro.ubb.catalog.core.model.Donation;
-import ro.ubb.catalog.core.model.Clinic;
+import ro.ubb.catalog.core.model.*;
 import ro.ubb.catalog.core.repository.BloodRepository;
 import ro.ubb.catalog.core.repository.ClinicRepository;
 import ro.ubb.catalog.core.repository.DonationRepository;
@@ -61,6 +59,7 @@ public class BloodServiceImpl implements BloodService
         List<Blood> expiredBlood = bloodList.stream().filter(b->b.getCollectionDate()+86400*b.getShelfLife()< currentTime).collect(Collectors.toList());
         to_return.addAll(unusableBlood);
         to_return.addAll(expiredBlood);
+
         return to_return.stream().collect(Collectors.toList());
     }
 
@@ -160,8 +159,12 @@ public class BloodServiceImpl implements BloodService
     }
 
     @Override
-    public Float checkAvailability(Float R, Float P, Float T) {
-        List<Blood> bloodList = getUsableBloods();
+    public Float checkAvailability(Request request)
+    {
+        Patient patient = request.getPatient();
+
+        Float R = request.getRQuantity(), P = request.getPQuantity(), T = request.getTQuantity();
+        List<Blood> bloodList = getUsableBloods().stream().filter(b-> b.getDonation().getDonor().isCompatible(patient)).collect(Collectors.toList());
         Float RAvailable = bloodList.stream().filter(p -> p.getType().equals("r")).map(Blood::getQuantity).reduce(0f, (a, b) -> a + b);
         Float PAvailable = bloodList.stream().filter(p -> p.getType().equals("p")).map(Blood::getQuantity).reduce(0f, (a, b) -> a + b);
         Float TAvailable = bloodList.stream().filter(p -> p.getType().equals("t")).map(Blood::getQuantity).reduce(0f, (a, b) -> a + b);
@@ -173,14 +176,16 @@ public class BloodServiceImpl implements BloodService
 
     @Override
     @Transactional
-    public void honorRequest(Float R, Float P, Float T)
+    public void honorRequest(Request r)
     {
         log.trace("honorRequest entered!");
 
-        Float RNeeded = R, PNeeded = P, TNeeded = T;
-        List<Blood> RbloodList = getUsableBloods().stream().filter(b-> b.getType().equals("r")).collect(Collectors.toList());;
-        List<Blood> PbloodList = getUsableBloods().stream().filter(b-> b.getType().equals("p")).collect(Collectors.toList());;
-        List<Blood> TbloodList = getUsableBloods().stream().filter(b-> b.getType().equals("t")).collect(Collectors.toList());;
+        Patient patient = r.getPatient();
+
+        Float RNeeded = r.getRQuantity(), PNeeded = r.getPQuantity(), TNeeded = r.getTQuantity();
+        List<Blood> RbloodList = getUsableBloods().stream().filter(b-> b.getType().equals("r") && b.getDonation().getDonor().isCompatible(patient)).collect(Collectors.toList());;
+        List<Blood> PbloodList = getUsableBloods().stream().filter(b-> b.getType().equals("p")&& b.getDonation().getDonor().isCompatible(patient)).collect(Collectors.toList());;
+        List<Blood> TbloodList = getUsableBloods().stream().filter(b-> b.getType().equals("t")&& b.getDonation().getDonor().isCompatible(patient)).collect(Collectors.toList());;
 
         for(int i = 0 ; i<RbloodList.size() && RNeeded > 0; i++)
         {

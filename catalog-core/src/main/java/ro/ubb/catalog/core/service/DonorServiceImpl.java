@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ro.ubb.catalog.core.model.Donor;
+import ro.ubb.catalog.core.model.Patient;
 import ro.ubb.catalog.core.repository.DonorRepository;
 
 import java.time.Instant;
@@ -120,9 +121,9 @@ public class DonorServiceImpl implements DonorService
 
     @Override
     @Transactional
-    public Boolean notifyDonorsNeeded(String BloodType, Boolean RH, String Anticorps) {
+    public Boolean notifyDonorsNeeded(Patient p) {
         List<Donor> donors = this.getAllDonors();
-        donors = donors.stream().filter(donor -> donor.getNextDonation() <= Instant.now().getEpochSecond() && donor.getAnticorps().equals(Anticorps) && donor.getRh() == RH && donor.getBloodType().equals(BloodType)).collect(Collectors.toList());
+        donors = donors.stream().filter(donor -> donor.getNextDonation() <= Instant.now().getEpochSecond() && donor.getAnticorps().equals(p.getAnticorps()) && donor.getRh() == p.getRh() && donor.getBloodType().equals(p.getBloodType())).collect(Collectors.toList());
         Boolean res = false;
         if(donors.size()>0)
             res = true;

@@ -107,9 +107,12 @@ public class BloodController implements InitializingBean {
             Clinic clinic = clinicRepository.save(new Clinic(46.67f, 23.50f));
             Doctor doctor = doctorService.createDoctor("dre", "dre", "Dr. Dre", "central");
             Patient patient = patientService.createPatient("ionut", 1l, "a", "b", "A", false, "none", false, 40.0f, 40.0f, "central");
+            Patient donorPatient = patientService.createPatient("ionut", 1l, "a", "b", "B", true, "got", true, 40.0f, 40.0f, "central");
             Donor donor = donorService.createDonor("donor", "donor", "ionut", 1l, "a", "b", "A", false, "none", false, 1.0f, 2.0f);
             Donation donation = donationService.createDonation(donor.getId(), null, clinicService.getTheClinic().getId());
             Request request = requestService.createRequest(patient.getId(), doctor.getId(), 1.0f, 2.0f, 3.0f, 1,1l, clinic.getId());
+            Request priorityRequest = requestService.createRequest(patient.getId(), doctor.getId(), 1.0f, 2.0f, 3.0f, 2,1l, clinic.getId());
+            Request donorPatientRequest = requestService.createRequest(donorPatient.getId(), doctor.getId(), 1.0f, 2.0f, 3.0f, 1,1l, clinic.getId());
             Blood blood = bloodService.createBlood(currentTime, 2.0f, 1, "r", donation.getId(), clinic.getId());
             bloodService.testBlood(blood.getId(), true);
             personnelRepository.save(new Personnel("admin", "admin"));
@@ -315,10 +318,13 @@ String checkRequestStatus(@RequestBody final Long PatientID)
 
                 // Set<RequestDTO> getAllRequests()
                 requestDTOList = clinicController.getAllRequests();
-                assert (requestDTOList.size() == 1);
+                assert (requestDTOList.size() == 3);
+                assert (requestDTOList.get(0).getId()==priorityRequest.getId());
+                assert (requestDTOList.get(1).getId()==donorPatientRequest.getId());
+                assert (requestDTOList.get(2).getId()==request.getId());
                 requestService.updateRequest(request.getId(), request.getPatient().getId(), req.getDoctor().getId(), 1.0f, 2.0f, 3.0f, 2, true, clinic.getId());
                 requestDTOList = clinicController.getAllRequests();
-                assert (requestDTOList.size() == 0);
+                assert (requestDTOList.size() == 2);
 
                 // Set<DonationDTO> getAllPendingDonations()
                 List<DonationDTO> donationDTOList1 = clinicController.getAllPendingDonations();
@@ -475,12 +481,16 @@ String checkRequestStatus(@RequestBody final Long PatientID)
                 Request testRequest = requestService.createRequest(patient.getId(), doctor.getId(), 90f, 70f, 50f, 3, 2l,clinic.getId());
                 size = bloodService.getUsableBloods().size();
                 assert (request.getCompleted()==false);
-                clinicController.processRequest(request.getId());
+                assert(clinicController.processRequest(request.getId())==0);
                 assert (request.getCompleted()==true);
                 assert (!donorController.getBloodJourney(donor.getId()).stream().map(b->b.getState()).collect(Collectors.toList()).contains(3));
                 assert (donorController.getBloodJourney(donor.getId()).stream().map(b->b.getState()).collect(Collectors.toList()).contains(3));
                 newSize = bloodService.getUsableBloods().size();
                 assert ((size - 3) == newSize);
+
+                assert (donorPatientRequest.getCompleted()==false);
+                assert (clinicController.processRequest(donorPatientRequest.getId())!=0);
+                assert (donorPatientRequest.getCompleted()==false);
 //                log.trace("All bloods AFTER: " + bloodService.getAllBloods().toString());
 //                log.trace("Old size: " + size.toString() + " new size: "+newSize.toString());
 

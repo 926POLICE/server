@@ -2,6 +2,7 @@ package ro.ubb.catalog.core.service;
 
 import com.sun.org.apache.xpath.internal.operations.Bool;
 import ro.ubb.catalog.core.model.Blood;
+import ro.ubb.catalog.core.model.Request;
 
 import java.util.List;
 import java.util.Optional;
@@ -26,9 +27,9 @@ public interface BloodService
 
     Optional<Blood> testBlood (Long BloodID, Boolean tested);
 
-    Float checkAvailability(Float R, Float P, Float T);
+    Float checkAvailability(Request request);
 
-    void honorRequest(Float R, Float P, Float T);
+    void honorRequest(Request request);
 
     void useBlood(Long bloodId);
 }

@@ -37,10 +37,10 @@ public class Request extends BaseEntity<Long> implements Serializable, Comparabl
     @Override
     public int compareTo(Request o)
     {
-        if(this.patient.getIsDonor() != o.patient.getIsDonor())
-            return this.patient.getIsDonor().compareTo(o.patient.getIsDonor());
-        else
+        if(!this.priority.equals(o.priority))
             return this.priority.compareTo(o.priority);
+        else
+            return this.getPatient().getIsDonor().compareTo(o.getPatient().getIsDonor());
     }
 
     @Override
