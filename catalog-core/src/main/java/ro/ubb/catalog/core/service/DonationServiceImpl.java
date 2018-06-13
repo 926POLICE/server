@@ -97,5 +97,20 @@ public class DonationServiceImpl implements DonationService {
         return donationRepository.findById(id);
     }
 
+    @Override
+    @Transactional
+    public void setResult(Long id, Boolean flag)
+    {
+        log.trace("SetDonationResult entered!");
+        log.trace("Flag: "+flag.toString());
+        Optional<Donation> optionalDonation = donationRepository.findById(id);
+
+        optionalDonation.ifPresent(st -> {
+            st.setAnalysisResult(flag);
+        });
+
+        log.trace("SetDonationResult exited!! Result:"+optionalDonation.get().toString());
+    }
+
 
 }

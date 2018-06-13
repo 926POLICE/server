@@ -16,4 +16,6 @@ public interface DonationService
     void deleteDonation(Long id);
 
     Optional<Donation> findByID(Long id);
+
+    void setResult(Long id, Boolean flag);
 }

@@ -220,8 +220,8 @@ public class DonorController
         Long donorID = Long.parseLong(json.get("donorid"));
         Long patientTD;
 
-        if(donorService.findbyID(donorID).get().getEligibility()==false)
-            return donationConverter.convertModelToDto(new Donation(null,null,null,false,null,null,null));
+//        if(donorService.findbyID(donorID).get().getEligibility()==false)
+//            return donationConverter.convertModelToDto(new Donation(null,null,null,false,null,null,null));
 
         try
         {

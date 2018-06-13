@@ -525,21 +525,24 @@ String checkRequestStatus(@RequestBody final Long PatientID)
 
                 log.trace("ALL TESTS PASSED!");
 
+                donation = donationService.createDonation(donor.getId(), null, clinicService.getTheClinic().getId());
+                clinicController.deletePendingDonation(donation.getId());
+
                 clearAll();
                 clinic = clinicRepository.save(new Clinic(46.67f, 23.50f));
                 doctor = doctorService.createDoctor("dre", "dre", "Dr. Dre", "central");
                 patient = patientService.createPatient("ionut", 1l, "a", "b", "A", false, "none", false, 40.0f, 40.0f, "central");
                 donor = donorService.createDonor("donor", "donor", "ionut", 1l, "a", "b", "A", false, "none", false, 1.0f, 2.0f);
+                Donation dummy = donationService.createDonation(donor.getId(), null, clinicService.getTheClinic().getId());
                 donation = donationService.createDonation(donor.getId(), null, clinicService.getTheClinic().getId());
                 request = requestService.createRequest(patient.getId(), doctor.getId(), 1.0f, 2.0f, 3.0f, 1,1l, clinic.getId());
-                blood = bloodService.createBlood(currentTime, 2.0f, 1, "r", donation.getId(), clinic.getId());
+                blood = bloodService.createBlood(currentTime, 2.0f, 1, "r", dummy.getId(), clinic.getId());
+                donationService.updateDonation(dummy.getId(), blood.getId(), blood.getId(), blood.getId(), donation.getDonor().getId(), donation.getAnalysisResult(), -1L, donation.getClinic().getId());
                 bloodService.testBlood(blood.getId(), true);
-                blood = bloodService.createBlood(currentTime, 3.0f, 1, "p", donation.getId(), clinic.getId());
+                blood = bloodService.createBlood(currentTime, 3.0f, 1, "p", dummy.getId(), clinic.getId());
                 bloodService.testBlood(blood.getId(), false);
-                blood = bloodService.createBlood(currentTime, 5.0f, 1, "t", donation.getId(), clinic.getId());
+                blood = bloodService.createBlood(currentTime, 2.0f, 1, "t", dummy.getId(), clinic.getId());
                 personnelRepository.save(new Personnel("admin", "admin"));
-
-
 
                 log.trace("Re-added test data sucessfully!");
             } catch (Exception e) {

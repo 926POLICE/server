@@ -187,6 +187,7 @@ public class ClinicController {
         Map<String, BloodDTO> result = new HashMap<>();
         bloodOptional.ifPresent(b -> result.put("blood", bloodConverter.convertModelToDto(b)));
 
+        donationService.setResult(bloodOptional.get().getDonation().getId(),flag);
         donorService.setLastAnalysisResult(bloodOptional.get().getDonation().getDonor().getId(),flag);
 
         log.trace("testBlood: result={}", result);
@@ -198,7 +199,7 @@ public class ClinicController {
     public ResponseEntity disposeBlood(@PathVariable final Long bloodid) {
         log.trace("disposeBlood: bloodId={}", bloodid);
 
-        bloodService.deleteBlood(bloodid);
+        bloodService.removeBlood(bloodid);
 
         log.trace("disposeBlood - method end");
 
@@ -356,7 +357,7 @@ boolean notifyDonorNeeded(@RequestBody final String BloodType,@RequestBody final
         return false;
     }
 
-    @RequestMapping(value = "/donors/compatibility", method = RequestMethod.GET)
+    @RequestMapping(value = "/donors/compatibility", method = RequestMethod.POST)
     public boolean checkCompatibility(@RequestBody Map<String, String> json) {
         /*
         // Will check that the donor with ID is compatible with the patient with given ID. Return true ok and false if not. Throws an exception if either ID does not exist.

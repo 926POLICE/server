@@ -32,4 +32,6 @@ public interface BloodService
     void honorRequest(Request request);
 
     void useBlood(Long bloodId);
+
+    Optional<Blood> removeBlood(Long BloodID);
 }

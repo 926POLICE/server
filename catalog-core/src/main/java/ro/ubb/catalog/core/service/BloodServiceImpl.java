@@ -55,7 +55,7 @@ public class BloodServiceImpl implements BloodService
     public List<Blood> getUnusableBloods() {
         Set<Blood> to_return = new HashSet<>();
         List<Blood> bloodList = getAllBloods();
-        List<Blood> unusableBlood = bloodList.stream().filter(b-> !b.getUsable()).collect(Collectors.toList());
+        List<Blood> unusableBlood = bloodList.stream().filter(b-> !b.getUsable() && b.getState()!=4).collect(Collectors.toList());
         List<Blood> expiredBlood = bloodList.stream().filter(b->b.getCollectionDate()+86400*b.getShelfLife()< currentTime).collect(Collectors.toList());
         to_return.addAll(unusableBlood);
         to_return.addAll(expiredBlood);
@@ -153,6 +153,19 @@ public class BloodServiceImpl implements BloodService
             st.setState(2);
             st.setTested(true);
             st.setUsable(flag);
+        });
+
+        return optionalBlood;
+    }
+
+
+    @Override
+    @Transactional
+    public Optional<Blood> removeBlood(Long BloodID) {
+        Optional<Blood> optionalBlood = bloodRepository.findById(BloodID);
+
+        optionalBlood.ifPresent(st -> {
+            st.setState(4);
         });
 
         return optionalBlood;
