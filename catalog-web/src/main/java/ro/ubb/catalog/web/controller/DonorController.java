@@ -72,13 +72,14 @@ public class DonorController
         Float latitude = Float.parseFloat(json.get("latitude"));
         Float longitude = Float.parseFloat(json.get("longitude"));
         Long birthday = Long.parseLong(birthString);
+        String address = json.get("address");
 
         // username-u ar trebui sa fie unic nu? I mean nu cred ca poti sa ai doi useri cu acelasi username da parole diferite
         List<Donor> donors = donorService.getAllDonors().stream().filter(donor-> donor.getUsername().equals(username)).collect(Collectors.toList());
         if(!donors.isEmpty())
             throw new RuntimeException("This username is already taken!");
 
-        Donor createdDonor = donorService.createDonor(username,password,name,birthday,residence,"","",true,"",true,latitude,longitude);
+        Donor createdDonor = donorService.createDonor(username,password,name,birthday,residence,address,"",true,"",true,latitude,longitude);
         DonorDTO donorDTO1 = donorConverter.convertModelToDto(createdDonor);
 
         log.trace("---- regiterUser finished ----");

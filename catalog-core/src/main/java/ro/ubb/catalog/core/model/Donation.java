@@ -44,6 +44,24 @@ public class Donation extends BaseEntity<Long> implements Serializable {
     }
 
     @Override
+    public String toString()
+    {
+        if(R==null)
+        return "PENDINGDonation{" +
+                "analysisResult=" + analysisResult +
+                ", donor=" + donor.getId().toString() +
+                ", clinic=" + clinic.getId().toString() +
+                '}';
+        else
+            return "Donation{" +
+                    "R" + R.getId() +
+                    "analysisResult=" + analysisResult +
+                    ", donor=" + donor.getId().toString() +
+                    ", clinic=" + clinic.getId().toString() +
+                    '}';
+    }
+
+    @Override
     public int hashCode() {
 
         return Objects.hash(super.hashCode());

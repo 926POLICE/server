@@ -34,7 +34,7 @@ public class Donor extends Person implements Serializable
         lastAnalysisResult=true;
         hasBeenNotified=false;
         nextDonation= 1L;
-        eligibility=true;
+        eligibility=false;
     }
 
     @Override

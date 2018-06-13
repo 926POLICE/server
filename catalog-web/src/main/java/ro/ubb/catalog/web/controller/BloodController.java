@@ -109,7 +109,9 @@ public class BloodController implements InitializingBean {
             Patient patient = patientService.createPatient("ionut", 1l, "a", "b", "A", false, "none", false, 40.0f, 40.0f, "central");
             Patient donorPatient = patientService.createPatient("ionut", 1l, "a", "b", "B", true, "got", true, 40.0f, 40.0f, "central");
             Donor donor = donorService.createDonor("donor", "donor", "ionut", 1l, "a", "b", "A", false, "none", false, 1.0f, 2.0f);
+            Donor vitoc = donorService.createDonor("vitoc", "vitoc", "alecs", 1l, "a", "b", "A", false, "none", false, 1.0f, 2.0f);
             Donation donation = donationService.createDonation(donor.getId(), null, clinicService.getTheClinic().getId());
+            Donation deletableDonation = donationService.createDonation(vitoc.getId(), patient.getId(), clinicService.getTheClinic().getId());
             Request request = requestService.createRequest(patient.getId(), doctor.getId(), 1.0f, 2.0f, 3.0f, 1,1l, clinic.getId());
             Request priorityRequest = requestService.createRequest(patient.getId(), doctor.getId(), 1.0f, 2.0f, 3.0f, 2,1l, clinic.getId());
             Request donorPatientRequest = requestService.createRequest(donorPatient.getId(), doctor.getId(), 1.0f, 2.0f, 3.0f, 1,1l, clinic.getId());
@@ -236,7 +238,8 @@ String checkRequestStatus(@RequestBody final Long PatientID)
 
                 Donor testDonor = donorService.findbyID(donor.getId()).get();
 
-                assert testDonor.getName().equals("ares");
+                assert (testDonor.getName().equals("ares"));
+                assert (vitoc.getName().equals("vitoc"));
 
                 // DonorDTO getPersonalDetails(@PathVariable final  Long donorID)
                 DonorDTO donorDTO = donorController.getPersonalDetails(donor.getId());
@@ -253,7 +256,17 @@ String checkRequestStatus(@RequestBody final Long PatientID)
                 // @RequestBody final Long DonorID, @RequestBody final @Nullable Long PatientID
 
                 // Set<DonationDTO> getAllPendingDonations()
-                assert (clinicController.getAllPendingDonations().size() == 0);
+
+                log.trace("DEBUG START");
+                log.trace("Donations:");
+                log.trace(donationService.getAllDonations().toString());
+                log.trace("PENDINGDonations:");
+                log.trace(clinicController.getAllPendingDonations().toString());
+                log.trace("PENDINGDonations size:");
+                log.trace("SIZE::"+Integer.toString(clinicController.getAllPendingDonations().size()));
+                log.trace("DEBUG END");
+
+                //assert (false);
 
                 theMap.clear();
                 theMap.put("donorid", Long.toString(donor.getId()));

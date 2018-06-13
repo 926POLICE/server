@@ -130,28 +130,29 @@ public class ClinicController {
         return requestConverter.convertModelsToDtos(requests);
     }
 
+    @RequestMapping(value = "/pendingDonations/{donationid}", method = RequestMethod.DELETE)
+    public ResponseEntity deletePendingDonation(@PathVariable final Long donationid) {
+        log.trace("deletePendingDonation: donationid={}", donationid);
+
+        donationService.deleteDonation(donationid);
+
+        log.trace("deletePendingDonation - method end");
+
+        return new ResponseEntity(new EmptyJsonResponse(), HttpStatus.OK);
+    }
+
     @RequestMapping(value = "/pendingDonations", method = RequestMethod.GET)
     public List<DonationDTO> getAllPendingDonations()
     {
         log.trace("GetAllPendingDonations entered!");
-        try
-        {
-            List<Donation> donations = donationService.getAllDonations();
 
-            donations = donations.stream().filter(d -> d.getR() == null).collect(Collectors.toList());
+        List<Donation> donations = donationService.getAllDonations();
 
-            log.trace("GetAllPendingDonations exited!");
+        donations = donations.stream().filter(d -> d.getR() == null).collect(Collectors.toList());
 
-            return donationConverter.convertModelsToDtos(donations);
-        }
-        catch (Exception e)
-        {
-            log.trace(Arrays.toString(e.getStackTrace()));
+        log.trace("GetAllPendingDonations exited!");
 
-            log.trace("GetAllPendingDonations failed!");
-
-            return new ArrayList<>();
-        }
+        return donationConverter.convertModelsToDtos(donations);
     }
 
     @RequestMapping(value = "/bloodStocks/{bloodid}", method = RequestMethod.PUT)
